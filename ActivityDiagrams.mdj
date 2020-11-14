@@ -1456,9 +1456,9 @@
 										"$ref": "AAAAAAF1tFt4oFeLzFI="
 									},
 									"font": "Arial;13;0",
-									"left": 607,
+									"left": 606,
 									"top": 287,
-									"width": 23.841796875,
+									"width": 24.54638671875,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -3126,7 +3126,7 @@
 											"top": 631,
 											"width": 256.45166015625,
 											"height": 13,
-											"text": "User applies points or codes or gift cards"
+											"text": "User applies coupon codes or points"
 										},
 										{
 											"_type": "LabelView",
@@ -6084,7 +6084,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF1tGfILljA23Y="
 					},
-					"name": "User applies points or codes or gift cards"
+					"name": "User applies coupon codes or points"
 				},
 				{
 					"_type": "UMLAction",
