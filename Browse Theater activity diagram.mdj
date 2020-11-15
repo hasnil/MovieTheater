@@ -333,7 +333,7 @@
 											"top": 231,
 											"width": 138.49951171875,
 											"height": 13,
-											"text": "View Theaters Nearest"
+											"text": "View Theater List"
 										},
 										{
 											"_type": "LabelView",
@@ -2016,7 +2016,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF1uoX6q8Wmjiw="
 					},
-					"name": "View Theaters Nearest"
+					"name": "View Theater List"
 				},
 				{
 					"_type": "UMLAction",
