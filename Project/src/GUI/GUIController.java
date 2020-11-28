@@ -46,8 +46,11 @@ public class GUIController {
                     break;
                 }
                 case (2): {
-                    if (!loggedIn)
-                        response = "Modify";
+                    if (!loggedIn) {
+                        response = loginGUI.logInUser();
+                        if (response.equals("Successfully logged in"))
+                            loggedIn = true;
+                    }
                     else
                         response = "You are already logged in";
                     gui.displayMessage(response);

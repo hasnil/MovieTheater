@@ -29,6 +29,13 @@ public class UserSystem {
             return "Payment unsuccessful";
     }
 
+    public String logInUser(String username, String password) {
+        for (RegisteredUser user : registeredUsers)
+            if (user.getUserName().equals(username) && user.getPassword().equals(password))
+                return "Successfully logged in";
+        return "Wrong username and/or password, try again";
+    }
+
     private boolean findUserByEmail(String email) {
         for (RegisteredUser user : registeredUsers)
             if (user.getEmail().equals(email))

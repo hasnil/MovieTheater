@@ -2,16 +2,14 @@ package Registration;
 
 public class ManageLogin {
 
-    private User user;
-    //    private LoginGUI loginGUI;
     private UserSystem userSystem;
 
     public ManageLogin(UserSystem userSystem) {
         setUserSystem(userSystem);
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public String logInUser(String username, String password) {
+        return userSystem.logInUser(username, password);
     }
 
     public void setUserSystem(UserSystem userSystem) {
