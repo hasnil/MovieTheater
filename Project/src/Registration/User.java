@@ -8,4 +8,15 @@ public class User {
 //    private ArrayList<Reservation> reservations;
     private ArrayList<Voucher> vouchers;
 
+    public User(String email) {
+        setEmail(email);
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
 }
