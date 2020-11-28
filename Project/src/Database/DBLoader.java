@@ -14,6 +14,7 @@ public class DBLoader {
     public ResultSet loadUsers() {
         try {
             String query = "SELECT * FROM users";
+            stmt = conn.createStatement();
             return stmt.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();

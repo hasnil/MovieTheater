@@ -12,6 +12,10 @@ public class ManageRegistration {
         return userSystem.registerUser(email, username, password);
     }
 
+    public void displayUsers() {
+        userSystem.displayUsers();
+    }
+
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }

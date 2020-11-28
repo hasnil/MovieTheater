@@ -8,7 +8,7 @@ public class RegisteredUser extends User {
     private String password;
     private ArrayList<StoreCredit> storeCredits;
 
-    public RegisteredUser(String email, String userName, String password) {
+    public RegisteredUser(String userName, String email, String password) {
         super(email);
         setUserName(userName);
         setPassword(password);
@@ -28,5 +28,10 @@ public class RegisteredUser extends User {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserName: " + getUserName() + ", email: " + getEmail() + ", password: " + getPassword();
     }
 }

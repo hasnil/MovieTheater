@@ -29,6 +29,10 @@ public class RegistrationGUI {
         return "ERROR";
     }
 
+    public void displayUsers() {
+        manageRegistration.displayUsers();
+    }
+
     public void setManageRegistration(ManageRegistration manageRegistration) {
         this.manageRegistration = manageRegistration;
     }

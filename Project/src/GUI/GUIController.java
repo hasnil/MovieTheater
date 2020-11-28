@@ -1,10 +1,12 @@
 package GUI;
 
+import Database.DBController;
 import Registration.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.ResultSet;
 
 public class GUIController {
 
@@ -28,6 +30,7 @@ public class GUIController {
             System.out.println("1 to register a user");
             System.out.println("2 to log in");
             System.out.println("3 to log out");
+            System.out.println("4 to view all users");
             try {
                 option = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
@@ -67,8 +70,15 @@ public class GUIController {
                     gui.displayMessage(response);
                     break;
                 }
+                case (4): {
+                    registrationGUI.displayUsers();
+                }
             }
         }
+    }
+
+    public void loadFromDB(DBController dbController) {
+        dbController.loadFromDB();
     }
 
     public void setGui(GUI gui) {
@@ -89,6 +99,7 @@ public class GUIController {
         UserSystem userSystem = new UserSystem();
         guiController.setRegistrationGUI(new RegistrationGUI(new ManageRegistration(userSystem)));
         guiController.setLoginGUI(new LoginGUI(new ManageLogin(userSystem)));
+        guiController.loadFromDB(new DBController(userSystem));
         guiController.selectOption();
     }
 }

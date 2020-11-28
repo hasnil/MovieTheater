@@ -1,5 +1,7 @@
 package Registration;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserSystem {
@@ -34,6 +36,28 @@ public class UserSystem {
             if (user.getUserName().equals(username) && user.getPassword().equals(password))
                 return "Successfully logged in";
         return "Wrong username and/or password, try again";
+    }
+
+    public void loadUsers(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                addUser(new RegisteredUser(
+                        rs.getString("userName"),
+                        rs.getString("email"),
+                        rs.getString("passw")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void displayUsers() {
+        for (RegisteredUser user : registeredUsers)
+            System.out.println(user);
+    }
+
+    private void addUser(RegisteredUser user) {
+        registeredUsers.add(user);
     }
 
     private boolean findUserByEmail(String email) {

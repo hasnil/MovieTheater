@@ -1,18 +1,19 @@
 package Database;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import Registration.UserSystem;
+
+import java.sql.*;
 
 public class DBController implements DBCredentials {
 
     private Connection conn;
     private DBLoader dbLoader;
+    private UserSystem userSystem;
 
-    public DBController() {
+    public DBController(UserSystem userSystem) {
         initializeConnection();
         dbLoader = new DBLoader(conn);
+        setUserSystem(userSystem);
     }
 
     public void initializeConnection() {
@@ -23,6 +24,14 @@ public class DBController implements DBCredentials {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public void loadFromDB() {
+        ResultSet rs = dbLoader.loadUsers();
+        userSystem.loadUsers(rs);
+    }
+
+    public void setUserSystem(UserSystem userSystem) {
+        this.userSystem = userSystem;
     }
 }
