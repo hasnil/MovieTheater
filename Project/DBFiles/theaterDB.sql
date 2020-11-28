@@ -5,7 +5,7 @@ USE theater;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
 userName	VARCHAR(20) NOT NULL,
-email		VARCHAR(20),
+email		VARCHAR(30),
 passw	VARCHAR(20),
 PRIMARY KEY (userName)
 );
