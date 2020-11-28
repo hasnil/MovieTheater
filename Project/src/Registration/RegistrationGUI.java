@@ -14,7 +14,7 @@ public class RegistrationGUI {
         manageRegistration = new ManageRegistration(new UserSystem());
     }
 
-    public void registerUser() {
+    public String registerUser() {
         try {
             System.out.println("Enter your email");
             String email = reader.readLine();
@@ -22,12 +22,11 @@ public class RegistrationGUI {
             String userName = reader.readLine();
             System.out.println("Enter your password");
             String password = reader.readLine();
-            String response = manageRegistration.registerUser(email, userName, password);
-            System.out.println(response);
+            return manageRegistration.registerUser(email, userName, password);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return "ERROR";
     }
 
     public static void main(String[] args) {
