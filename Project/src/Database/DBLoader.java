@@ -1,0 +1,27 @@
+package Database;
+
+import java.sql.*;
+
+public class DBLoader {
+
+    private Connection conn;
+    private Statement stmt;
+
+    public DBLoader(Connection conn) {
+        setConn(conn);
+    }
+
+    public ResultSet loadUsers() {
+        try {
+            String query = "SELECT * FROM users";
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
+}
