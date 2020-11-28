@@ -7,4 +7,8 @@ public class ManageAnnualFee {
     private UserSystem userSystem;
 //    private MakePayment makePayment;
 
+    public boolean payAnnualFee() {
+        // TODO call make payment
+        return true;
+    }
 }

@@ -20,6 +20,7 @@ public class UserSystem {
 
     public UserSystem() {
         registeredUsers = new ArrayList<>();
+        manageAnnualFee = new ManageAnnualFee();
     }
 
     public String registerUser(String email, String username, String password) {
@@ -28,8 +29,12 @@ public class UserSystem {
         if (findUserByUsername(username))
             return "That username already exists, try a different one";
 
-        registeredUsers.add(new RegisteredUser(email, username, password));
-        return "User registered successfully";
+        if (manageAnnualFee.payAnnualFee()) {
+            registeredUsers.add(new RegisteredUser(email, username, password));
+            return "User registered successfully";
+        }
+        else
+            return "Payment unsuccessful";
     }
 
     private boolean findUserByEmail(String email) {
