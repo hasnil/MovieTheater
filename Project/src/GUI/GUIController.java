@@ -27,6 +27,7 @@ public class GUIController {
             System.out.println("0 to quit");
             System.out.println("1 to register a user");
             System.out.println("2 to log in");
+            System.out.println("3 to log out");
             try {
                 option = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
@@ -53,6 +54,16 @@ public class GUIController {
                     }
                     else
                         response = "You are already logged in";
+                    gui.displayMessage(response);
+                    break;
+                }
+                case (3): {
+                    if (!loggedIn)
+                        response = "You are not logged in";
+                    else {
+                        loggedIn = false;
+                        response = "Successfully logged out";
+                    }
                     gui.displayMessage(response);
                     break;
                 }
