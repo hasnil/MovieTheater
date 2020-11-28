@@ -9,9 +9,9 @@ public class RegistrationGUI {
     private BufferedReader reader;
     private ManageRegistration manageRegistration;
 
-    public RegistrationGUI() {
+    public RegistrationGUI(ManageRegistration manageRegistration) {
+        setManageRegistration(manageRegistration);
         reader = new BufferedReader(new InputStreamReader(System.in));
-        manageRegistration = new ManageRegistration(new UserSystem());
     }
 
     public String registerUser() {
@@ -29,10 +29,7 @@ public class RegistrationGUI {
         return "ERROR";
     }
 
-    public static void main(String[] args) {
-        RegistrationGUI registrationGUI = new RegistrationGUI();
-        while (true) {
-            registrationGUI.registerUser();
-        }
+    public void setManageRegistration(ManageRegistration manageRegistration) {
+        this.manageRegistration = manageRegistration;
     }
 }

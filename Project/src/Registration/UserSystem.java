@@ -10,14 +10,6 @@ public class UserSystem {
     private RegisteredUser registeredUser;
     private ArrayList<RegisteredUser> registeredUsers;
 
-//    public UserSystem(ManageLogin manageLogin, ManageRegistration manageRegistration, ManageAnnualFee manageAnnualFee, RegisteredUser registeredUser) {
-//        setManageLogin(manageLogin);
-//        setManageRegistration(manageRegistration);
-//        setManageAnnualFee(manageAnnualFee);
-//        setRegisteredUser(registeredUser);
-//    }
-
-
     public UserSystem() {
         registeredUsers = new ArrayList<>();
         manageAnnualFee = new ManageAnnualFee();

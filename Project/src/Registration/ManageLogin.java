@@ -6,8 +6,7 @@ public class ManageLogin {
     //    private LoginGUI loginGUI;
     private UserSystem userSystem;
 
-    public ManageLogin(User user, UserSystem userSystem) {
-        setUser(user);
+    public ManageLogin(UserSystem userSystem) {
         setUserSystem(userSystem);
     }
 
