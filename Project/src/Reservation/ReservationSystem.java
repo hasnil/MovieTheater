@@ -23,7 +23,7 @@ public class ReservationSystem {
     public void cancelReservation(int reservationId) {
         for (Reservation reservation : reservations)
             if (reservation.getReservationId() == reservationId)
-                if (checkForExpiry(reservation))
+//                if (checkForExpiry(reservation))
                     return;
     }
 
@@ -71,9 +71,7 @@ public class ReservationSystem {
             while (rs.next()) {
                 addReservation(new Reservation(
                         rs.getInt("reservationId"),
-                        rs.getString("movieName"),
-                        rs.getString("userName"),
-                        rs.getString("showtime")));
+                        rs.getString("userName")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,12 +93,12 @@ public class ReservationSystem {
             System.out.println(reservation);
     }
 
-    private boolean checkForExpiry(Reservation reservation) {
-        if (reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) < 0) {
-            return true;
-        }
-        return false;
-    }
+//    private boolean checkForExpiry(Reservation reservation) {
+//        if (reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) < 0) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     private void addMovie(Movie movie) {
         movies.add(movie);
