@@ -13,8 +13,13 @@ public class MakePayment {
         setPaymentSystem(paymentSystem);
     }
 
-    public boolean payWithCreditCard(String cc, int cvv, double amount) {
-        return true;
+    public boolean payWithCreditCard(String cc, String cvv, double amount) {
+        TransactionForm tf = new TransactionForm(cc, cvv, amount);
+    	
+    	boolean result = tf.submit();
+    	System.out.println(tf); //print summary of the payment
+    	
+    	return result;
     }
 
     public double payWithVoucher(int vouchNum, double amount) {

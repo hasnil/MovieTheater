@@ -35,15 +35,15 @@ public class MakePaymentGUI {
 
     private boolean payWithCreditCard(double amount) {
         String cc = "";
-        int cvv = 0;
+        String cvv = "";
         try {
             System.out.println("Enter your credit card number");
             cc = reader.readLine();
             System.out.println("Enter the CVV number of your card");
-            cvv = Integer.parseInt(reader.readLine());
+            cvv = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+		}
         return makePayment.payWithCreditCard(cc, cvv, amount);
     }
 

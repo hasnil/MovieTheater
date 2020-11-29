@@ -3,19 +3,37 @@ package Payment;
 public class TransactionForm {
 
 	private String cc;
-	private int cvv;
+	private String cvv;
 	private double amount;
 	private String result;
-	private FinancialInstitute fi;
 	private java.util.Date date;
 	
-    public TransactionForm(String cc, int cvv, double amount) {
+    public TransactionForm(String cc, String cvv, double amount) {
     	this.amount = amount;
     	this.cvv = cvv;
     	this.cc = cc;
-    	this.date = new java.util.Date();
-    	this.result = "NOT_SUBMITTED";
+    	this.date = null;
+    	this.result = "NOT_PROCESSED";
     }
+    
+    public boolean submit() {
+    	FinancialInstitute fi = new FinancialInstitute();
+    	fi.processTransaction(this);
+    	
+    	return result.contentEquals("PROCESSED");
+    }
+    
+    public String getCc() {
+		return cc;
+	}
+    
+    public String getCvv() {
+		return cvv;
+	}
+    
+    public double getAmount() {
+		return amount;
+	}
     
     public void setResult(String result) {
 		this.result = result;
@@ -24,4 +42,13 @@ public class TransactionForm {
     public String getResult() {
 		return result;
 	}
+    
+    public void setDate(java.util.Date date) {
+		this.date = date;
+	}
+    
+    @Override
+    public String toString() {
+    	return "Payment result: " + result + ", amount: " + amount + ", date: " + date.toString();
+    }
 }
