@@ -55,6 +55,17 @@ public class DBLoader {
         return null;
     }
 
+    public ResultSet loadReservations() {
+        try {
+            String query = "SELECT * FROM reservations";
+            stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void setConn(Connection conn) {
         this.conn = conn;
     }

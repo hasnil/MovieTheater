@@ -16,6 +16,10 @@ public class ManageReservations {
         reservationSystem.displayVouchers();
     }
 
+    public void displayReservations() {
+        reservationSystem.displayReservations();
+    }
+
     public void setReservationSystem(ReservationSystem reservationSystem) {
         this.reservationSystem = reservationSystem;
     }

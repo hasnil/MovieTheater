@@ -11,11 +11,13 @@ public class ReservationSystem {
     private MakePaymentGUI makePaymentGUI;
     private ArrayList<Voucher> vouchers;
     private ArrayList<Movie> movies;
+    private ArrayList<Reservation> reservations;
 
     public ReservationSystem(MakePaymentGUI makePaymentGUI) {
         setMakePaymentGUI(makePaymentGUI);
         vouchers = new ArrayList<>();
         movies = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     public void loadMovies(ResultSet rs) {
@@ -57,6 +59,20 @@ public class ReservationSystem {
         }
     }
 
+    public void loadReservations(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                addReservation(new Reservation(
+                        rs.getInt("reservationId"),
+                        rs.getString("movieName"),
+                        rs.getString("userName"),
+                        rs.getString("showtime")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void displayMovies() {
         for (Movie movie : movies)
             System.out.println(movie);
@@ -67,12 +83,21 @@ public class ReservationSystem {
             System.out.println(voucher);
     }
 
+    public void displayReservations() {
+        for (Reservation reservation : reservations)
+            System.out.println(reservation);
+    }
+
     private void addMovie(Movie movie) {
         movies.add(movie);
     }
 
     private void addVoucher(Voucher voucher) {
         vouchers.add(voucher);
+    }
+
+    private void addReservation(Reservation reservation) {
+        reservations.add(reservation);
     }
 
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {

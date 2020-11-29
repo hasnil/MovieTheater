@@ -43,6 +43,10 @@ public class ReservationGUI {
         manageReservations.displayVouchers();
     }
 
+    public void displayReservations() {
+        manageReservations.displayReservations();
+    }
+
     public void setManageReservations(ManageReservations manageReservations) {
         this.manageReservations = manageReservations;
     }
