@@ -5,6 +5,8 @@ import Payment.MakePayment;
 import Payment.MakePaymentGUI;
 import Payment.PaymentSystem;
 import Registration.*;
+import Reservation.ManageReservations;
+import Reservation.ReservationGUI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +18,7 @@ public class GUIController {
     private RegistrationGUI registrationGUI;
     private LoginGUI loginGUI;
     private MakePaymentGUI makePaymentGUI;
+    private ReservationGUI reservationGUI;
     private BufferedReader reader;
     private boolean loggedIn;
 
@@ -100,6 +103,10 @@ public class GUIController {
         this.makePaymentGUI = makePaymentGUI;
     }
 
+    public void setReservationGUI(ReservationGUI reservationGUI) {
+        this.reservationGUI = reservationGUI;
+    }
+
     public static void main(String[] args) {
         GUIController guiController = new GUIController();
         guiController.setGui(new GUI());
@@ -108,6 +115,7 @@ public class GUIController {
         guiController.setMakePaymentGUI(makePaymentGUI);
         UserSystem userSystem = new UserSystem(makePaymentGUI);
         guiController.setRegistrationGUI(new RegistrationGUI(new ManageRegistration(userSystem)));
+        guiController.setReservationGUI(new ReservationGUI(new ManageReservations()));
         guiController.setLoginGUI(new LoginGUI(new ManageLogin(userSystem)));
         guiController.loadFromDB(new DBController(userSystem));
         guiController.selectOption();
