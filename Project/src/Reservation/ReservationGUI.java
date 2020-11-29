@@ -17,8 +17,8 @@ public class ReservationGUI {
     public void cancelReservation() {
         try {
             System.out.println("Enter your reservation number: ");
-            String reservation = reader.readLine();
-
+            int reservation = Integer.parseInt(reader.readLine());
+            manageReservations.cancelReservation(reservation);
         } catch (IOException e) {
             e.printStackTrace();
         }

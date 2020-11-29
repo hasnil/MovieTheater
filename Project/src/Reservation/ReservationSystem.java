@@ -20,6 +20,13 @@ public class ReservationSystem {
         reservations = new ArrayList<>();
     }
 
+    public void cancelReservation(int reservationId) {
+        for (Reservation reservation : reservations)
+            if (reservation.getReservationId() == reservationId)
+                if (checkForExpiry(reservation))
+                    return;
+    }
+
     public void loadMovies(ResultSet rs) {
         try {
             while (rs.next()) {
@@ -86,6 +93,13 @@ public class ReservationSystem {
     public void displayReservations() {
         for (Reservation reservation : reservations)
             System.out.println(reservation);
+    }
+
+    private boolean checkForExpiry(Reservation reservation) {
+        if (reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) < 0) {
+            return true;
+        }
+        return false;
     }
 
     private void addMovie(Movie movie) {

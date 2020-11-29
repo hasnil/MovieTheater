@@ -1,9 +1,6 @@
 package Reservation;
 
-import Registration.RegisteredUser;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class Reservation {
 
@@ -33,6 +30,14 @@ public class Reservation {
 
     public void setShowTime(String showTime) {
         this.showTime = LocalDateTime.parse(showTime);
+    }
+
+    public int getReservationId() {
+        return reservationId;
+    }
+
+    public LocalDateTime getShowTime() {
+        return showTime;
     }
 
     @Override
