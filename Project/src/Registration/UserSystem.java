@@ -1,20 +1,19 @@
 package Registration;
 
+import Payment.MakePaymentGUI;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserSystem {
 
-    private ManageLogin manageLogin;
-    private ManageRegistration manageRegistration;
     private ManageAnnualFee manageAnnualFee;
-    private RegisteredUser registeredUser;
     private ArrayList<RegisteredUser> registeredUsers;
 
-    public UserSystem() {
+    public UserSystem(MakePaymentGUI makePaymentGUI) {
         registeredUsers = new ArrayList<>();
-        manageAnnualFee = new ManageAnnualFee();
+        manageAnnualFee = new ManageAnnualFee(makePaymentGUI);
     }
 
     public String registerUser(String email, String username, String password) {
@@ -24,7 +23,7 @@ public class UserSystem {
             return "That username already exists, try a different one";
 
         if (manageAnnualFee.payAnnualFee()) {
-            registeredUsers.add(new RegisteredUser(email, username, password));
+            registeredUsers.add(new RegisteredUser(username, email, password));
             return "User registered successfully";
         }
         else

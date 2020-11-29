@@ -1,18 +1,21 @@
 package GUI;
 
 import Database.DBController;
+import Payment.MakePayment;
+import Payment.MakePaymentGUI;
+import Payment.PaymentSystem;
 import Registration.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.ResultSet;
 
 public class GUIController {
 
     private GUI gui;
     private RegistrationGUI registrationGUI;
     private LoginGUI loginGUI;
+    private MakePaymentGUI makePaymentGUI;
     private BufferedReader reader;
     private boolean loggedIn;
 
@@ -93,10 +96,17 @@ public class GUIController {
         this.loginGUI = loginGUI;
     }
 
+    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
+        this.makePaymentGUI = makePaymentGUI;
+    }
+
     public static void main(String[] args) {
         GUIController guiController = new GUIController();
         guiController.setGui(new GUI());
-        UserSystem userSystem = new UserSystem();
+        PaymentSystem paymentSystem = new PaymentSystem();
+        MakePaymentGUI makePaymentGUI = new MakePaymentGUI(new MakePayment(paymentSystem));
+        guiController.setMakePaymentGUI(makePaymentGUI);
+        UserSystem userSystem = new UserSystem(makePaymentGUI);
         guiController.setRegistrationGUI(new RegistrationGUI(new ManageRegistration(userSystem)));
         guiController.setLoginGUI(new LoginGUI(new ManageLogin(userSystem)));
         guiController.loadFromDB(new DBController(userSystem));
