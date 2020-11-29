@@ -1,6 +1,7 @@
 package Database;
 
 import Registration.UserSystem;
+import Reservation.ReservationSystem;
 
 import java.sql.*;
 
@@ -9,11 +10,13 @@ public class DBController implements DBCredentials {
     private Connection conn;
     private DBLoader dbLoader;
     private UserSystem userSystem;
+    private ReservationSystem reservationSystem;
 
-    public DBController(UserSystem userSystem) {
+    public DBController(UserSystem userSystem, ReservationSystem reservationSystem) {
         initializeConnection();
         dbLoader = new DBLoader(conn);
         setUserSystem(userSystem);
+        setReservationSystem(reservationSystem);
     }
 
     public void initializeConnection() {
@@ -30,10 +33,14 @@ public class DBController implements DBCredentials {
         ResultSet rs = dbLoader.loadUsers();
         userSystem.loadUsers(rs);
         rs = dbLoader.loadVouchers();
-
+        reservationSystem.loadVouchers(rs);
     }
 
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
+    }
+
+    public void setReservationSystem(ReservationSystem reservationSystem) {
+        this.reservationSystem = reservationSystem;
     }
 }

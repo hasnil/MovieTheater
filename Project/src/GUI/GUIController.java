@@ -7,6 +7,7 @@ import Payment.PaymentSystem;
 import Registration.*;
 import Reservation.ManageReservations;
 import Reservation.ReservationGUI;
+import Reservation.ReservationSystem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class GUIController {
             System.out.println("2 to log in");
             System.out.println("3 to log out");
             System.out.println("4 to view all users");
-            System.out.println("5 to make a reservation");
+            System.out.println("5 to view all vouchers");
             try {
                 option = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
@@ -82,7 +83,7 @@ public class GUIController {
                     break;
                 }
                 case (5): {
-
+                    reservationGUI.displayVouchers();
                     break;
                 }
             }
@@ -121,9 +122,10 @@ public class GUIController {
         guiController.setMakePaymentGUI(makePaymentGUI);
         UserSystem userSystem = new UserSystem(makePaymentGUI);
         guiController.setRegistrationGUI(new RegistrationGUI(new ManageRegistration(userSystem)));
-        guiController.setReservationGUI(new ReservationGUI(new ManageReservations()));
+        ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI);
+        guiController.setReservationGUI(new ReservationGUI(new ManageReservations(reservationSystem)));
         guiController.setLoginGUI(new LoginGUI(new ManageLogin(userSystem)));
-        guiController.loadFromDB(new DBController(userSystem));
+        guiController.loadFromDB(new DBController(userSystem, reservationSystem));
         guiController.selectOption();
     }
 }

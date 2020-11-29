@@ -1,6 +1,6 @@
 package Registration;
 
-import Payment.Voucher;
+import Reservation.Voucher;
 
 import java.util.ArrayList;
 

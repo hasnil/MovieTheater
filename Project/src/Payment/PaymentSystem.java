@@ -1,5 +1,7 @@
 package Payment;
 
+import Reservation.Voucher;
+
 import java.util.ArrayList;
 
 public class PaymentSystem {

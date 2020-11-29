@@ -1,4 +1,4 @@
-package Payment;
+package Reservation;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,13 +9,19 @@ public class Voucher {
     private double amount;
     private Date expiryDate;
 
+    public Voucher(int vouchNum, double amount, Date expiryDate) {
+        setVouchNum(vouchNum);
+        setAmount(amount);
+        setExpiryDate(expiryDate);
+    }
+
     public Voucher(int vouchNum, double amount) {
         setVouchNum(vouchNum);
         setAmount(amount);
-        setDate();
+        setTodayDate();
     }
 
-    public void setDate() {
+    public void setTodayDate() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, 1); // to get previous year add -1
         expiryDate = cal.getTime();
@@ -29,6 +35,10 @@ public class Voucher {
         this.amount = amount;
     }
 
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
     public int getVouchNum() {
         return vouchNum;
     }
@@ -39,5 +49,14 @@ public class Voucher {
 
     public Date getExpiryDate() {
         return expiryDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Voucher{" +
+                "vouchNum=" + vouchNum +
+                ", amount=" + amount +
+                ", expiryDate=" + expiryDate +
+                '}';
     }
 }

@@ -1,5 +1,7 @@
 package Payment;
 
+import Reservation.Voucher;
+
 import java.util.Date;
 
 public class MakePayment {
