@@ -12,10 +12,19 @@ public class Movie {
     public Movie(String movieName, Date releaseDate) {
         setMovieName(movieName);
         setReleaseDate(releaseDate);
+        showTimes = new ArrayList<>();
+    }
+
+    public void addShowTime(ShowTime showTime) {
+        showTimes.add(showTime);
     }
 
     public void setMovieName(String movieName) {
         this.movieName = movieName;
+    }
+
+    public String getMovieName() {
+        return movieName;
     }
 
     public void setReleaseDate(Date releaseDate) {

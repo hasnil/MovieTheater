@@ -43,6 +43,20 @@ public class ReservationSystem {
         }
     }
 
+    public void loadShowTimes(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                ShowTime showTime = new ShowTime(rs.getString("showTime"),
+                                                 rs.getString("movieName"));
+                for (Movie movie : movies)
+                    if (movie.getMovieName().equals(showTime.getMovieName()))
+                        movie.addShowTime(showTime);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void displayMovies() {
         for (Movie movie : movies)
             System.out.println(movie);

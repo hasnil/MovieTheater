@@ -38,8 +38,19 @@ public class DBLoader {
             String query = "SELECT * FROM movies";
             stmt = conn.createStatement();
             return stmt.executeQuery(query);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet loadShowTimes() {
+        try {
+            String query = "SELECT * FROM showtimes";
+            stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
