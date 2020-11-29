@@ -48,6 +48,14 @@ public class Ticket {
         this.showTime = LocalDateTime.parse(showTime);
     }
 
+    public double getPrice() {
+        return price;
+    }
+
+    public LocalDateTime getShowTime() {
+        return showTime;
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +

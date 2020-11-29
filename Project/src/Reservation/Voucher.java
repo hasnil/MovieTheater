@@ -23,7 +23,7 @@ public class Voucher {
 
     public void setTodayDate() {
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.YEAR, 1); // to get previous year add -1
+        cal.add(Calendar.YEAR, 1);
         expiryDate = cal.getTime();
     }
 

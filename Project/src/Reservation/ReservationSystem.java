@@ -4,7 +4,9 @@ import Payment.MakePaymentGUI;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ReservationSystem {
 
@@ -23,8 +25,10 @@ public class ReservationSystem {
     public void cancelReservation(int reservationId) {
         for (Reservation reservation : reservations)
             if (reservation.getReservationId() == reservationId)
-//                if (checkForExpiry(reservation))
-                    return;
+                if (checkForExpiry(reservation))
+                    System.out.println(createVoucher(reservation));
+                else
+                    System.out.println("Movie starts in less than 3 days, can't cancel anymore");
     }
 
     public void loadMovies(ResultSet rs) {
@@ -110,12 +114,19 @@ public class ReservationSystem {
             System.out.println(reservation);
     }
 
-//    private boolean checkForExpiry(Reservation reservation) {
-//        if (reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) < 0) {
-//            return true;
-//        }
-//        return false;
-//    }
+    private Voucher createVoucher(Reservation reservation) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
+        Voucher voucher = new Voucher(vouchNum, amount);
+        vouchers.add(voucher);
+        return voucher;
+    }
+
+    private boolean checkForExpiry(Reservation reservation) {
+        return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
+    }
 
     private void addMovie(Movie movie) {
         movies.add(movie);

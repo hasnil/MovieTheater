@@ -31,6 +31,14 @@ public class Reservation {
         return reservationId;
     }
 
+    public LocalDateTime getShowTime() {
+        return tickets.get(0).getShowTime();
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
+
     @Override
     public String toString() {
         return "Reservation{" +
