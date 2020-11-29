@@ -32,6 +32,6 @@ public class RegisteredUser extends User {
 
     @Override
     public String toString() {
-        return "UserName: " + getUserName() + ", email: " + getEmail() + ", password: " + getPassword();
+        return "User name: " + getUserName() + ", email: " + getEmail() + ", password: " + getPassword();
     }
 }

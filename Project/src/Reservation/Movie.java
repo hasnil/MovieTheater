@@ -33,10 +33,6 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
-                "movieName='" + movieName + '\'' +
-                ", showTimes=" + showTimes +
-                ", releaseDate=" + releaseDate +
-                '}';
+        return "Movie: " + movieName + "\nShowTimes: " + showTimes + "\nRelease Date: " + releaseDate + "\n";
     }
 }

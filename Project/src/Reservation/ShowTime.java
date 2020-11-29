@@ -24,9 +24,6 @@ public class ShowTime {
 
     @Override
     public String toString() {
-        return "ShowTime{" +
-                "showTime=" + showTime +
-                ", movieName='" + movieName + '\'' +
-                '}';
+        return "showTime: " + showTime + "\n";
     }
 }
