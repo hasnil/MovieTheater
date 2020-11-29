@@ -78,6 +78,17 @@ public class ReservationSystem {
         }
     }
 
+//    public void loadTickets(ResultSet rs) {
+//        try {
+//            while (rs.next()) {
+////                Ticket ticket = new Ticket(rs.getString("movieName"),
+////                                          rs.getInt("seat"),
+////
+////            }
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//    }
     public void displayMovies() {
         for (Movie movie : movies)
             System.out.println(movie);

@@ -66,6 +66,17 @@ public class DBLoader {
         return null;
     }
 
+    public ResultSet loadTickets() {
+        try {
+            String query = "SELECT * FROM tickets";
+            stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void setConn(Connection conn) {
         this.conn = conn;
     }
