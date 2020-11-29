@@ -99,7 +99,10 @@ public class GUIController {
                     break;
                 }
                 case (8): {
-                    reservationGUI.cancelReservation();
+                    if (user == null)
+                        reservationGUI.cancelReservation();
+                    else
+
                     break;
                 }
             }

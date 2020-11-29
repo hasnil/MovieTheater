@@ -1,5 +1,7 @@
 package Reservation;
 
+import Registration.RegisteredUser;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +21,16 @@ public class ReservationGUI {
             System.out.println("Enter your reservation number: ");
             int reservation = Integer.parseInt(reader.readLine());
             manageReservations.cancelReservation(reservation);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void cancelReservationRU(RegisteredUser user) {
+        try {
+            System.out.println("Enter your reservation number: ");
+            int reservation = Integer.parseInt(reader.readLine());
+            manageReservations.cancelReservationRU(user);
         } catch (IOException e) {
             e.printStackTrace();
         }

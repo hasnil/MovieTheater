@@ -1,6 +1,7 @@
 package Reservation;
 
 import Payment.MakePaymentGUI;
+import Registration.RegisteredUser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,12 +13,14 @@ public class ReservationSystem {
     private ArrayList<Voucher> vouchers;
     private ArrayList<Movie> movies;
     private ArrayList<Reservation> reservations;
+    private ArrayList<StoreCredit> storeCredits;
 
     public ReservationSystem(MakePaymentGUI makePaymentGUI) {
         setMakePaymentGUI(makePaymentGUI);
         vouchers = new ArrayList<>();
         movies = new ArrayList<>();
         reservations = new ArrayList<>();
+        storeCredits = new ArrayList<>();
     }
 
     public void cancelReservation(int reservationId) {
@@ -27,6 +30,18 @@ public class ReservationSystem {
                     System.out.println(createVoucher(reservation));
                 else
                     System.out.println("Movie starts in less than 3 days, can't cancel anymore");
+    }
+
+    public void cancelReservationRU(int reservationId, RegisteredUser user) {
+        for (Reservation reservation : reservations)
+            if (reservation.getReservationId() == reservationId)
+                if (reservation.getUserName().equals(user.getUserName()))
+                    if (checkForExpiry(reservation))
+                        System.out.println(createStoreCredit(reservation, user));
+                    else
+                        System.out.println("Movie starts in less than 3 days, can't cancel anymore");
+                else
+                    System.out.println("That reservation doesn't match your profile");
     }
 
     public void loadMovies(ResultSet rs) {
@@ -120,6 +135,16 @@ public class ReservationSystem {
         Voucher voucher = new Voucher(vouchNum, (amount * .85));
         vouchers.add(voucher);
         return voucher;
+    }
+
+    private StoreCredit createStoreCredit(Reservation reservation, RegisteredUser user) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int creditNum = storeCredits.get(storeCredits.size() - 1).getCreditNum() + 1;
+        StoreCredit storeCredit = new StoreCredit(creditNum, amount, user.getUserName());
+        storeCredits.add(storeCredit);
+        return storeCredit;
     }
 
     private boolean checkForExpiry(Reservation reservation) {

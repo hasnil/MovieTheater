@@ -1,5 +1,7 @@
 package Registration;
 
+import Reservation.StoreCredit;
+
 import java.util.ArrayList;
 
 public class RegisteredUser extends User {
