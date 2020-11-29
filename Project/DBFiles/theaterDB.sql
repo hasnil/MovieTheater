@@ -30,3 +30,12 @@ CREATE TABLE showtimes(
 showTime	VARCHAR(25),
 movieName	VARCHAR(25)
 );
+
+DROP TABLE IF EXISTS reservations;
+CREATE TABLE reservations(
+reservationId	INT NOT NULL,
+movieName		VARCHAR(25),
+userName		VARCHAR(25),
+showTime		VARCHAR(25),
+PRIMARY KEY (reservationId)
+);

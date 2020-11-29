@@ -14,6 +14,16 @@ public class ReservationGUI {
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
+    public void cancelReservation() {
+        try {
+            System.out.println("Enter your reservation number: ");
+            String reservation = reader.readLine();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void makeReservation() {
         try {
             System.out.println("Select a movie:");

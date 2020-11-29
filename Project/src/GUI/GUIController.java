@@ -40,6 +40,7 @@ public class GUIController {
             System.out.println("4 to view all users");
             System.out.println("5 to view all vouchers");
             System.out.println("6 to view all movies");
+            System.out.println("7 to cancel reservation");
             try {
                 option = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
@@ -89,6 +90,10 @@ public class GUIController {
                 }
                 case (6): {
                     reservationGUI.displayMovies();
+                    break;
+                }
+                case (7): {
+                    reservationGUI.cancelReservation();
                     break;
                 }
             }
