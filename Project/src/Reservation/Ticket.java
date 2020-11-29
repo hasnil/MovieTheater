@@ -20,6 +20,10 @@ public class Ticket {
         setReservationId(reservationId);
     }
 
+    public int getReservationId() {
+        return reservationId;
+    }
+
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
@@ -44,4 +48,15 @@ public class Ticket {
         this.showTime = LocalDateTime.parse(showTime);
     }
 
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "movieName='" + movieName + '\'' +
+                ", seat=" + seat +
+                ", showTime=" + showTime +
+                ", room=" + room +
+                ", price=" + price +
+                ", reservationId=" + reservationId +
+                '}';
+    }
 }

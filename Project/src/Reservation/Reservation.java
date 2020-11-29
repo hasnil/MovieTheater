@@ -23,6 +23,9 @@ public class Reservation {
         this.userName = userName;
     }
 
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+    }
 
     public int getReservationId() {
         return reservationId;
@@ -33,6 +36,7 @@ public class Reservation {
         return "Reservation{" +
                 "reservationId=" + reservationId +
                 ", userName='" + userName + '\'' +
+                ", tickets=" + tickets +
                 '}';
     }
 }

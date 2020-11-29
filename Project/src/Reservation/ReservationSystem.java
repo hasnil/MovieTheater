@@ -78,17 +78,23 @@ public class ReservationSystem {
         }
     }
 
-//    public void loadTickets(ResultSet rs) {
-//        try {
-//            while (rs.next()) {
-////                Ticket ticket = new Ticket(rs.getString("movieName"),
-////                                          rs.getInt("seat"),
-////
-////            }
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
+    public void loadTickets(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                Ticket ticket = new Ticket(rs.getString("movieName"),
+                                           rs.getInt("seat"),
+                                           rs.getString("showTime"),
+                                           rs.getInt("room"),
+                                           rs.getDouble("price"),
+                                          rs.getInt("reservationId"));
+                for (Reservation reservation : reservations)
+                    if (reservation.getReservationId() == ticket.getReservationId())
+                        reservation.addTicket(ticket);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     public void displayMovies() {
         for (Movie movie : movies)
             System.out.println(movie);
