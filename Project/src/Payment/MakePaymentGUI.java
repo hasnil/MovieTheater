@@ -36,14 +36,14 @@ public class MakePaymentGUI {
             return makePayment.payWithCreditCard(cc, cvv, amount);
         }
         else if (option == 2) {
-            int voucher = 0;
+            int vouchNum = 0;
             try {
                 System.out.println("Enter your voucher number");
-                voucher = Integer.parseInt(reader.readLine());
+                vouchNum = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            makePayment.payWithVoucher(voucher, amount);
+            return makePayment.payWithVoucher(vouchNum, amount);
         }
         else
             System.out.println("ERROR");

@@ -1,8 +1,6 @@
 package Registration;
 
-import Payment.MakePayment;
 import Payment.MakePaymentGUI;
-import Payment.PaymentSystem;
 
 public class ManageAnnualFee {
 
@@ -13,9 +11,7 @@ public class ManageAnnualFee {
     }
 
     public boolean payAnnualFee() {
-        // TODO call make payment
-        makePaymentGUI.makePayment(20);
-        return true;
+        return makePaymentGUI.makePayment(20);
     }
 
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {

@@ -1,5 +1,7 @@
 package Payment;
 
+import java.util.Date;
+
 public class MakePayment {
 
     private PaymentSystem paymentSystem;
@@ -13,9 +15,17 @@ public class MakePayment {
         return true;
     }
 
-    public void payWithVoucher(int voucher, int amount) {
-
+    public boolean payWithVoucher(int vouchNum, int amount) {
+        for (Voucher voucher : paymentSystem.getVouchers())
+            if (voucher.getNumber() == vouchNum)
+                if (voucher.getExpiryDate().compareTo(new Date()) > 0) {
+                    if (voucher.getAmount() >= amount)
+                        return true;
+                } else
+                    return false;
+        return false;
     }
+
 
     public void setPaymentSystem(PaymentSystem paymentSystem) {
         this.paymentSystem = paymentSystem;
