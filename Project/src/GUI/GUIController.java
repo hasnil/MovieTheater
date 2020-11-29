@@ -37,6 +37,7 @@ public class GUIController {
             System.out.println("2 to log in");
             System.out.println("3 to log out");
             System.out.println("4 to view all users");
+            System.out.println("5 to make a reservation");
             try {
                 option = Integer.parseInt(reader.readLine());
             } catch (IOException e) {
@@ -78,6 +79,11 @@ public class GUIController {
                 }
                 case (4): {
                     registrationGUI.displayUsers();
+                    break;
+                }
+                case (5): {
+
+                    break;
                 }
             }
         }

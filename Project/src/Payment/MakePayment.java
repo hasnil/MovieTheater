@@ -17,7 +17,7 @@ public class MakePayment {
 
     public double payWithVoucher(int vouchNum, double amount) {
         for (Voucher voucher : paymentSystem.getVouchers())
-            if (voucher.getNumber() == vouchNum)
+            if (voucher.getVouchNum() == vouchNum)
                 if (voucher.getExpiryDate().compareTo(new Date()) > 0) {
                     if (voucher.getAmount() >= amount)
                         return 0;

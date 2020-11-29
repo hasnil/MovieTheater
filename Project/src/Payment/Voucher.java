@@ -5,12 +5,12 @@ import java.util.Date;
 
 public class Voucher {
 
-    private int number;
+    private int vouchNum;
     private double amount;
     private Date expiryDate;
 
-    public Voucher(int number, double amount) {
-        setNumber(number);
+    public Voucher(int vouchNum, double amount) {
+        setVouchNum(vouchNum);
         setAmount(amount);
         setDate();
     }
@@ -21,16 +21,16 @@ public class Voucher {
         expiryDate = cal.getTime();
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setVouchNum(int vouchNum) {
+        this.vouchNum = vouchNum;
     }
 
     public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public int getNumber() {
-        return number;
+    public int getVouchNum() {
+        return vouchNum;
     }
 
     public double getAmount() {

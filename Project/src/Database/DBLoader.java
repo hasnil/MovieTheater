@@ -22,6 +22,17 @@ public class DBLoader {
         return null;
     }
 
+    public ResultSet loadVouchers() {
+        try {
+            String query = "SELECT * FROM vouchers";
+            stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void setConn(Connection conn) {
         this.conn = conn;
     }

@@ -29,6 +29,8 @@ public class DBController implements DBCredentials {
     public void loadFromDB() {
         ResultSet rs = dbLoader.loadUsers();
         userSystem.loadUsers(rs);
+        rs = dbLoader.loadVouchers();
+
     }
 
     public void setUserSystem(UserSystem userSystem) {

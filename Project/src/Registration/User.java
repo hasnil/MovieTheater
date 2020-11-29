@@ -1,5 +1,7 @@
 package Registration;
 
+import Payment.Voucher;
+
 import java.util.ArrayList;
 
 public class User {
