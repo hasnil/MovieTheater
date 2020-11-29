@@ -9,7 +9,6 @@ public class EmailServer {
 
 	private String smtpServer;
 	private String smtpPrefix;
-	private String from;
 	private String userName;
 	private String password;
 	
@@ -19,12 +18,24 @@ public class EmailServer {
 	public EmailServer() {
 		smtpServer = "smtp.gmail.com";
 		smtpPrefix = "mail.smtp.";
-		from = "slabcinemas@gmail.com";
 		password = "slabcinemas123!";
 		self = "slabcinemas@gmail.com";
+		userName = "slabcinemas";
 	}
 	
-	public void send(EmailForm email) {
+	
+	/**
+	 * Sends an email to the user from the Slab Cinemas.
+	 * Currently implemented to send emails only to slabcinemas@gmail.com
+	 * to avoid sending emails to random people accidentally.
+	 *
+	 * @param email email form object to be sent
+	 * @return true if email send was successful.
+	 */
+	@SuppressWarnings("finally")
+	public boolean send(EmailForm email) {
+		
+		boolean result = false;
 		
 		//Get properties object    
 		Properties props = new Properties();
@@ -40,7 +51,7 @@ public class EmailServer {
 				(props,    
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication("slabcinemas", password);
+						return new PasswordAuthentication(userName, password);
 						}
 					}
 				);
@@ -57,10 +68,17 @@ public class EmailServer {
 			
 			//send message
 			Transport.send(message);
-			System.out.println("message sent successfully");
+			
+			result = true;
+			
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
+			
+		} finally {
+			return result;
 		}
+		
+
 	}
 	
 }

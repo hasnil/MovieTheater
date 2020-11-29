@@ -4,6 +4,8 @@ import Reservation.Voucher;
 
 import java.util.Date;
 
+import Emailer.EmailForm;
+
 public class MakePayment {
 
     private PaymentSystem paymentSystem;
@@ -18,6 +20,16 @@ public class MakePayment {
     	
     	boolean result = tf.submit();
     	System.out.println(tf); //print summary of the payment
+    	
+    	//send receipt as email when payment is processed
+    	if (result) {
+    		EmailForm email = new EmailForm();
+    		email.setSubject("Your Receipt for Payment - SLAB CINEMAS");
+    		email.setBody(tf.toString());
+    		//email.setTo(to); //will send to self
+    		
+    		email.submit();
+    	}
     	
     	return result;
     }
