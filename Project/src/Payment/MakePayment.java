@@ -11,21 +11,22 @@ public class MakePayment {
         setPaymentSystem(paymentSystem);
     }
 
-    public boolean payWithCreditCard(String cc, int cvv, int amount) {
+    public boolean payWithCreditCard(String cc, int cvv, double amount) {
         return true;
     }
 
-    public boolean payWithVoucher(int vouchNum, int amount) {
+    public double payWithVoucher(int vouchNum, double amount) {
         for (Voucher voucher : paymentSystem.getVouchers())
             if (voucher.getNumber() == vouchNum)
                 if (voucher.getExpiryDate().compareTo(new Date()) > 0) {
                     if (voucher.getAmount() >= amount)
-                        return true;
+                        return 0;
+                    else
+                        return amount - voucher.getAmount();
                 } else
-                    return false;
-        return false;
+                    return -1;
+        return -1;
     }
-
 
     public void setPaymentSystem(PaymentSystem paymentSystem) {
         this.paymentSystem = paymentSystem;

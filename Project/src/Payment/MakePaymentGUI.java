@@ -14,7 +14,7 @@ public class MakePaymentGUI {
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public boolean makePayment(int amount) {
+    public boolean makePayment(double amount) {
         int option = 0;
         System.out.println("Select 1 to pay with credit card or 2 te pay with a voucher");
         try {
@@ -23,31 +23,45 @@ public class MakePaymentGUI {
             e.printStackTrace();
         }
         if (option == 1) {
-            String cc = "";
-            int cvv = 0;
-            try {
-                System.out.println("Enter your credit card number");
-                cc = reader.readLine();
-                System.out.println("Enter the CVV number of your card");
-                cvv = Integer.parseInt(reader.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return makePayment.payWithCreditCard(cc, cvv, amount);
+            return payWithCreditCard(amount);
         }
         else if (option == 2) {
-            int vouchNum = 0;
-            try {
-                System.out.println("Enter your voucher number");
-                vouchNum = Integer.parseInt(reader.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return makePayment.payWithVoucher(vouchNum, amount);
+            return payWithVoucher(amount);
         }
         else
             System.out.println("ERROR");
     return false;
+    }
+
+    private boolean payWithCreditCard(double amount) {
+        String cc = "";
+        int cvv = 0;
+        try {
+            System.out.println("Enter your credit card number");
+            cc = reader.readLine();
+            System.out.println("Enter the CVV number of your card");
+            cvv = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return makePayment.payWithCreditCard(cc, cvv, amount);
+    }
+
+    private boolean payWithVoucher(double amount) {
+        int vouchNum = 0;
+        try {
+            System.out.println("Enter your voucher number");
+            vouchNum = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        double remainder = makePayment.payWithVoucher(vouchNum, amount);
+        if (remainder == 0)
+            return true;
+        else if (remainder == -1)
+            return false;
+        else
+            return payWithCreditCard(remainder);
     }
 
     public void setMakePayment(MakePayment makePayment) {
