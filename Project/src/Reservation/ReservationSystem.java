@@ -10,10 +10,16 @@ public class ReservationSystem {
 
     private MakePaymentGUI makePaymentGUI;
     private ArrayList<Voucher> vouchers;
+    private ArrayList<Movie> movies;
 
     public ReservationSystem(MakePaymentGUI makePaymentGUI) {
         setMakePaymentGUI(makePaymentGUI);
         vouchers = new ArrayList<>();
+        movies = new ArrayList<>();
+    }
+
+    public void makeReservation() {
+
     }
 
     public void loadVouchers(ResultSet rs) {

@@ -12,8 +12,8 @@ public class UserSystem {
     private ArrayList<RegisteredUser> registeredUsers;
 
     public UserSystem(MakePaymentGUI makePaymentGUI) {
-        registeredUsers = new ArrayList<>();
         manageAnnualFee = new ManageAnnualFee(makePaymentGUI);
+        registeredUsers = new ArrayList<>();
     }
 
     public String registerUser(String email, String username, String password) {
