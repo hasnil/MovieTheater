@@ -4,9 +4,7 @@ import Payment.MakePaymentGUI;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ReservationSystem {
 
@@ -119,7 +117,7 @@ public class ReservationSystem {
         for (Ticket ticket : reservation.getTickets())
             amount += ticket.getPrice();
         int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
-        Voucher voucher = new Voucher(vouchNum, amount);
+        Voucher voucher = new Voucher(vouchNum, (amount * .85));
         vouchers.add(voucher);
         return voucher;
     }

@@ -18,10 +18,10 @@ public class Voucher {
     public Voucher(int vouchNum, double amount) {
         setVouchNum(vouchNum);
         setAmount(amount);
-        setTodayDate();
+        setAYearFromTodayDate();
     }
 
-    public void setTodayDate() {
+    public void setAYearFromTodayDate() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, 1);
         expiryDate = cal.getTime();
