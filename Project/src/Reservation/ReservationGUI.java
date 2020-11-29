@@ -25,6 +25,10 @@ public class ReservationGUI {
         }
     }
 
+    public void displayMovies() {
+        manageReservations.displayMovies();
+    }
+
     public void displayVouchers() {
         manageReservations.displayVouchers();
     }

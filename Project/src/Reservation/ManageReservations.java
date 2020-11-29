@@ -8,6 +8,10 @@ public class ManageReservations {
         setReservationSystem(reservationSystem);
     }
 
+    public void displayMovies() {
+        reservationSystem.displayMovies();
+    }
+
     public void displayVouchers() {
         reservationSystem.displayVouchers();
     }

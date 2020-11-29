@@ -18,8 +18,16 @@ public class ReservationSystem {
         movies = new ArrayList<>();
     }
 
-    public void makeReservation() {
-
+    public void loadMovies(ResultSet rs) {
+        try {
+            while (rs.next()) {
+                addMovie(new Movie(
+                        rs.getString("movieName"),
+                        rs.getDate("releaseDate")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void loadVouchers(ResultSet rs) {
@@ -35,9 +43,18 @@ public class ReservationSystem {
         }
     }
 
+    public void displayMovies() {
+        for (Movie movie : movies)
+            System.out.println(movie);
+    }
+
     public void displayVouchers() {
         for (Voucher voucher : vouchers)
             System.out.println(voucher);
+    }
+
+    private void addMovie(Movie movie) {
+        movies.add(movie);
     }
 
     private void addVoucher(Voucher voucher) {

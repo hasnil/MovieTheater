@@ -33,6 +33,17 @@ public class DBLoader {
         return null;
     }
 
+    public ResultSet loadMovies() {
+        try {
+            String query = "SELECT * FROM movies";
+            stmt = conn.createStatement();
+            return stmt.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void setConn(Connection conn) {
         this.conn = conn;
     }

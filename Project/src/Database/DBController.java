@@ -34,6 +34,8 @@ public class DBController implements DBCredentials {
         userSystem.loadUsers(rs);
         rs = dbLoader.loadVouchers();
         reservationSystem.loadVouchers(rs);
+        rs = dbLoader.loadMovies();
+        reservationSystem.loadMovies(rs);
     }
 
     public void setUserSystem(UserSystem userSystem) {
