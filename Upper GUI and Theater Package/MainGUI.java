@@ -52,11 +52,11 @@ public class MainGUI extends JPanel {
 		panel.setLayout(null);
 		
 		cancelReservationButton = new JButton("Cancel Reservations");
-		cancelReservationButton.setBounds(94, 178, 200, 40);
+		cancelReservationButton.setBounds(94, 302, 200, 40);
 		panel.add(cancelReservationButton);
 		
 		browseMoviesButton = new JButton("Browse Movies");
-		browseMoviesButton.setBounds(94, 242, 200, 40);
+		browseMoviesButton.setBounds(94, 178, 200, 40);
 		panel.add(browseMoviesButton);
 		
 		manageAnnualFeeButton = new JButton("Manage Annual Fee");
@@ -68,7 +68,7 @@ public class MainGUI extends JPanel {
 		panel.add(registerButton);
 		
 		showtimesButton = new JButton("View Showtimes");
-		showtimesButton.setBounds(94, 302, 200, 40);
+		showtimesButton.setBounds(94, 242, 200, 40);
 		panel.add(showtimesButton);
 		
 		loginButton = new JButton("Login");

@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 
 
@@ -99,6 +100,8 @@ public class GUIController {
 		reservation.getReturnHomeButton().addActionListener(new ReturnHomeListener());
 		viewShowtimes.getReturnHomeButton().addActionListener(new ReturnHomeListener());
 		
+		browseTheater.addConfirmTheaterButtonListener(new TheaterConfirmedListener());
+		
 		
 		mainGUI.getBrowseTheaterButton().addActionListener(new ActionListener() {
 		    @Override
@@ -183,6 +186,20 @@ public class GUIController {
 			layeredPane.moveToFront(mainGUI);
 			mainGUI.setVisible(true);
 		}
+	}
+	
+	class TheaterConfirmedListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			browseMovies.getWelcomeLabel().setText("Please have a look at our movies!");
+			browseMovies.getTable().setVisible(true);
+			browseMovies.getConfirmSelectionButton().setEnabled(true);
+			browseMovies.getSearchButton().setEnabled(true);
+			browseMovies.getListAllMoviesButton().setEnabled(true);
+			browseMovies.getShowtimesComboBox().setEnabled(true);
+		}
+		
 	}
 	
 	
