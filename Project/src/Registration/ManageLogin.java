@@ -8,7 +8,7 @@ public class ManageLogin {
         setUserSystem(userSystem);
     }
 
-    public String logInUser(String username, String password) {
+    public RegisteredUser logInUser(String username, String password) {
         return userSystem.logInUser(username, password);
     }
 

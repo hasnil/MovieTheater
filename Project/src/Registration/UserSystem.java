@@ -30,11 +30,11 @@ public class UserSystem {
             return "Payment unsuccessful";
     }
 
-    public String logInUser(String username, String password) {
+    public RegisteredUser logInUser(String username, String password) {
         for (RegisteredUser user : registeredUsers)
             if (user.getUserName().equals(username) && user.getPassword().equals(password))
-                return "Successfully logged in";
-        return "Wrong username and/or password, try again";
+                return user;
+        return null;
     }
 
     public void loadUsers(ResultSet rs) {

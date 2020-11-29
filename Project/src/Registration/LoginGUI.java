@@ -14,7 +14,7 @@ public class LoginGUI {
         reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public String logInUser() {
+    public RegisteredUser logInUser() {
         try {
             System.out.println("Enter your username");
             String username = reader.readLine();
@@ -24,7 +24,7 @@ public class LoginGUI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "ERROR";
+        return null;
     }
 
     public void setManageLogin(ManageLogin manageLogin) {

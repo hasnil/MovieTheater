@@ -22,6 +22,7 @@ public class GUIController {
     private ReservationGUI reservationGUI;
     private BufferedReader reader;
     private boolean loggedIn;
+    private RegisteredUser user;
 
     public GUIController() {
         reader = new BufferedReader(new InputStreamReader(System.in));
@@ -62,8 +63,8 @@ public class GUIController {
                 }
                 case (2): {
                     if (!loggedIn) {
-                        response = loginGUI.logInUser();
-                        if (response.equals("Successfully logged in"))
+                        user = loginGUI.logInUser();
+                        if (user != null)
                             loggedIn = true;
                     }
                     else
