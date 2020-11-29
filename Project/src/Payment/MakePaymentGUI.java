@@ -16,7 +16,7 @@ public class MakePaymentGUI {
 
     public boolean makePayment(double amount) {
         int option = 0;
-        System.out.println("Select 1 to pay with credit card or 2 te pay with a voucher");
+        System.out.println("Select 1 to pay with credit card, 2 to pay with a voucher or 3 to pay with store credit");
         try {
             option = Integer.parseInt(reader.readLine());
         } catch (IOException e) {
@@ -27,6 +27,9 @@ public class MakePaymentGUI {
         }
         else if (option == 2) {
             return payWithVoucher(amount);
+        }
+        else if (option == 3) {
+            return payWithStoreCredit(amount);
         }
         else
             System.out.println("ERROR");
@@ -62,6 +65,18 @@ public class MakePaymentGUI {
             return false;
         else
             return payWithCreditCard(remainder);
+    }
+
+    private boolean payWithStoreCredit(double amount) {
+        int creditNum = 0;
+        try {
+            System.out.println("Enter your store credit number");
+            creditNum = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // TODO finish this with the gui
+        return true;
     }
 
     public void setMakePayment(MakePayment makePayment) {

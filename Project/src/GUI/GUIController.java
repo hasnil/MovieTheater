@@ -102,7 +102,7 @@ public class GUIController {
                     if (user == null)
                         reservationGUI.cancelReservation();
                     else
-
+                        reservationGUI.cancelReservationRU(user);
                     break;
                 }
             }
