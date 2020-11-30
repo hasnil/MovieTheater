@@ -20,6 +20,7 @@ public class RegistrationGUI extends JPanel{
 	private ManageRegistration manageRegistration;
 	private JButton registerButton;
 	private JButton makePaymentButton;
+	private JTextField textField;
 
 
 	public RegistrationGUI(ManageRegistration manageRegistration) {
@@ -32,13 +33,13 @@ public class RegistrationGUI extends JPanel{
 		JLabel lblNewLabel = new JLabel("Email");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(356, 88, 271, 44);
+		lblNewLabel.setBounds(356, 69, 271, 44);
 		frame.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Username");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(402, 162, 180, 38);
+		lblNewLabel_1.setBounds(401, 132, 180, 38);
 		frame.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("Please enter your information to register. Note that there is a $20 annual fee.");
@@ -54,46 +55,46 @@ public class RegistrationGUI extends JPanel{
 		frame.add(registerButton);
 		
 		emailTextField = new JTextField();
-		emailTextField.setBounds(367, 124, 249, 27);
+		emailTextField.setBounds(367, 105, 249, 27);
 		frame.add(emailTextField);
 		emailTextField.setColumns(10);
 		
 		usernameTextField = new JTextField();
 		usernameTextField.setColumns(10);
-		usernameTextField.setBounds(367, 199, 249, 27);
+		usernameTextField.setBounds(366, 169, 249, 27);
 		frame.add(usernameTextField);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1.setBounds(402, 245, 180, 38);
+		lblNewLabel_1_1.setBounds(402, 196, 180, 38);
 		frame.add(lblNewLabel_1_1);
 		
 		passwordTextField = new JTextField();
 		passwordTextField.setColumns(10);
-		passwordTextField.setBounds(367, 282, 249, 27);
+		passwordTextField.setBounds(367, 233, 249, 27);
 		frame.add(passwordTextField);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(367, 357, 249, 27);
+		textField_3.setBounds(367, 302, 249, 27);
 		frame.add(textField_3);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Last Name");
+		JLabel lblNewLabel_1_1_1 = new JLabel("Full Name");
 		lblNewLabel_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1_1.setBounds(402, 320, 180, 38);
+		lblNewLabel_1_1_1.setBounds(402, 265, 180, 38);
 		frame.add(lblNewLabel_1_1_1);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(367, 432, 249, 27);
+		textField_4.setBounds(367, 363, 249, 27);
 		frame.add(textField_4);
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("First Name");
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Address");
 		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1_1_1.setBounds(402, 395, 180, 38);
+		lblNewLabel_1_1_1_1.setBounds(402, 326, 180, 38);
 		frame.add(lblNewLabel_1_1_1_1);
 		
 		returnHomeButton = new JButton("Return to Home");
@@ -111,6 +112,17 @@ public class RegistrationGUI extends JPanel{
 		frame.add(makePaymentButton);
 
 		add(frame);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(367, 430, 249, 27);
+		frame.add(textField);
+		
+		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Credit Card Account Number");
+		lblNewLabel_1_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_1_1_1_1_1.setBounds(325, 393, 335, 38);
+		frame.add(lblNewLabel_1_1_1_1_1);
 	}
 
 	public void addRegisterButtonListener(ActionListener actionListener) {

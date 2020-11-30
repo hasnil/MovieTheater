@@ -155,6 +155,10 @@ public class ViewShowtimesGUI extends JPanel{
 		return showtimesList.getSelectedValue();
 	}
 	
+	public JList<ShowTime> getShowTimesList(){
+		return showtimesList;
+	}
+	
 
 	public void setInfoLabelText(String message) {
 		infoLabel.setText(message);

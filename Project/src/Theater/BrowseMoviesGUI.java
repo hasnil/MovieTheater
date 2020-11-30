@@ -38,9 +38,7 @@ public class BrowseMoviesGUI extends JPanel{
 	private JLabel posterLabel;
 	private String[] headers;
 	private JButton returnHomeButton; 
-	private JLabel lblNewLabel;
 	private JPanel panel;
-	private boolean currentSelectionEligible;
 	private JLabel loginLabel;
 
 
@@ -220,14 +218,6 @@ public class BrowseMoviesGUI extends JPanel{
 
 	public JTable getTable() {
 		return table;
-	}
-	
-	public boolean isCurrentSelectionEligible() {
-		return currentSelectionEligible;
-	}
-
-	public void setCurrentSelectionEligible(boolean currentSelectionEligible) {
-		this.currentSelectionEligible = currentSelectionEligible;
 	}
 	
 	public JLabel getLoginLabel() {

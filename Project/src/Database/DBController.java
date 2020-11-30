@@ -1,10 +1,16 @@
 package Database;
 
 import Registration.UserSystem;
+import Theater.Movie;
+import Theater.ShowTime;
 import Reservation.ReservationSystem;
 import Theater.TheaterSystem;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DBController implements DBCredentials {
 
@@ -12,14 +18,12 @@ public class DBController implements DBCredentials {
     private DBLoader dbLoader;
     private UserSystem userSystem;
     private ReservationSystem reservationSystem;
-    private TheaterSystem theaterSystem;
 
-    public DBController(UserSystem userSystem, ReservationSystem reservationSystem, TheaterSystem theaterSystem) {
+    public DBController(UserSystem userSystem, ReservationSystem reservationSystem) {
         initializeConnection();
         dbLoader = new DBLoader(conn);
         setUserSystem(userSystem);
         setReservationSystem(reservationSystem);
-        setTheaterSystem(theaterSystem);
     }
 
     public void initializeConnection() {
@@ -56,7 +60,78 @@ public class DBController implements DBCredentials {
         this.reservationSystem = reservationSystem;
     }
 
-    public void setTheaterSystem(TheaterSystem theaterSystem) {
-        this.theaterSystem = theaterSystem;
+    
+    public ArrayList<ShowTime> loadShowTimesFromDatabase(){
+    	ResultSet rs = dbLoader.loadShowTimes();
+    	ArrayList<ShowTime> showtimes = new ArrayList<ShowTime>();
+    	try {
+			while(rs.next()) {
+				ShowTime showtime = new ShowTime(modifyDate(rs.getDate("ShowTimes")));
+				showtimes.add(showtime);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return showtimes;
+    }
+    
+ 
+    public ArrayList<Movie> loadMoviesFromDatabase(){
+
+    	
+    	ArrayList<Movie> returnArrayList = new ArrayList<Movie>();
+    			
+    	ResultSet rs = dbLoader.loadMovies();
+    	try {
+			while(rs.next()) {
+				Movie singleMovie = new Movie(rs.getString("movieName"), new ArrayList<ShowTime> (), modifyDate(rs.getDate("releaseDate")));
+				returnArrayList.add(singleMovie);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    	ResultSet rs2 = dbLoader.loadShowTimes();
+    	try {
+			while(rs2.next()) {
+				for(Movie m: returnArrayList) {
+					if(m.getMovieName().equals(rs2.getString("movieName"))) {
+						m.getShowTimes().add(new ShowTime(modifyDate(rs2.getDate("ShowTimes"))));
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+    	return returnArrayList;
+    }
+    
+    
+    
+    
+    
+    public ArrayList<String> loadPostersFromDatabase(){
+    	ResultSet rs = dbLoader.loadMovies();
+    	ArrayList<String> posters = new ArrayList<String>();
+    	try {
+			while(rs.next()) {
+				posters.add(rs.getString("moviePosterUrl"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	return posters;
+    }
+    
+    
+    //public LocalDateTime modifyDate(Date originalDate) {
+    //    return originalDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    //}
+    
+    public LocalDateTime modifyDate(Date dateToConvert) {
+        return new java.sql.Timestamp(
+          dateToConvert.getTime()).toLocalDateTime();
     }
 }

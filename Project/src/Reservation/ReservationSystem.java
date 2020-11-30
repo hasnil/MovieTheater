@@ -62,7 +62,7 @@ public class ReservationSystem {
     public void loadShowTimes(ResultSet rs) {
         try {
             while (rs.next()) {
-                ShowTime showTime = new ShowTime(rs.getString("showTime"),
+                ShowTime showTime = new ShowTime(rs.getString("showTimes"),
                                                  rs.getString("movieName"));
                 for (Movie movie : movies)
                     if (movie.getMovieName().equals(showTime.getMovieName()))

@@ -38,10 +38,12 @@ public class MainController {
 		this.manageRegistration = manageRegistration;
 		this.manageAnnualFee = manageAnnualFee;
 		this.guiController = guiController;
-		this.manageTheater = manageTheater;
+		this.setManageTheater(manageTheater);
 		this.manageReservations = manageReservations;
 		this.databaseController = databaseController;
         databaseController.loadFromDB();
+        
+        manageLogin.setMainController(this);
 
 	}
 	
@@ -114,11 +116,14 @@ public class MainController {
         MainGUI mainGUI = new MainGUI();
      ////////////////////////////////////////////////////////
 
-//        dbController.loadFromDB();
+        
+        
+        DBController dbController = new DBController(userSystem, reservationSystem);
 
         // Set up Manage Theater and Theater GUIs
         ManageTheater manageTheater = new ManageTheater(false);
-        TheaterSystem theaterSystem = new TheaterSystem();
+        TheaterSystem theaterSystem = new TheaterSystem(dbController.loadMoviesFromDatabase(), new ArrayList<Theater>()
+        		, dbController.loadPostersFromDatabase());
         manageTheater.setTheaterSystem(theaterSystem);
         ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
@@ -129,7 +134,7 @@ public class MainController {
         manageTheater.setMovieView(browseMovies);
         ////////////////////////////////////////////////////
 
-        DBController dbController = new DBController(userSystem, reservationSystem, theaterSystem);
+       
 
         cancel.setLayout(null);
         mainGUI.setLayout(null);
@@ -165,4 +170,19 @@ public class MainController {
         		manageAnnualFee, guiController, manageTheater, manageReservations, dbController);
         
     }
+
+
+	public ManageTheater getManageTheater() {
+		return manageTheater;
+	}
+
+
+	public void setManageTheater(ManageTheater manageTheater) {
+		this.manageTheater = manageTheater;
+	}
+
+
+	public GUIController getGUIController() {
+		return guiController;
+	}
 }

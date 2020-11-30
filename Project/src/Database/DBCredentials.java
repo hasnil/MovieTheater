@@ -2,8 +2,8 @@ package Database;
 
 public interface DBCredentials {
 
-    String DB_URL = "jdbc:mysql://localhost/theater";
+    String DB_URL = "jdbc:mysql://localhost:3306/theater";
 
-    String USERNAME = "santiago";
-    String PASSWORD = "santiago123!";
+    String USERNAME = "root";
+    String PASSWORD = "zgmfx09a!";
 }

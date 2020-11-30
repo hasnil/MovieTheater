@@ -3,11 +3,14 @@ package Registration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import mainController.MainController;
+
 public class ManageLogin {
 
     private UserSystem userSystem;
     private LoginGUI loginGUI;
     private RegisteredUser user;
+	private MainController mainController;
 
     public ManageLogin(UserSystem userSystem) {
         setUserSystem(userSystem);
@@ -31,6 +34,8 @@ public class ManageLogin {
                         loginGUI.displayMessage("Successfully logged in");
                         loginGUI.setLoginSuccessful(true);
                         loginGUI.getLoginLabel().setText("Login Status: Logged In");
+                        mainController.getManageTheater().setUserStatus(true);
+                        mainController.getGUIController().setUserStatus(true);
                     }
                     else {
                         loginGUI.displayMessage("Wrong username and/or password");
@@ -43,4 +48,8 @@ public class ManageLogin {
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
+
+	public void setMainController(MainController mainController) {
+		this.mainController = mainController;
+	}
 }
