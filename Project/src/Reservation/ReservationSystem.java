@@ -7,12 +7,10 @@ import java.util.ArrayList;
 public class ReservationSystem {
 
     private ArrayList<Voucher> vouchers;
-    private ArrayList<Movie> movies;
     private ArrayList<Reservation> reservations;
 
     public ReservationSystem() {
         vouchers = new ArrayList<>();
-        movies = new ArrayList<>();
         reservations = new ArrayList<>();
     }
 
@@ -62,19 +60,6 @@ public class ReservationSystem {
         return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
     }
 
-
-    public void loadMovies(ResultSet rs) {
-        try {
-            while (rs.next()) {
-                addMovie(new Movie(
-                        rs.getString("movieName"),
-                        rs.getDate("releaseDate")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void loadVouchers(ResultSet rs) {
         try {
             while (rs.next()) {
@@ -82,20 +67,6 @@ public class ReservationSystem {
                         rs.getInt("vouchNum"),
                         rs.getFloat("amount"),
                         rs.getDate("expiryDate")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadShowTimes(ResultSet rs) {
-        try {
-            while (rs.next()) {
-                ShowTime showTime = new ShowTime(rs.getString("showTime"),
-                                                 rs.getString("movieName"));
-                for (Movie movie : movies)
-                    if (movie.getMovieName().equals(showTime.getMovieName()))
-                        movie.addShowTime(showTime);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,10 +101,6 @@ public class ReservationSystem {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    private void addMovie(Movie movie) {
-        movies.add(movie);
     }
 
     private void addVoucher(Voucher voucher) {
