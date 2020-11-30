@@ -8,25 +8,40 @@ public class ManageRegistration {
     private UserSystem userSystem;
     private RegistrationGUI registrationGUI;
 
-    public ManageRegistration(UserSystem userSystem) {
+    public ManageRegistration(RegistrationGUI registrationGUI, UserSystem userSystem) {
+        setRegistrationGUI(registrationGUI);
         setUserSystem(userSystem);
+        registrationGUI.addButtonActionListener(registrationGUI.getRegisterButton(), new RegistrationButtonListener());
     }
 
     public String checkCredentialsAvailability(String email, String username) {
         return userSystem.registerUser(email, username);
     }
 
-    public boolean makePayment(String email, String username, String password) {
-        return userSystem.makePayment(email, username, password);
+    class RegistrationButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            register();
+        }
     }
 
-    public void displayUsers() {
-        userSystem.displayUsers();
+    private void register() {
+        String email = registrationGUI.getEmailTextField().getText();
+        String username = registrationGUI.getUsernameTextField().getText();
+        String response = checkCredentialsAvailability(email, username);
+        if (!response.equals("Okay"))
+            registrationGUI.displayMessage(response);
+        else {
+            registrationGUI.displayMessage("That username and email are available, please proceed to make a payment");
+            registrationGUI.getMakePaymentButton().setEnabled(true);
+        }
     }
 
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
 
-
+    public void setRegistrationGUI(RegistrationGUI registrationGUI) {
+        this.registrationGUI = registrationGUI;
+    }
 }

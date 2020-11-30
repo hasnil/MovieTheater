@@ -1,9 +1,16 @@
 package Database;
 
 import Registration.UserSystem;
+import Theater.Movie;
+import Theater.ShowTime;
 import Reservation.ReservationSystem;
+import Theater.TheaterSystem;
 
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DBController implements DBCredentials {
 
@@ -36,6 +43,7 @@ public class DBController implements DBCredentials {
         reservationSystem.loadVouchers(rs);
         rs = dbLoader.loadMovies();
         reservationSystem.loadMovies(rs);
+//        theaterSystem.loadMovies(rs);
         rs = dbLoader.loadShowTimes();
         reservationSystem.loadShowTimes(rs);
         rs = dbLoader.loadReservations();
@@ -51,4 +59,6 @@ public class DBController implements DBCredentials {
     public void setReservationSystem(ReservationSystem reservationSystem) {
         this.reservationSystem = reservationSystem;
     }
+
+
 }

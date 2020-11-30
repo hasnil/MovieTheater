@@ -21,6 +21,8 @@ public class TheaterSystem {
 		this.theatersList = theatersList;
 		this.posterURLs = posterURLs;
 	}
+
+	public TheaterSystem() {}
 	
 	public ArrayList<Movie> getMoviesList() {
 		return moviesList;
@@ -76,9 +78,18 @@ public class TheaterSystem {
 				showtimesAndMovies.put(s.toString(), m.getMovieName());
 			}
 		}
-
+		
+		ArrayList<String> stringList = new ArrayList<String>();
 		Set<String> showtimes = showtimesAndMovies.keySet();
-		String[] showtimesArray = showtimes.toArray(new String[showtimes.size()]);
+		
+		for(String s: showtimes) {
+			stringList.add(showtimesAndMovies.get(s) + s);
+		}
+		String[] showtimesArray = new String[stringList.size()];
+		
+		for(int i = 0; i < showtimesArray.length; i++) {
+			showtimesArray[i] = stringList.get(i);
+		}
 		
 		return showtimesArray;
 	}

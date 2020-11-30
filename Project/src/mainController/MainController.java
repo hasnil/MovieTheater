@@ -1,6 +1,7 @@
 package mainController;
 
 import Database.DBController;
+import Database.TheaterDBLoader;
 import GUI.GUIController;
 import GUI.MainGUI;
 import Payment.MakePayment;
@@ -38,35 +39,14 @@ public class MainController {
 		this.manageRegistration = manageRegistration;
 		this.manageAnnualFee = manageAnnualFee;
 		this.guiController = guiController;
-		this.manageTheater = manageTheater;
+		this.setManageTheater(manageTheater);
 		this.manageReservations = manageReservations;
 		this.databaseController = databaseController;
         databaseController.loadFromDB();
+        
+        manageLogin.setMainController(this);
 
 	}
-	
-
-    /*
-    public void setMainGui(MainGUI mainGui) {
-        this.mainGui = mainGui;
-    }
-
-    public void setRegistrationGUI(RegistrationGUI registrationGUI) {
-        this.registrationGUI = registrationGUI;
-    }
-
-    public void setLoginGUI(LoginGUI loginGUI) {
-        this.loginGUI = loginGUI;
-    }
-
-    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
-        this.makePaymentGUI = makePaymentGUI;
-    }
-
-    public void setReservationGUI(ReservationGUI reservationGUI) {
-        this.reservationGUI = reservationGUI;
-    }
-     */
 	
     public static void main(String[] args) {
 
@@ -74,6 +54,7 @@ public class MainController {
         PaymentSystem paymentSystem = new PaymentSystem();
         MakePayment makePayment = new MakePayment(paymentSystem);
         MakePaymentGUI makePaymentGUI = new MakePaymentGUI(makePayment);
+        makePayment.setMakePaymentGUI(makePaymentGUI);
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
@@ -98,15 +79,14 @@ public class MainController {
         /////////////////////////////////////////////////////////
 
         // Set up Manage Registration and RegistrationGUI
-        ManageRegistration manageRegistration = new ManageRegistration(userSystem);
-        RegistrationGUI registrationGUI = new RegistrationGUI(manageRegistration);
+        RegistrationGUI registrationGUI = new RegistrationGUI();
+        ManageRegistration manageRegistration = new ManageRegistration(registrationGUI, userSystem);
         manageAnnualFee.setManageRegistration(manageRegistration);
         ////////////////////////////////////////////////////////
         
         // Set up Manage Login and Login GUI
         ManageLogin manageLogin = new ManageLogin(userSystem);
         LoginGUI loginGUI = new LoginGUI();
-        loginGUI.setManageLogin(manageLogin);
         manageLogin.setLoginGUI(loginGUI);
         ///////////////////////////////////////////////////////
         
@@ -114,15 +94,15 @@ public class MainController {
         MainGUI mainGUI = new MainGUI();
      ////////////////////////////////////////////////////////
 
+        
+        
         DBController dbController = new DBController(userSystem, reservationSystem);
-//        dbController.loadFromDB();
+        TheaterDBLoader theaterLoader = new TheaterDBLoader();
 
         // Set up Manage Theater and Theater GUIs
         ManageTheater manageTheater = new ManageTheater(false);
-        ArrayList<Movie> movies = new ArrayList<Movie>(); //load from database
-        ArrayList<Theater> theaters = new ArrayList<Theater>(); // load from database
-        ArrayList<String> moviePosters = new ArrayList<String>(); // load from database
-        TheaterSystem theaterSystem = new TheaterSystem(movies, theaters, moviePosters);
+        TheaterSystem theaterSystem = new TheaterSystem(theaterLoader.loadMoviesFromDatabase(), new ArrayList<Theater>()
+        		, theaterLoader.loadPostersFromDatabase());
         manageTheater.setTheaterSystem(theaterSystem);
         ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
@@ -133,6 +113,8 @@ public class MainController {
         manageTheater.setTheaterView(browseTheater);
         manageTheater.setMovieView(browseMovies);
         ////////////////////////////////////////////////////
+
+       
 
         cancel.setLayout(null);
         mainGUI.setLayout(null);
@@ -168,4 +150,19 @@ public class MainController {
         		manageAnnualFee, guiController, manageTheater, manageReservations, dbController);
         
     }
+
+
+	public ManageTheater getManageTheater() {
+		return manageTheater;
+	}
+
+
+	public void setManageTheater(ManageTheater manageTheater) {
+		this.manageTheater = manageTheater;
+	}
+
+
+	public GUIController getGUIController() {
+		return guiController;
+	}
 }

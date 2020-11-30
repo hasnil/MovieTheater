@@ -2,8 +2,10 @@ package Reservation;
 
 import Payment.MakePaymentGUI;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReservationSystem {
@@ -20,13 +22,18 @@ public class ReservationSystem {
         reservations = new ArrayList<>();
     }
 
-    public void cancelReservation(int reservationId) {
-        for (Reservation reservation : reservations)
-            if (reservation.getReservationId() == reservationId)
-                if (checkForExpiry(reservation))
-                    System.out.println(createVoucher(reservation));
-                else
-                    System.out.println("Movie starts in less than 3 days, can't cancel anymore");
+    public String cancelReservation(int reservationId) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getReservationId() == reservationId) {
+                if (checkForExpiry(reservation)) {
+                    Voucher voucher = createVoucher(reservation);
+                    reservations.remove(reservation);
+                    return "Cancellation successful\nThe following voucher has been emailed to you\n" + voucher.toString();
+                } else
+                    return "Movie starts in less than 3 days, can't cancel anymore";
+            }
+        }
+        return "Reservation doesn't exist";
     }
 
     public void loadMovies(ResultSet rs) {
@@ -57,7 +64,7 @@ public class ReservationSystem {
     public void loadShowTimes(ResultSet rs) {
         try {
             while (rs.next()) {
-                ShowTime showTime = new ShowTime(rs.getString("showTime"),
+                ShowTime showTime = new ShowTime(rs.getString("showTimes"),
                                                  rs.getString("movieName"));
                 for (Movie movie : movies)
                     if (movie.getMovieName().equals(showTime.getMovieName()))
@@ -85,7 +92,7 @@ public class ReservationSystem {
             while (rs.next()) {
                 Ticket ticket = new Ticket(rs.getString("movieName"),
                                            rs.getInt("seat"),
-                                           rs.getString("showTime"),
+                                           modifyDate(rs.getDate("showTimes")),
                                            rs.getInt("room"),
                                            rs.getDouble("price"),
                                           rs.getInt("reservationId"));
@@ -140,5 +147,9 @@ public class ReservationSystem {
 
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
         this.makePaymentGUI = makePaymentGUI;
+    }
+    
+    public LocalDateTime modifyDate(Date originalDate) {
+        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 }

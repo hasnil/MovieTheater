@@ -46,7 +46,11 @@ public class ManageTheater {
 			DefaultListModel<ShowTime> listModel = new DefaultListModel<ShowTime>();
 			
 			for (ShowTime s: showtimesList) {
-				listModel.addElement(s);
+				for(ShowTime s2: theaterSystem.getSelectedMovie().getShowTimes()) {
+					if(s.getTime().compareTo(s2.getTime()) == 0) {
+						listModel.addElement(s);
+					}
+				}
 			}
 			
 			try {
@@ -123,10 +127,11 @@ public class ManageTheater {
 			String movieName = movieView.getMovieNameSelection();
 			if(movieName != null) {
 				
-				if(movieView.isCurrentSelectionEligible() == false) {
+				if(theaterSystem.searchMovieByName(movieName).isEarlyAccess() == true && userStatus == false) {
 					movieView.displayMessage("Sorry, only registered users may select that movie right now! Please consider registering.");
 					return;
 				}
+						
 				
 				movieSelected = true;
 				Movie selectedMovie = null;
@@ -154,6 +159,7 @@ public class ManageTheater {
 			
 			try {
 				movieView.setUpTable(moviesWithAccess);
+				movieView.addMovieRowListener(new MovieRowClickListener());
 			}catch (Exception ex) {
 				movieView.displayMessage("Something went wrong! Please retry.");
 			}
@@ -175,10 +181,10 @@ public class ManageTheater {
 				moviesWithAccess[i][0] = moviesArr.get(i).getMovieName();
 				
 				if(moviesArr.get(i).isEarlyAccess() == true) {
-					moviesWithAccess[i][1] = "✓";
+					moviesWithAccess[i][1] = "Y";
 				}
 				else {
-					moviesWithAccess[i][1] = "x";
+					moviesWithAccess[i][1] = "N";
 				}			
 			}
 			
@@ -211,13 +217,6 @@ public class ManageTheater {
 				ex.printStackTrace();
 			}
 			
-			if(theaterSystem.searchMovieByName(movieName).isEarlyAccess() == true && userStatus == false) {
-				movieView.setCurrentSelectionEligible(false);
-			}
-			else {
-				movieView.setCurrentSelectionEligible(true);
-			}
-
 			movieView.setPosterLabel(new ImageIcon(moviePoster));
 		}
 	}
@@ -248,15 +247,16 @@ public class ManageTheater {
 				moviesWithAccess[i][0] = moviesArr.get(i).getMovieName();
 				
 				if(moviesArr.get(i).isEarlyAccess() == true) {
-					moviesWithAccess[i][1] = "✓";
+					moviesWithAccess[i][1] = "Y";
 				}
 				else {
-					moviesWithAccess[i][1] = "x";
+					moviesWithAccess[i][1] = "N";
 				}			
 			}
 			
 			try {
 				movieView.setUpTable(moviesWithAccess);
+				movieView.addMovieRowListener(new MovieRowClickListener());
 			}catch (Exception ex) {
 				movieView.displayMessage("Something went wrong! Please retry.");
 			}

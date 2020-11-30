@@ -3,13 +3,12 @@ package Reservation;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -21,9 +20,10 @@ public class CancellationGUI extends JPanel{
 	private static final long serialVersionUID = 1L;
 	private JPanel frame;
 	private boolean userType;
-	private JTextField textField;
+	private JTextField reservationId;
 	private JButton returnHomeButton;
 	private JLabel loginLabel;
+	private JButton confirmCancellation;
 	
 	
 	public CancellationGUI(boolean userType){
@@ -39,14 +39,14 @@ public class CancellationGUI extends JPanel{
 		lblNewLabel.setBounds(238, 76, 517, 60);
 		frame.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(325, 268, 344, 34);
-		frame.add(textField);
-		textField.setColumns(10);
+		reservationId = new JTextField();
+		reservationId.setBounds(325, 268, 344, 34);
+		frame.add(reservationId);
+		reservationId.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Confirm Cancellation");
-		btnNewButton.setBounds(415, 335, 163, 34);
-		frame.add(btnNewButton);
+		confirmCancellation = new JButton("Confirm Cancellation");
+		confirmCancellation.setBounds(415, 335, 163, 34);
+		frame.add(confirmCancellation);
 		
 		JLabel lblNewLabel_1 = new JLabel("Enter your reservation ID here:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -65,8 +65,11 @@ public class CancellationGUI extends JPanel{
 		}
 		add(frame);
 	}
-	
-	
+
+	public JTextField getReservationId() {
+		return reservationId;
+	}
+
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;
 	}	
@@ -78,5 +81,9 @@ public class CancellationGUI extends JPanel{
 	public void displayMessage(String string) {
 		JOptionPane pane = new JOptionPane();
 		JOptionPane.showMessageDialog(pane, string);	
+	}
+
+	public void addCancellationButtonListener(ActionListener actionListener) {
+		confirmCancellation.addActionListener(actionListener);
 	}
 }

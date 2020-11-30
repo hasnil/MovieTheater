@@ -2,20 +2,15 @@ package GUI;
 
 import Payment.MakePaymentGUI;
 import Registration.*;
-import Registration.ManageLogin;
 import Registration.RegistrationGUI;
 import Reservation.CancellationGUI;
 import Reservation.PurchaseTicketsGUI;
 import Reservation.ReservationGUI;
 import Theater.*;
 
-import javax.swing.JLayeredPane;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 public class GUIController {
@@ -32,6 +27,7 @@ public class GUIController {
     private RegistrationGUI registrationGUI;
     private LoginGUI loginGUI;
     private JLayeredPane layeredPane;
+    private boolean userStatus;
 
 
     public GUIController(MainGUI mainGUI, ViewShowtimesGUI viewShowtimes, BrowseMoviesGUI browseMovies,
@@ -101,9 +97,10 @@ public class GUIController {
         registrationGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         reservation.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         viewShowtimes.getReturnHomeButton().addActionListener(new ReturnHomeListener());
-        registrationGUI.addMakePaymentListener(new MakePaymentButtonListener());
+        registrationGUI.addMakePaymentListener(new AnnualFeeMakePaymentButtonListener());
         browseTheater.addConfirmTheaterButtonListener(new TheaterConfirmedListener());
         browseMovies.addConfirmMovieButtonListener(new MovieConfirmedListener());
+        viewShowtimes.getConfirmShowtimeButton().addActionListener(new ConfirmShowtimeButtonListener());
 
 
         mainGUI.getBrowseTheaterButton().addActionListener(new ActionListener() {
@@ -217,15 +214,28 @@ public class GUIController {
             mainGUI.setVisible(true);
         }
     }
+    
+    class ConfirmShowtimeButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(viewShowtimes.getShowtimesListSelection() != null) {
+				viewShowtimes.setVisible(false);
+				layeredPane.moveToFront(reservation);
+				reservation.setVisible(true);
+			}
+		}
+    	
+    }
 
 
-    class MakePaymentButtonListener implements ActionListener {
+    class AnnualFeeMakePaymentButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            reservation.setVisible(false);
-            registrationGUI.setVisible(false);
             manageAnnualFee.setVisible(false);
+            registrationGUI.setVisible(false);
+            makePaymentGUI.setAmount(20);
             layeredPane.moveToFront(makePaymentGUI);
             makePaymentGUI.setVisible(true);
         }
@@ -295,10 +305,21 @@ public class GUIController {
 
                 browseMovies.setVisible(false);
                 layeredPane.moveToFront(reservation);
-                reservation.setVisible(true);
+                viewShowtimes.setVisible(true);
+                viewShowtimes.getViewAllShowtimesButton().setEnabled(false);
+                viewShowtimes.getViewSelectedShowtimesButton().setEnabled(true);
+                viewShowtimes.getConfirmShowtimeButton().setEnabled(true);
+                viewShowtimes.getInfoLabel().setText("");
+                DefaultListModel<String> listModel = new DefaultListModel<String>();
+                viewShowtimes.setShowtimesAndMoviesList(listModel);
             }
         }
 
     }
+    
+
+	public void setUserStatus(boolean b) {
+		this.userStatus = b;
+	}
 
 }

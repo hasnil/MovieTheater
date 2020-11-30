@@ -1,21 +1,29 @@
-releaseDate,movieName
-2020-11-30 17:30:00,Star Wars
-2020-11-30 20:30:00,Star Wars
-2020-12-05  11:00:00 AM,Coco
-2020-12-05 13:00:00,Coco
-2020-12-10 19:00:00,Interstellar
-2020-12-10 22:00:00,Interstellar
-2020-12-15 14:00:00,Aladdin
-2020-12-15 17:00:00,Aladdin
-2020-12-20 16:00:00,Jumanji
-2020-12-20 19:00:00,Jumanji
-2020-12-25 15:00:00,The Hobbit
-2020-12-25 20:30:00,The Hobbit
-2020-12-30 18:30:00,Venom
-2020-12-30 20:30:00,Venom
-2021-01-04 14:30:00,Avengers
-2021-01-04 18:30:00,Avengers
-2021-01-09 15:00:00,Jungle Book
-2021-01-09 18:00:00,Jungle Book
-2021-01-14 10:00:00,Cars
-2021-01-14 13:00:00,Cars
+showTimes,movieName
+2020-11-18 17:45,The Shawshank Redemption
+2020-11-18 21:00,The Shawshank Redemption
+2020-11-23 17:45,Madagascar
+2020-11-23 21:45,Madagascar
+2020-11-28 17:30,Star Wars
+2020-11-28 20:30,Star Wars
+2020-12-03 11:00,Coco
+2020-12-03 13:00,Coco
+2020-12-08 19:00,Interstellar
+2020-12-08 22:00,Interstellar
+2020-12-13 14:00,Aladdin
+2020-12-13 17:00,Aladdin
+2020-12-18 16:00,Jumanji
+2020-12-18 19:00,Jumanji
+2020-12-23 15:00,The Hobbit
+2020-12-23 20:30,The Hobbit
+2020-12-28 18:30,Venom
+2020-12-28 20:30,Venom
+2021-01-02 14:30,Avengers
+2021-01-02 18:30,Avengers
+2021-01-07 15:00,Jungle Book
+2021-01-07 18:00,Jungle Book
+2021-01-12 10:00,Cars
+2021-01-12 13:00,Cars
+2021-01-17 14:00,Lord of the Rings
+2021-01-17 17:00,Lord of the Rings
+2021-01-22 17:00,Good Will Hunting
+2021-01-22 21:00,Good Will Hunting
