@@ -14,9 +14,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-//public class ReservationGUI extends JPanel {
+public class ReservationGUI extends JPanel {
 
-public class ReservationGUI extends JFrame {
+//public class ReservationGUI extends JFrame {
 	
 	private JPanel frame;
 	private JTextField txtEnterVoucherId;
@@ -103,9 +103,9 @@ public class ReservationGUI extends JFrame {
 		this.manageReservations = manageReservations;
 	}
 	
-	public static void main(String[] args) {
-		ReservationGUI res = new ReservationGUI();
-		res.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		ReservationGUI res = new ReservationGUI();
+//		res.setVisible(true);
+//	}
 	
 }

@@ -5,17 +5,21 @@ import java.util.ArrayList;
 public class Theater {
 
 	private int lastRoomId;
+	private int numOfRooms;
 	private ArrayList<Room> rooms;
 	private String address;
 	private String name;
-	
+
 	public Theater() {
 		lastRoomId = 1;
-		this.rooms = new ArrayList<Room>(); 
+		this.numOfRooms = 3;
+		this.rooms = new ArrayList<Room>();
+		for (int i = 0; i < numOfRooms; i++)
+			addRoom();
 	}
 	
 	private void addRoom() {
-		Room r = new Room(lastRoomId, 10, 10);
+		Room r = new Room(lastRoomId, 20);
 		getRooms().add(r);
 		lastRoomId++;
 	}
