@@ -30,8 +30,6 @@ public class MainController {
 	private ManageReservations manageReservations;
 	private DBController databaseController;
 	
-	
-	
 	public MainController(MakePayment makePayment, ManageLogin manageLogin, ManageRegistration manageRegistration, ManageAnnualFee manageAnnualFee,
 			GUIController guiController, ManageTheater manageTheater, ManageReservations manageReservations, DBController databaseController) {
 		

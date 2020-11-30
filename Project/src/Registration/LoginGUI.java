@@ -78,13 +78,10 @@ public class LoginGUI extends JPanel {
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;
 	}
-	
-	
 
 	public boolean isLoginSuccessful() {
 		return loginSuccessful;
 	}
-
 
 	public void setLoginSuccessful(boolean loginSuccessful) {
 		this.loginSuccessful = loginSuccessful;
@@ -105,11 +102,8 @@ public class LoginGUI extends JPanel {
 		this.manageLogin = manageLogin;
 	}
 
-	
 	public void displayMessage(String string) {
 		JOptionPane pane = new JOptionPane();
 		JOptionPane.showMessageDialog(pane, string);	
 	}
-
-	
 }

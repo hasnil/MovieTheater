@@ -248,6 +248,11 @@ public class GUIController {
                 layeredPane.moveToFront(mainGUI);
                 mainGUI.setVisible(true);
             }
+            else {
+                loginGUI.setVisible(false);
+                layeredPane.moveToFront(mainGUI);
+                mainGUI.setVisible(true);
+            }
 
         }
 
