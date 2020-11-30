@@ -10,21 +10,23 @@ import java.awt.event.ActionListener;
 public class RegistrationGUI extends JPanel{
 
 	private JPanel frame;
-	private JTextField emailTextField, usernameTextField, passwordTextField, nameTextField, addressTextField;
-	private JButton returnHomeButton;
+	private JTextField emailTextField, usernameTextField, passwordTextField, nameTextField, addressTextField, creditCardTextField;
+	private JButton returnHomeButton, registerButton, makePaymentButton;
 	private JLabel loginLabel;
-	private ManageRegistration manageRegistration;
-	private JButton registerButton;
-	private JButton makePaymentButton;
-	private JTextField creditCardTextField;
 
-	public RegistrationGUI(ManageRegistration manageRegistration) {
-		setManageRegistration(manageRegistration);
+	public RegistrationGUI() {
 		frame = new JPanel();
 		frame.setBounds(0, 0, 1000, 650);
 		frame.setBackground(new Color(176, 196, 222));
 		frame.setLayout(null);
+		buildGUI();
+	}
 
+	public void addButtonActionListener(JButton button, ActionListener actionListener) {
+		button.addActionListener(actionListener);
+	}
+
+	private void buildGUI() {
 		JLabel emailLabel = new JLabel("Email");
 		emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		emailLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -46,7 +48,6 @@ public class RegistrationGUI extends JPanel{
 		registerButton = new JButton("Submit Registration");
 		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		registerButton.setBounds(383, 493, 217, 44);
-		registerButton.addActionListener(new RegisterButton());
 		frame.add(registerButton);
 
 		emailTextField = new JTextField();
@@ -119,8 +120,10 @@ public class RegistrationGUI extends JPanel{
 
 		add(frame);
 	}
-	public void addRegisterButtonListener(ActionListener actionListener) {
-		registerButton.addActionListener(actionListener);
+
+	public void displayMessage(String string) {
+		JOptionPane pane = new JOptionPane();
+		JOptionPane.showMessageDialog(pane, string);
 	}
 
 	public JLabel getLoginLabel() {
@@ -130,40 +133,22 @@ public class RegistrationGUI extends JPanel{
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;
 	}
-	public void displayUsers() {
-		manageRegistration.displayUsers();
-	}
-	public void setManageRegistration(ManageRegistration manageRegistration) {
-		this.manageRegistration = manageRegistration;
-	}
+
 	public JTextField getEmailTextField() {
 		return emailTextField;
 	}
 	public JTextField getUsernameTextField() {
 		return usernameTextField;
 	}
-	public JTextField getPasswordTextField() {
-		return passwordTextField;
+
+	public JButton getRegisterButton() {
+		return registerButton;
 	}
-	public void displayMessage(String string) {
-		JOptionPane pane = new JOptionPane();
-		JOptionPane.showMessageDialog(pane, string);
+
+	public JButton getMakePaymentButton() {
+		return makePaymentButton;
 	}
-	class RegisterButton implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent actionEvent) {
-			String email = getEmailTextField().getText();
-			String username = getUsernameTextField().getText();
-			String password = getPasswordTextField().getText();
-			String response = manageRegistration.checkCredentialsAvailability(email, username);
-			if (!response.equals("Okay"))
-				displayMessage(response);
-			else {
-				displayMessage("That username and email are available, please proceed to make a payment");
-				makePaymentButton.setEnabled(true);
-			}
-		}
-	}
+
 	public void addMakePaymentListener(ActionListener actionListener) {
 		makePaymentButton.addActionListener(actionListener);
 	}

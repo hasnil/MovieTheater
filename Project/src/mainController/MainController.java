@@ -75,8 +75,8 @@ public class MainController {
         /////////////////////////////////////////////////////////
 
         // Set up Manage Registration and RegistrationGUI
-        ManageRegistration manageRegistration = new ManageRegistration(userSystem);
-        RegistrationGUI registrationGUI = new RegistrationGUI(manageRegistration);
+        RegistrationGUI registrationGUI = new RegistrationGUI();
+        ManageRegistration manageRegistration = new ManageRegistration(registrationGUI, userSystem);
         manageAnnualFee.setManageRegistration(manageRegistration);
         ////////////////////////////////////////////////////////
         
