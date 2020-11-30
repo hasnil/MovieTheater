@@ -49,6 +49,6 @@ public class Voucher {
 
     @Override
     public String toString() {
-        return "Voucher #: " + vouchNum + ", amount $" + amount + ", expiry date: " + expiryDate;
+        return "Voucher #: " + vouchNum + ", amount $" + String.format("%.2f", amount) + ", expiry date: " + expiryDate;
     }
 }

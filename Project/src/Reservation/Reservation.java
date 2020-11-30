@@ -31,6 +31,10 @@ public class Reservation {
         return reservationId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     public LocalDateTime getShowTime() {
         return tickets.get(0).getShowTime();
     }

@@ -24,9 +24,17 @@ public class ReservationSystem {
         for (Reservation reservation : reservations) {
             if (reservation.getReservationId() == reservationId) {
                 if (checkForExpiry(reservation)) {
-                    Voucher voucher = createVoucher(reservation);
-                    reservations.remove(reservation);
-                    return "Cancellation successful\nThe following voucher has been emailed to you\n" + voucher.toString();
+                    if (reservation.getUserName().equals("noUser")) {
+                        Voucher voucher = createVoucherRegularUser(reservation);
+                        reservations.remove(reservation);
+                        return "Cancellation successful\nThe following voucher has been emailed to you\n" +
+                                voucher.toString() + "\nYour voucher is for 85% of the original amount";
+                    } else {
+                        Voucher voucher = createVoucherRegisteredUser(reservation);
+                        reservations.remove(reservation);
+                        return "Cancellation successful\nThe following voucher has been emailed to you\n" +
+                                voucher.toString() + "\nYour voucher is for the full original amount";
+                    }
                 } else
                     return "Movie starts in less than 3 days, can't cancel anymore";
             }
@@ -117,12 +125,22 @@ public class ReservationSystem {
             System.out.println(reservation);
     }
 
-    private Voucher createVoucher(Reservation reservation) {
+    private Voucher createVoucherRegularUser(Reservation reservation) {
         double amount = 0;
         for (Ticket ticket : reservation.getTickets())
             amount += ticket.getPrice();
         int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
         Voucher voucher = new Voucher(vouchNum, (amount * .85));
+        vouchers.add(voucher);
+        return voucher;
+    }
+
+    private Voucher createVoucherRegisteredUser(Reservation reservation) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
+        Voucher voucher = new Voucher(vouchNum, amount);
         vouchers.add(voucher);
         return voucher;
     }
