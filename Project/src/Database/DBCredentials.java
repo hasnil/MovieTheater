@@ -5,5 +5,5 @@ public interface DBCredentials {
     String DB_URL = "jdbc:mysql://localhost:3306/theater";
 
     String USERNAME = "root";
-    String PASSWORD = "zgmfx09a!";
+    String PASSWORD = "zgmfx09a";
 }

@@ -1,6 +1,7 @@
 package mainController;
 
 import Database.DBController;
+import Database.TheaterDBLoader;
 import GUI.GUIController;
 import GUI.MainGUI;
 import Payment.MakePayment;
@@ -119,11 +120,12 @@ public class MainController {
         
         
         DBController dbController = new DBController(userSystem, reservationSystem);
+        TheaterDBLoader theaterLoader = new TheaterDBLoader();
 
         // Set up Manage Theater and Theater GUIs
         ManageTheater manageTheater = new ManageTheater(false);
-        TheaterSystem theaterSystem = new TheaterSystem(dbController.loadMoviesFromDatabase(), new ArrayList<Theater>()
-        		, dbController.loadPostersFromDatabase());
+        TheaterSystem theaterSystem = new TheaterSystem(theaterLoader.loadMoviesFromDatabase(), new ArrayList<Theater>()
+        		, theaterLoader.loadPostersFromDatabase());
         manageTheater.setTheaterSystem(theaterSystem);
         ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
