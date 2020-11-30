@@ -122,7 +122,7 @@ public class MakePaymentGUI extends JPanel {
 //            System.out.println("Enter your credit card number");
 //            cc = reader.readLine();
 //            System.out.println("Enter the CVV number of your card");
-//            cvv = Integer.parseInt(reader.readLine());
+//            cvv = reader.readLine();
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }

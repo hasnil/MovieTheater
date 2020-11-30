@@ -48,7 +48,10 @@ public class TransactionForm {
 	}
     
     @Override
+    
     public String toString() {
-    	return "Payment result: " + result + ", amount: " + amount + ", date: " + date.toString();
+    	return 	"Payment result: " + result + "\n" + 
+    			"Amount: $" + String.format("%,.2f", amount) + "\n" + 
+    			"Date: " + date.toString();
     }
 }
