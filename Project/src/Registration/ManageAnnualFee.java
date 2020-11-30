@@ -15,11 +15,12 @@ public class ManageAnnualFee {
         setMakePaymentGUI(makePaymentGUI);
     }
 
-    public boolean payAnnualFee() {
-        makePaymentGUI.showMakePaymentGUI();
-        makePaymentGUI.setAmount(20);
-        return makePaymentGUI.payWithCreditCard();
-    }
+//    public boolean payAnnualFee() {
+//        System.out.println("HERE");
+//        makePaymentGUI.showMakePaymentGUI();
+//        makePayment.setAmount(20);
+//        return makePaymentGUI.payWithCreditCard();
+//    }
 
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
         this.makePaymentGUI = makePaymentGUI;

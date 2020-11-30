@@ -25,14 +25,14 @@ public class UserSystem {
             return "Okay";
     }
 
-    public boolean makePayment(String email, String username, String password) {
-        if (manageAnnualFee.payAnnualFee()) {
-            registeredUsers.add(new RegisteredUser(username, email, password));
-            return true;
-        }
-        else
-            return false;
-    }
+//    public boolean makePayment(String email, String username, String password) {
+//        if (manageAnnualFee.payAnnualFee()) {
+//            registeredUsers.add(new RegisteredUser(username, email, password));
+//            return true;
+//        }
+//        else
+//            return false;
+//    }
 
     public RegisteredUser logInUser(String username, String password) {
         for (RegisteredUser user : registeredUsers)

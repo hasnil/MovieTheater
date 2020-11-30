@@ -2,7 +2,6 @@ package GUI;
 
 import Payment.MakePaymentGUI;
 import Registration.*;
-import Registration.ManageLogin;
 import Registration.RegistrationGUI;
 import Reservation.CancellationGUI;
 import Reservation.PurchaseTicketsGUI;
@@ -14,8 +13,6 @@ import javax.swing.JLayeredPane;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 public class GUIController {
@@ -101,7 +98,7 @@ public class GUIController {
         registrationGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         reservation.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         viewShowtimes.getReturnHomeButton().addActionListener(new ReturnHomeListener());
-        registrationGUI.addMakePaymentListener(new MakePaymentButtonListener());
+        registrationGUI.addMakePaymentListener(new AnnualFeeMakePaymentButtonListener());
         browseTheater.addConfirmTheaterButtonListener(new TheaterConfirmedListener());
         browseMovies.addConfirmMovieButtonListener(new MovieConfirmedListener());
 
@@ -219,14 +216,13 @@ public class GUIController {
     }
 
 
-    class MakePaymentButtonListener implements ActionListener {
+    class AnnualFeeMakePaymentButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            reservation.setVisible(false);
-            registrationGUI.setVisible(false);
             manageAnnualFee.setVisible(false);
             layeredPane.moveToFront(makePaymentGUI);
+            makePaymentGUI.setAmount(20);
             makePaymentGUI.setVisible(true);
         }
     }

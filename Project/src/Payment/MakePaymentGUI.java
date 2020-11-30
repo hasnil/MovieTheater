@@ -51,12 +51,6 @@ public class MakePaymentGUI extends JPanel {
 		frame.add(lblNewLabel_3);
 		
 		submitPaymentButton = new JButton("Submit Payment");
-		submitPaymentButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-				payWithCreditCard();
-			}
-		});
 		submitPaymentButton.setBounds(409, 410, 166, 46);
 		frame.add(submitPaymentButton);
 		
@@ -80,7 +74,10 @@ public class MakePaymentGUI extends JPanel {
 		
 		add(frame);
 	}
-	
+
+	public double getAmount() {
+		return amount;
+	}
 
 	public JTextField getSecurityCodeField() {
 		return securityCodeField;
@@ -103,67 +100,10 @@ public class MakePaymentGUI extends JPanel {
 		return loginLabel;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
-
-	public boolean makePayment(double amount) {
-//        int option = 0;
-//        System.out.println("Select 1 to pay with credit card or 2 te pay with a voucher");
-//        try {
-////            option = Integer.parseInt(reader.readLine());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        if (option == 1) {
-//            return payWithCreditCard(amount);
-//        }
-//        else if (option == 2) {
-//            return payWithVoucher(amount);
-//        }
-//        else
-//            System.out.println("ERROR");
-    return false;
-    }
-
-    public boolean payWithCreditCard() {
-        String cc = cardNumberField.getText();
-        String cvv = securityCodeField.getText();
-        boolean payment = makePayment.payWithCreditCard(cc, cvv, amount);
-        if (payment) {
-			displayMessage("Payment successful, receipt sent to your email");
-			return true;
-        }
-        else {
-        	displayMessage("Payment unsuccessful");
-        	return false;
-		}
-    }
-
-
-
 	public void displayMessage(String string) {
 		JOptionPane pane = new JOptionPane();
 		JOptionPane.showMessageDialog(pane, string);
 	}
-
-    private boolean payWithVoucher(double amount) {
-        int vouchNum = 0;
-//        try {
-//            System.out.println("Enter your voucher number");
-////            vouchNum = Integer.parseInt(reader.readLine());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        double remainder = makePayment.payWithVoucher(vouchNum, amount);
-//        if (remainder == 0)
-//            return true;
-//        else if (remainder == -1)
-//            return false;
-//        else
-//            return payWithCreditCard(remainder);
-		return false;
-    }
 
     public void showMakePaymentGUI() {
 		layeredPane.moveToFront(this);
@@ -178,4 +118,11 @@ public class MakePaymentGUI extends JPanel {
         this.makePayment = makePayment;
     }
 
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public void addSubmitButtonListener(ActionListener actionListener) {
+		submitPaymentButton.addActionListener(actionListener);
+	}
 }

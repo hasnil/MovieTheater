@@ -16,9 +16,9 @@ public class ManageRegistration {
         return userSystem.registerUser(email, username);
     }
 
-    public boolean makePayment(String email, String username, String password) {
-        return userSystem.makePayment(email, username, password);
-    }
+//    public boolean makePayment(String email, String username, String password) {
+//        return userSystem.makePayment(email, username, password);
+//    }
 
     public void displayUsers() {
         userSystem.displayUsers();

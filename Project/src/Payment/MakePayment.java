@@ -1,5 +1,7 @@
 package Payment;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import Reservation.Voucher;
 import Registration.ManageAnnualFee;
@@ -62,6 +64,7 @@ public class MakePayment {
     
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
     	this.makePaymentGUI = makePaymentGUI;
+        makePaymentGUI.addSubmitButtonListener(new SubmitPaymentButton());
     }
     
     public void setManageAnnualFee(ManageAnnualFee manageAnnualFee) {
@@ -74,5 +77,21 @@ public class MakePayment {
     
     public String getDescription() {
     	return this.description;
+    }
+
+    class SubmitPaymentButton implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            String cc = makePaymentGUI.getCardNumberField().getText();
+            String cvv = makePaymentGUI.getSecurityCodeField().getText();
+            boolean payment = payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
+            if (payment) {
+                makePaymentGUI.displayMessage("Payment successful");
+            }
+            else {
+                makePaymentGUI.displayMessage("Payment unsuccessful");
+            }
+        }
     }
 }

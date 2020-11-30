@@ -74,6 +74,7 @@ public class MainController {
         PaymentSystem paymentSystem = new PaymentSystem();
         MakePayment makePayment = new MakePayment(paymentSystem);
         MakePaymentGUI makePaymentGUI = new MakePaymentGUI(makePayment);
+        makePayment.setMakePaymentGUI(makePaymentGUI);
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
