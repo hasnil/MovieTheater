@@ -15,40 +15,25 @@ public class Reservation {
         tickets = new ArrayList<>();
     }
 
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+    }
+
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
     }
-
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public void addTicket(Ticket ticket) {
-        tickets.add(ticket);
     }
 
     public int getReservationId() {
         return reservationId;
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
+    public String getUserName() { return userName; }
     public LocalDateTime getShowTime() {
         return tickets.get(0).getShowTime();
     }
-
     public ArrayList<Ticket> getTickets() {
         return tickets;
-    }
-
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "reservationId=" + reservationId +
-                ", userName='" + userName + '\'' +
-                ", tickets=" + tickets +
-                '}';
     }
 }
