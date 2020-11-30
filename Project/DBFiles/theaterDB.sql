@@ -33,6 +33,7 @@ DROP TABLE IF EXISTS showtimes;
 CREATE TABLE showtimes(
 showTimes	DATETIME NOT NULL,
 movieName	VARCHAR(40) NOT NULL,
+roomNumber	INT	NOT NULL,
 PRIMARY KEY (movieName)
 );
 
