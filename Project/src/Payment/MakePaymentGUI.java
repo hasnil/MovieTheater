@@ -30,10 +30,10 @@ public class MakePaymentGUI extends JPanel {
 		frame.setBackground(new Color(176, 196, 222));
 		frame.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Payment needed for your transaction:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel.setBounds(319, 11, 346, 72);
-		frame.add(lblNewLabel);
+		JLabel informationLabel = new JLabel("Payment needed for your transaction:");
+		informationLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		informationLabel.setBounds(319, 11, 346, 72);
+		frame.add(informationLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("$20.00");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -90,7 +90,6 @@ public class MakePaymentGUI extends JPanel {
 	public JButton getSubmitPaymentButton() {
 		return submitPaymentButton;
 	}
-
 	
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;
@@ -103,11 +102,6 @@ public class MakePaymentGUI extends JPanel {
 	public void displayMessage(String string) {
 		JOptionPane pane = new JOptionPane();
 		JOptionPane.showMessageDialog(pane, string);
-	}
-
-    public void showMakePaymentGUI() {
-		layeredPane.moveToFront(this);
-		this.setVisible(true);
 	}
 
 	public void setLayeredPane(JLayeredPane layeredPane) {
