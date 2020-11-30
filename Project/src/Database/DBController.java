@@ -42,6 +42,7 @@ public class DBController implements DBCredentials {
         reservationSystem.loadReservations(rs);
         rs = dbLoader.loadTickets();
         reservationSystem.loadTickets(rs);
+        System.out.println("OKAY");
     }
 
     public void setUserSystem(UserSystem userSystem) {

@@ -70,32 +70,7 @@ public class MainController {
      */
 	
     public static void main(String[] args) {
-    	   
-       
-    	// Set up Manage Theater and Theater GUIs
-        ManageTheater manageTheater = new ManageTheater(false);
-        ArrayList<Movie> movies = new ArrayList<Movie>(); //load from database
-        Movie testMovie = new Movie("Star Wars: Episode III – Revenge of the Sith", null, LocalDateTime.of(2020, 12, 28, 0, 0));
-        Movie testMove2 = new Movie("Pirates of the Caribbean: The Curse of the Black Pearl", null, LocalDateTime.of(2020, 11, 28, 0, 0));
-        movies.add(testMovie);
-        movies.add(testMove2);
-        ArrayList<Theater> theaters = new ArrayList<Theater>(); // load from database
-        ArrayList<String> moviePosters = new ArrayList<String>(); // load from database
-        moviePosters.add("https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg");
-        moviePosters.add("https://upload.wikimedia.org/wikipedia/en/8/89/Pirates_of_the_Caribbean_-_The_Curse_of_the_Black_Pearl.png");
-        TheaterSystem theaterSystem = new TheaterSystem(movies, theaters, moviePosters);
-        manageTheater.setTheaterSystem(theaterSystem);
-        ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
-        BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
-        BrowseMoviesGUI browseMovies = new BrowseMoviesGUI(theaterSystem.getAllMoviesWithAccess(),
-                manageTheater.getUserStatus(), manageTheater.getTheaterSystem().getShowTimesArray());
-        manageTheater.setShowtimesView(viewShowtimes);
-        manageTheater.setTheaterView(browseTheater);
-        manageTheater.setMovieView(browseMovies);
-        ////////////////////////////////////////////////////
-        
-        
-        
+
         // Set up Manage Reservations and Reservation GUIs
         PaymentSystem paymentSystem = new PaymentSystem();
         MakePayment makePayment = new MakePayment(paymentSystem);
@@ -106,15 +81,11 @@ public class MainController {
         ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI);
         ManageReservations manageReservations = new ManageReservations(reservationSystem, cancel, reservation, purchaseTicketsGUI);
         ///////////////////////////////////////////////////////
-        
-        
-        
-        
+
         // Set up Make Payment and Payment GUI
         makePayment.setMakePaymentGUI(makePaymentGUI);
         //////////////////////////////////////////////////////
-     
-       
+
         // Set up Manage Annual Fee and Manage Annual Fee GUI
         ManageAnnualFee manageAnnualFee = new ManageAnnualFee(makePaymentGUI);
         ManageAnnualFeeGUI manageAnnualFeeGUI = new ManageAnnualFeeGUI();
@@ -125,15 +96,12 @@ public class MainController {
         UserSystem userSystem = new UserSystem(makePaymentGUI);
         manageAnnualFee.setUserSystem(userSystem);
         /////////////////////////////////////////////////////////
-        
-        
-        
+
         // Set up Manage Registration and RegistrationGUI
         ManageRegistration manageRegistration = new ManageRegistration(userSystem);
         RegistrationGUI registrationGUI = new RegistrationGUI(manageRegistration);
         manageAnnualFee.setManageRegistration(manageRegistration);
         ////////////////////////////////////////////////////////
-        
         
         // Set up Manage Login and Login GUI
         ManageLogin manageLogin = new ManageLogin(userSystem);
@@ -141,12 +109,29 @@ public class MainController {
         loginGUI.setManageLogin(manageLogin);
         manageLogin.setLoginGUI(loginGUI);
         ///////////////////////////////////////////////////////
- 
-        
         
      // Set up MainGUI
         MainGUI mainGUI = new MainGUI();
      ////////////////////////////////////////////////////////
+
+        DBController dbController = new DBController(userSystem, reservationSystem);
+//        dbController.loadFromDB();
+
+        // Set up Manage Theater and Theater GUIs
+        ManageTheater manageTheater = new ManageTheater(false);
+        ArrayList<Movie> movies = new ArrayList<Movie>(); //load from database
+        ArrayList<Theater> theaters = new ArrayList<Theater>(); // load from database
+        ArrayList<String> moviePosters = new ArrayList<String>(); // load from database
+        TheaterSystem theaterSystem = new TheaterSystem(movies, theaters, moviePosters);
+        manageTheater.setTheaterSystem(theaterSystem);
+        ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
+        BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
+        BrowseMoviesGUI browseMovies = new BrowseMoviesGUI(theaterSystem.getAllMoviesWithAccess(),
+                manageTheater.getUserStatus(), manageTheater.getTheaterSystem().getShowTimesArray());
+        manageTheater.setShowtimesView(viewShowtimes);
+        manageTheater.setTheaterView(browseTheater);
+        manageTheater.setMovieView(browseMovies);
+        ////////////////////////////////////////////////////
 
         cancel.setLayout(null);
         mainGUI.setLayout(null);
@@ -179,7 +164,7 @@ public class MainController {
         //////////////////////////////
         
         MainController mainController = new MainController(makePayment, manageLogin, manageRegistration, 
-        		manageAnnualFee, guiController, manageTheater, manageReservations, new DBController(userSystem, reservationSystem));
+        		manageAnnualFee, guiController, manageTheater, manageReservations, dbController);
         
     }
 }
