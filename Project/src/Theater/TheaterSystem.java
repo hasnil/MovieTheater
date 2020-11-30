@@ -158,10 +158,10 @@ public class TheaterSystem {
 			moviesWithAccess[i][0] = filteredMovies.get(i).getMovieName();
 			
 			if(filteredMovies.get(i).isEarlyAccess() == true) {
-				moviesWithAccess[i][1] = "✓";
+				moviesWithAccess[i][1] = "Y";
 			}
 			else {
-				moviesWithAccess[i][1] = "x";
+				moviesWithAccess[i][1] = "N";
 			}			
 		}
 		
@@ -178,10 +178,10 @@ public class TheaterSystem {
 			moviesWithAccess[i][0] = moviesArr.get(i).getMovieName();
 			
 			if(moviesArr.get(i).isEarlyAccess() == true) {
-				moviesWithAccess[i][1] = "✓";
+				moviesWithAccess[i][1] = "Y";
 			}
 			else {
-				moviesWithAccess[i][1] = "x";
+				moviesWithAccess[i][1] = "N";
 			}			
 		}
 		

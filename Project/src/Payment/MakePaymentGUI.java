@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Font;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ public class MakePaymentGUI extends JPanel {
 	private JButton submitPaymentButton;
 	private JLabel loginLabel;
 	private MakePayment makePayment;
+	private BufferedReader reader;
 
 
 
@@ -101,36 +103,37 @@ public class MakePaymentGUI extends JPanel {
 	
 	
 	public boolean makePayment(double amount) {
-        int option = 0;
-        System.out.println("Select 1 to pay with credit card or 2 te pay with a voucher");
-        try {
-            option = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (option == 1) {
-            return payWithCreditCard(amount);
-        }
-        else if (option == 2) {
-            return payWithVoucher(amount);
-        }
-        else
-            System.out.println("ERROR");
+//        int option = 0;
+//        System.out.println("Select 1 to pay with credit card or 2 te pay with a voucher");
+//        try {
+////            option = Integer.parseInt(reader.readLine());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        if (option == 1) {
+//            return payWithCreditCard(amount);
+//        }
+//        else if (option == 2) {
+//            return payWithVoucher(amount);
+//        }
+//        else
+//            System.out.println("ERROR");
     return false;
     }
 
     private boolean payWithCreditCard(double amount) {
-        String cc = "";
-        int cvv = 0;
-        try {
-            System.out.println("Enter your credit card number");
-            cc = reader.readLine();
-            System.out.println("Enter the CVV number of your card");
-            cvv = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return makePayment.payWithCreditCard(cc, cvv, amount);
+		return true;
+//        String cc = "";
+//        int cvv = 0;
+//        try {
+//            System.out.println("Enter your credit card number");
+//            cc = reader.readLine();
+//            System.out.println("Enter the CVV number of your card");
+//            cvv = Integer.parseInt(reader.readLine());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return makePayment.payWithCreditCard(cc, cvv, amount);
     }
 
     private boolean payWithVoucher(double amount) {

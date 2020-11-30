@@ -144,10 +144,8 @@ public class MainController {
  
         
         
-     // Set up GUIControllerr and MainGUI
+     // Set up MainGUI
         MainGUI mainGUI = new MainGUI();
-        GUIController guiController = new GUIController(mainGUI, viewShowtimes, browseMovies, browseTheater, cancel, reservation, 
-        		purchaseTicketsGUI, makePaymentGUI, manageAnnualFeeGUI, registrationGUI, loginGUI);
      ////////////////////////////////////////////////////////
 
         cancel.setLayout(null);
@@ -175,7 +173,10 @@ public class MainController {
         reservation.setVisible(false);
         viewShowtimes.setVisible(false);
         
-        
+        // Set up GUIControllerr
+        GUIController guiController = new GUIController(mainGUI, viewShowtimes, browseMovies, browseTheater, cancel, reservation,
+                purchaseTicketsGUI, makePaymentGUI, manageAnnualFeeGUI, registrationGUI, loginGUI);
+        //////////////////////////////
         
         MainController mainController = new MainController(makePayment, manageLogin, manageRegistration, 
         		manageAnnualFee, guiController, manageTheater, manageReservations, new DBController(userSystem, reservationSystem));
