@@ -101,7 +101,7 @@ public class GUIController {
         registrationGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         reservation.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         viewShowtimes.getReturnHomeButton().addActionListener(new ReturnHomeListener());
-
+        registrationGUI.addMakePaymentListener(new MakePaymentButtonListener());
         browseTheater.addConfirmTheaterButtonListener(new TheaterConfirmedListener());
         browseMovies.addConfirmMovieButtonListener(new MovieConfirmedListener());
 
@@ -227,11 +227,16 @@ public class GUIController {
         }
     }
 
-    class SubmitRegistrationListener implements ActionListener {
+
+    class MakePaymentButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-
+            reservation.setVisible(false);
+            registrationGUI.setVisible(false);
+            manageAnnualFee.setVisible(false);
+            layeredPane.moveToFront(makePaymentGUI);
+            makePaymentGUI.setVisible(true);
         }
     }
 

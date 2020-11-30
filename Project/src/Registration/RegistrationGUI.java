@@ -19,6 +19,7 @@ public class RegistrationGUI extends JPanel{
 	private JLabel loginLabel;
 	private ManageRegistration manageRegistration;
 	private JButton registerButton;
+	private JButton makePaymentButton;
 
 
 	public RegistrationGUI(ManageRegistration manageRegistration) {
@@ -102,7 +103,13 @@ public class RegistrationGUI extends JPanel{
 		loginLabel = new JLabel("Login Status: Not Logged In");
 		loginLabel.setBounds(818, 21, 166, 44);
 		frame.add(loginLabel);
-		
+
+		makePaymentButton = new JButton("Make Payment");
+		makePaymentButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		makePaymentButton.setBounds(659, 493, 198, 44);
+		makePaymentButton.setEnabled(false);
+		frame.add(makePaymentButton);
+
 		add(frame);
 	}
 
@@ -152,9 +159,23 @@ public class RegistrationGUI extends JPanel{
 			String email = getEmailTextField().getText();
 			String username = getUsernameTextField().getText();
 			String password = getPasswordTextField().getText();
-			String response = manageRegistration.registerUser(email, username, password);
-//			displayMessage(response);
+			String response = manageRegistration.registerUser(email, username);
+			if (!response.equals("Okay"))
+				displayMessage(response);
+			else {
+				displayMessage("That username and email are available, please proceed to make a payment");
+				makePaymentButton.setEnabled(true);
+//				boolean payment = manageRegistration.makePayment(email, username, password);
+//				if (payment)
+//					displayMessage("User registered successfully");
+//				else
+//					displayMessage("There was an error with your registration");
+			}
 		}
+	}
+
+	public void addMakePaymentListener(ActionListener actionListener) {
+		makePaymentButton.addActionListener(actionListener);
 	}
 }
 

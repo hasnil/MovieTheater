@@ -16,18 +16,22 @@ public class UserSystem {
         registeredUsers = new ArrayList<>();
     }
 
-    public String registerUser(String email, String username, String password) {
+    public String registerUser(String email, String username) {
         if (findUserByEmail(email))
             return "That email is already registered, try to log in";
-        if (findUserByUsername(username))
+        else if (findUserByUsername(username))
             return "That username already exists, try a different one";
+        else
+            return "Okay";
+    }
 
+    public boolean makePayment(String email, String username, String password) {
         if (manageAnnualFee.payAnnualFee()) {
             registeredUsers.add(new RegisteredUser(username, email, password));
-            return "User registered successfully";
+            return true;
         }
         else
-            return "Payment unsuccessful";
+            return false;
     }
 
     public RegisteredUser logInUser(String username, String password) {
