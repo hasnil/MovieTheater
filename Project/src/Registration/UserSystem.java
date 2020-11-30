@@ -47,7 +47,10 @@ public class UserSystem {
                 addUser(new RegisteredUser(
                         rs.getString("userName"),
                         rs.getString("email"),
-                        rs.getString("passw")));
+                        rs.getString("passw"),
+                        rs.getString("fullName"),
+                        rs.getString("address"),
+                        rs.getString("creditCard")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

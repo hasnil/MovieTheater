@@ -234,8 +234,9 @@ public class GUIController {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             manageAnnualFee.setVisible(false);
-            layeredPane.moveToFront(makePaymentGUI);
+            registrationGUI.setVisible(false);
             makePaymentGUI.setAmount(20);
+            layeredPane.moveToFront(makePaymentGUI);
             makePaymentGUI.setVisible(true);
         }
     }

@@ -48,29 +48,6 @@ public class MainController {
 
 	}
 	
-
-    /*
-    public void setMainGui(MainGUI mainGui) {
-        this.mainGui = mainGui;
-    }
-
-    public void setRegistrationGUI(RegistrationGUI registrationGUI) {
-        this.registrationGUI = registrationGUI;
-    }
-
-    public void setLoginGUI(LoginGUI loginGUI) {
-        this.loginGUI = loginGUI;
-    }
-
-    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
-        this.makePaymentGUI = makePaymentGUI;
-    }
-
-    public void setReservationGUI(ReservationGUI reservationGUI) {
-        this.reservationGUI = reservationGUI;
-    }
-     */
-	
     public static void main(String[] args) {
 
         // Set up Manage Reservations and Reservation GUIs
@@ -101,15 +78,14 @@ public class MainController {
         /////////////////////////////////////////////////////////
 
         // Set up Manage Registration and RegistrationGUI
-        ManageRegistration manageRegistration = new ManageRegistration(userSystem);
-        RegistrationGUI registrationGUI = new RegistrationGUI(manageRegistration);
+        RegistrationGUI registrationGUI = new RegistrationGUI();
+        ManageRegistration manageRegistration = new ManageRegistration(registrationGUI, userSystem);
         manageAnnualFee.setManageRegistration(manageRegistration);
         ////////////////////////////////////////////////////////
         
         // Set up Manage Login and Login GUI
         ManageLogin manageLogin = new ManageLogin(userSystem);
         LoginGUI loginGUI = new LoginGUI();
-        loginGUI.setManageLogin(manageLogin);
         manageLogin.setLoginGUI(loginGUI);
         ///////////////////////////////////////////////////////
         

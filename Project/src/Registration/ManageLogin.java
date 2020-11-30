@@ -20,8 +20,12 @@ public class ManageLogin {
         return userSystem.logInUser(username, password);
     }
 
-    public void setLoginGUI(LoginGUI login) {
-        loginGUI = login;
+    class LoginButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            login();
+        }
+    }
 
         loginGUI.getLoginButton().addActionListener(new ActionListener() {
             @Override
@@ -42,7 +46,15 @@ public class ManageLogin {
                     }
                 }
             }
-        });
+        }
+        else {
+            loginGUI.displayMessage("You are already logged in");
+        }
+    }
+
+    public void setLoginGUI(LoginGUI login) {
+        loginGUI = login;
+        loginGUI.addButtonActionListener(loginGUI.getLoginButton(), new LoginButtonListener());
     }
 
     public void setUserSystem(UserSystem userSystem) {
