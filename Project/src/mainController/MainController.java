@@ -114,15 +114,11 @@ public class MainController {
         MainGUI mainGUI = new MainGUI();
      ////////////////////////////////////////////////////////
 
-        DBController dbController = new DBController(userSystem, reservationSystem);
 //        dbController.loadFromDB();
 
         // Set up Manage Theater and Theater GUIs
         ManageTheater manageTheater = new ManageTheater(false);
-        ArrayList<Movie> movies = new ArrayList<Movie>(); //load from database
-        ArrayList<Theater> theaters = new ArrayList<Theater>(); // load from database
-        ArrayList<String> moviePosters = new ArrayList<String>(); // load from database
-        TheaterSystem theaterSystem = new TheaterSystem(movies, theaters, moviePosters);
+        TheaterSystem theaterSystem = new TheaterSystem();
         manageTheater.setTheaterSystem(theaterSystem);
         ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
@@ -132,6 +128,8 @@ public class MainController {
         manageTheater.setTheaterView(browseTheater);
         manageTheater.setMovieView(browseMovies);
         ////////////////////////////////////////////////////
+
+        DBController dbController = new DBController(userSystem, reservationSystem, theaterSystem);
 
         cancel.setLayout(null);
         mainGUI.setLayout(null);

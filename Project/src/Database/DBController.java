@@ -2,6 +2,7 @@ package Database;
 
 import Registration.UserSystem;
 import Reservation.ReservationSystem;
+import Theater.TheaterSystem;
 
 import java.sql.*;
 
@@ -11,12 +12,14 @@ public class DBController implements DBCredentials {
     private DBLoader dbLoader;
     private UserSystem userSystem;
     private ReservationSystem reservationSystem;
+    private TheaterSystem theaterSystem;
 
-    public DBController(UserSystem userSystem, ReservationSystem reservationSystem) {
+    public DBController(UserSystem userSystem, ReservationSystem reservationSystem, TheaterSystem theaterSystem) {
         initializeConnection();
         dbLoader = new DBLoader(conn);
         setUserSystem(userSystem);
         setReservationSystem(reservationSystem);
+        setTheaterSystem(theaterSystem);
     }
 
     public void initializeConnection() {
@@ -36,6 +39,7 @@ public class DBController implements DBCredentials {
         reservationSystem.loadVouchers(rs);
         rs = dbLoader.loadMovies();
         reservationSystem.loadMovies(rs);
+//        theaterSystem.loadMovies(rs);
         rs = dbLoader.loadShowTimes();
         reservationSystem.loadShowTimes(rs);
         rs = dbLoader.loadReservations();
@@ -50,5 +54,9 @@ public class DBController implements DBCredentials {
 
     public void setReservationSystem(ReservationSystem reservationSystem) {
         this.reservationSystem = reservationSystem;
+    }
+
+    public void setTheaterSystem(TheaterSystem theaterSystem) {
+        this.theaterSystem = theaterSystem;
     }
 }
