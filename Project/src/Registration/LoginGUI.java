@@ -91,25 +91,15 @@ public class LoginGUI extends JPanel {
 		return passwordTextField;
 	}
 
-	public JTextField getUsernameTextField() {
-		return usernameTextField;
-	}
+	public JTextField getUsernameTextField() { return usernameTextField; }
 
-	public JButton getReturnHomeButton() {
-		return returnHomeButton;
-	}
+	public JButton getReturnHomeButton() { return returnHomeButton; }
 
-	public boolean isLoginSuccessful() {
-		return loginSuccessful;
-	}
+	public boolean isLoginSuccessful() { return loginSuccessful; }
 
-	public void setLoginSuccessful(boolean loginSuccessful) {
-		this.loginSuccessful = loginSuccessful;
-	}
+	public void setLoginSuccessful(boolean loginSuccessful) { this.loginSuccessful = loginSuccessful; }
 
-	public JButton getLoginButton() {
-		return loginButton;
-	}
+	public JButton getLoginButton() { return loginButton; }
 
 	public JLabel getLoginLabel() {
 		return loginLabel;
