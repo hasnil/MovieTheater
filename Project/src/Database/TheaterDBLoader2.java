@@ -38,7 +38,7 @@ public class TheaterDBLoader implements DBCredentials{
     	ArrayList<ShowTime> showtimes = new ArrayList<ShowTime>();
     	try {
 			while(rs.next()) {
-				ShowTime showtime = new ShowTime(modifyDate(rs.getDate("showTimes")));
+				ShowTime showtime = new ShowTime(modifyDate(rs.getDate("ShowTimes")));
 				showtimes.add(showtime);
 			}
 		} catch (SQLException e) {
@@ -69,7 +69,7 @@ public class TheaterDBLoader implements DBCredentials{
 			while(rs2.next()) {
 				for(Movie m: returnArrayList) {
 					if(m.getMovieName().equals(rs2.getString("movieName"))) {
-						m.getShowTimes().add(new ShowTime(modifyDate(rs2.getDate("showTimes"))));
+						m.getShowTimes().add(new ShowTime(modifyDate(rs2.getDate("ShowTimes"))));
 					}
 				}
 			}
@@ -99,4 +99,3 @@ public class TheaterDBLoader implements DBCredentials{
         return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 }
-

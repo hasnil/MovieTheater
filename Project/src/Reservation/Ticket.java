@@ -11,7 +11,7 @@ public class Ticket {
     private double price;
     private int reservationId;
 
-    public Ticket(String movieName, int seat, String showTime, int room, double price, int reservationId) {
+    public Ticket(String movieName, int seat, LocalDateTime showTime, int room, double price, int reservationId) {
         setMovieName(movieName);
         setSeat(seat);
         setShowTime(showTime);
@@ -44,8 +44,8 @@ public class Ticket {
         this.reservationId = reservationId;
     }
 
-    public void setShowTime(String showTime) {
-        this.showTime = LocalDateTime.parse(showTime);
+    public void setShowTime(LocalDateTime showTime) {
+        this.showTime = showTime;
     }
 
     public double getPrice() {

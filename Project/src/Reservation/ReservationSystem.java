@@ -2,8 +2,10 @@ package Reservation;
 
 import Payment.MakePaymentGUI;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class ReservationSystem {
@@ -90,7 +92,7 @@ public class ReservationSystem {
             while (rs.next()) {
                 Ticket ticket = new Ticket(rs.getString("movieName"),
                                            rs.getInt("seat"),
-                                           rs.getString("showTime"),
+                                           modifyDate(rs.getDate("showTimes")),
                                            rs.getInt("room"),
                                            rs.getDouble("price"),
                                           rs.getInt("reservationId"));
@@ -145,5 +147,9 @@ public class ReservationSystem {
 
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
         this.makePaymentGUI = makePaymentGUI;
+    }
+    
+    public LocalDateTime modifyDate(Date originalDate) {
+        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 }

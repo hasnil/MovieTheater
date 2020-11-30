@@ -119,17 +119,6 @@ public class RegistrationGUI extends JPanel{
 		frame.add(creditCardNumberLabel);
 
 		add(frame);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(367, 430, 249, 27);
-		frame.add(textField);
-		
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("Credit Card Account Number");
-		lblNewLabel_1_1_1_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1_1_1_1_1.setBounds(325, 393, 335, 38);
-		frame.add(lblNewLabel_1_1_1_1_1);
 	}
 
 	public void displayMessage(String string) {
