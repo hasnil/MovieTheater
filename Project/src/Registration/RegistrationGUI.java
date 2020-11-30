@@ -159,17 +159,12 @@ public class RegistrationGUI extends JPanel{
 			String email = getEmailTextField().getText();
 			String username = getUsernameTextField().getText();
 			String password = getPasswordTextField().getText();
-			String response = manageRegistration.registerUser(email, username);
+			String response = manageRegistration.checkCredentialsAvailability(email, username);
 			if (!response.equals("Okay"))
 				displayMessage(response);
 			else {
 				displayMessage("That username and email are available, please proceed to make a payment");
 				makePaymentButton.setEnabled(true);
-//				boolean payment = manageRegistration.makePayment(email, username, password);
-//				if (payment)
-//					displayMessage("User registered successfully");
-//				else
-//					displayMessage("There was an error with your registration");
 			}
 		}
 	}

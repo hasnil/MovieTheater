@@ -42,6 +42,7 @@ public class MainController {
 		this.manageReservations = manageReservations;
 		this.databaseController = databaseController;
         databaseController.loadFromDB();
+
 	}
 	
 

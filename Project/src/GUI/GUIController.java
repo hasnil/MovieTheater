@@ -194,16 +194,7 @@ public class GUIController {
         });
 
 
-        makePaymentGUI.getSubmitPaymentButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
 
-                //Must Check before doing - display message on other side
-                makePaymentGUI.setVisible(false);
-                layeredPane.moveToFront(mainGUI);
-                mainGUI.setVisible(true);
-            }
-        });
 
     }
 

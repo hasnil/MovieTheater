@@ -12,7 +12,7 @@ public class ManageRegistration {
         setUserSystem(userSystem);
     }
 
-    public String registerUser(String email, String username) {
+    public String checkCredentialsAvailability(String email, String username) {
         return userSystem.registerUser(email, username);
     }
 
