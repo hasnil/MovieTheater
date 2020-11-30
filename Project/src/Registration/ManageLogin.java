@@ -17,27 +17,36 @@ public class ManageLogin {
         return userSystem.logInUser(username, password);
     }
 
+    class LoginButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            login();
+        }
+    }
+
+    private void login() {
+        if (user == null) {
+            String username = loginGUI.getUsernameTextField().getText();
+            String password = loginGUI.getPasswordTextField().getText();
+            user = logInUser(username, password);
+            loginGUI.clearTextFields();
+            if (user != null) {
+                loginGUI.displayMessage("Successfully logged in");
+                loginGUI.setLoginSuccessful(true);
+                loginGUI.getLoginLabel().setText("Login Status: Logged In");
+            }
+            else {
+                loginGUI.displayMessage("Wrong username and/or password");
+            }
+        }
+        else {
+            loginGUI.displayMessage("You are already logged in");
+        }
+    }
+
     public void setLoginGUI(LoginGUI login) {
         loginGUI = login;
-
-        loginGUI.getLoginButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                if (user == null) {
-                    String username = loginGUI.getUsernameTextField().getText();
-                    String password = loginGUI.getPasswordTextField().getText();
-                    user = logInUser(username, password);
-                    if (user != null) {
-                        loginGUI.displayMessage("Successfully logged in");
-                        loginGUI.setLoginSuccessful(true);
-                        loginGUI.getLoginLabel().setText("Login Status: Logged In");
-                    }
-                    else {
-                        loginGUI.displayMessage("Wrong username and/or password");
-                    }
-                }
-            }
-        });
+        loginGUI.addButtonActionListener(loginGUI.getLoginButton(), new LoginButtonListener());
     }
 
     public void setUserSystem(UserSystem userSystem) {

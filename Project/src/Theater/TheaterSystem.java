@@ -20,6 +20,8 @@ public class TheaterSystem {
 		this.theatersList = theatersList;
 		this.posterURLs = posterURLs;
 	}
+
+	public TheaterSystem() {}
 	
 	public ArrayList<Movie> getMoviesList() {
 		return moviesList;

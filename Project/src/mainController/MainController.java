@@ -45,29 +45,6 @@ public class MainController {
 
 	}
 	
-
-    /*
-    public void setMainGui(MainGUI mainGui) {
-        this.mainGui = mainGui;
-    }
-
-    public void setRegistrationGUI(RegistrationGUI registrationGUI) {
-        this.registrationGUI = registrationGUI;
-    }
-
-    public void setLoginGUI(LoginGUI loginGUI) {
-        this.loginGUI = loginGUI;
-    }
-
-    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
-        this.makePaymentGUI = makePaymentGUI;
-    }
-
-    public void setReservationGUI(ReservationGUI reservationGUI) {
-        this.reservationGUI = reservationGUI;
-    }
-     */
-	
     public static void main(String[] args) {
 
         // Set up Manage Reservations and Reservation GUIs
@@ -114,11 +91,12 @@ public class MainController {
         MainGUI mainGUI = new MainGUI();
      ////////////////////////////////////////////////////////
 
-//        dbController.loadFromDB();
-
         // Set up Manage Theater and Theater GUIs
         ManageTheater manageTheater = new ManageTheater(false);
-        TheaterSystem theaterSystem = new TheaterSystem();
+        ArrayList<Movie> movies = new ArrayList<Movie>(); //load from database
+        ArrayList<Theater> theaters = new ArrayList<Theater>(); // load from database
+        ArrayList<String> moviePosters = new ArrayList<String>(); // load from database
+        TheaterSystem theaterSystem = new TheaterSystem(movies, theaters, moviePosters);
         manageTheater.setTheaterSystem(theaterSystem);
         ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
