@@ -19,7 +19,6 @@ public class LoginGUI extends JPanel {
 	private JButton returnHomeButton, loginButton;
 	private boolean loginSuccessful = false;
 	private JLabel loginLabel;
-	private ManageLogin manageLogin;
 
 	public LoginGUI() {
 		frame = new JPanel();
@@ -78,6 +77,16 @@ public class LoginGUI extends JPanel {
 		add(frame);
 	}
 
+	public void displayMessage(String string) {
+		JOptionPane pane = new JOptionPane();
+		JOptionPane.showMessageDialog(pane, string);
+	}
+
+	public void clearTextFields() {
+		usernameTextField.setText("");
+		passwordTextField.setText("");
+	}
+
 	public JTextField getPasswordTextField() {
 		return passwordTextField;
 	}
@@ -104,19 +113,5 @@ public class LoginGUI extends JPanel {
 
 	public JLabel getLoginLabel() {
 		return loginLabel;
-	}
-
-	public void setManageLogin(ManageLogin manageLogin) {
-		this.manageLogin = manageLogin;
-	}
-
-	public void displayMessage(String string) {
-		JOptionPane pane = new JOptionPane();
-		JOptionPane.showMessageDialog(pane, string);	
-	}
-
-	public void clearTextFields() {
-		usernameTextField.setText("");
-		passwordTextField.setText("");
 	}
 }

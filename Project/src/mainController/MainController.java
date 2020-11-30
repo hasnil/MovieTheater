@@ -83,7 +83,6 @@ public class MainController {
         // Set up Manage Login and Login GUI
         ManageLogin manageLogin = new ManageLogin(userSystem);
         LoginGUI loginGUI = new LoginGUI();
-        loginGUI.setManageLogin(manageLogin);
         manageLogin.setLoginGUI(loginGUI);
         ///////////////////////////////////////////////////////
         
