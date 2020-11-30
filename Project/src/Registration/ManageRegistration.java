@@ -1,8 +1,12 @@
 package Registration;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class ManageRegistration {
 
     private UserSystem userSystem;
+    private RegistrationGUI registrationGUI;
 
     public ManageRegistration(UserSystem userSystem) {
         setUserSystem(userSystem);
@@ -19,4 +23,6 @@ public class ManageRegistration {
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
+
+
 }

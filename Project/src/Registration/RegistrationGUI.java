@@ -2,26 +2,23 @@ package Registration;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JButton;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class RegistrationGUI extends JPanel{
 	
 	private JPanel frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField emailTextField;
+	private JTextField usernameTextField;
+	private JTextField passwordTextField;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JButton returnHomeButton;
 	private JLabel loginLabel;
 	private ManageRegistration manageRegistration;
-	
+	private JButton registerButton;
 
 
 	public RegistrationGUI(ManageRegistration manageRegistration) {
@@ -49,20 +46,21 @@ public class RegistrationGUI extends JPanel{
 		lblNewLabel_5.setBounds(161, 21, 662, 67);
 		frame.add(lblNewLabel_5);
 		
-		JButton btnNewButton = new JButton("Submit Registration");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewButton.setBounds(383, 493, 217, 44);
-		frame.add(btnNewButton);
+		registerButton = new JButton("Submit Registration");
+		registerButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		registerButton.setBounds(383, 493, 217, 44);
+		registerButton.addActionListener(new RegisterButton());
+		frame.add(registerButton);
 		
-		textField = new JTextField();
-		textField.setBounds(367, 124, 249, 27);
-		frame.add(textField);
-		textField.setColumns(10);
+		emailTextField = new JTextField();
+		emailTextField.setBounds(367, 124, 249, 27);
+		frame.add(emailTextField);
+		emailTextField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(367, 199, 249, 27);
-		frame.add(textField_1);
+		usernameTextField = new JTextField();
+		usernameTextField.setColumns(10);
+		usernameTextField.setBounds(367, 199, 249, 27);
+		frame.add(usernameTextField);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,10 +68,10 @@ public class RegistrationGUI extends JPanel{
 		lblNewLabel_1_1.setBounds(402, 245, 180, 38);
 		frame.add(lblNewLabel_1_1);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(367, 282, 249, 27);
-		frame.add(textField_2);
+		passwordTextField = new JTextField();
+		passwordTextField.setColumns(10);
+		passwordTextField.setBounds(367, 282, 249, 27);
+		frame.add(passwordTextField);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
@@ -107,6 +105,10 @@ public class RegistrationGUI extends JPanel{
 		
 		add(frame);
 	}
+
+	public void addRegisterButtonListener(ActionListener actionListener) {
+		registerButton.addActionListener(actionListener);
+	}
 	
 	public JLabel getLoginLabel() {
 		return loginLabel;
@@ -125,6 +127,35 @@ public class RegistrationGUI extends JPanel{
     public void setManageRegistration(ManageRegistration manageRegistration) {
         this.manageRegistration = manageRegistration;
     }
+
+	public JTextField getEmailTextField() {
+		return emailTextField;
+	}
+
+	public JTextField getUsernameTextField() {
+		return usernameTextField;
+	}
+
+	public JTextField getPasswordTextField() {
+		return passwordTextField;
+	}
+
+	public void displayMessage(String string) {
+		JOptionPane pane = new JOptionPane();
+		JOptionPane.showMessageDialog(pane, string);
+	}
+
+	class RegisterButton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+			String email = getEmailTextField().getText();
+			String username = getUsernameTextField().getText();
+			String password = getPasswordTextField().getText();
+			String response = manageRegistration.registerUser(email, username, password);
+//			displayMessage(response);
+		}
+	}
 }
 
 	

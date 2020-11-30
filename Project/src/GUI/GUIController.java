@@ -56,6 +56,7 @@ public class GUIController {
         frame.setBounds(100, 140, 1000, 650);
 
         layeredPane = new JLayeredPane();
+        makePaymentGUI.setLayeredPane(layeredPane);
         layeredPane.add(mainGUI, 0);
         mainGUI.setBounds(0, 0, 1000, 650);
         layeredPane.add(cancellation, 1);
@@ -226,6 +227,13 @@ public class GUIController {
         }
     }
 
+    class SubmitRegistrationListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+
+        }
+    }
 
     class ReturnHomeListenerForLogin implements ActionListener{
 
@@ -244,7 +252,7 @@ public class GUIController {
                 registrationGUI.getLoginLabel().setText("Login Status: Logged In");
                 reservation.getLoginLabel().setText("Login Status: Logged In");
                 viewShowtimes.getLoginLabel().setText("Login Status: Logged In");
-
+                mainGUI.getRegisterButton().setEnabled(false);
                 layeredPane.moveToFront(mainGUI);
                 mainGUI.setVisible(true);
             }

@@ -16,6 +16,7 @@ public class ManageAnnualFee {
     }
 
     public boolean payAnnualFee() {
+        makePaymentGUI.showMakePaymentGUI();
         return makePaymentGUI.makePayment(20);
     }
 

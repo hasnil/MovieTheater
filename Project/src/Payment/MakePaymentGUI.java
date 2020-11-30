@@ -2,16 +2,11 @@ package Payment;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.IOException;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
 
 public class MakePaymentGUI extends JPanel {
 	
@@ -22,9 +17,7 @@ public class MakePaymentGUI extends JPanel {
 	private JButton submitPaymentButton;
 	private JLabel loginLabel;
 	private MakePayment makePayment;
-	private BufferedReader reader;
-
-
+	private JLayeredPane layeredPane;
 
 	public MakePaymentGUI(MakePayment makePayment){
 		setMakePayment(makePayment);
@@ -136,14 +129,16 @@ public class MakePaymentGUI extends JPanel {
 //        return makePayment.payWithCreditCard(cc, cvv, amount);
     }
 
+
+
     private boolean payWithVoucher(double amount) {
         int vouchNum = 0;
-        try {
-            System.out.println("Enter your voucher number");
-            vouchNum = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            System.out.println("Enter your voucher number");
+////            vouchNum = Integer.parseInt(reader.readLine());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         double remainder = makePayment.payWithVoucher(vouchNum, amount);
         if (remainder == 0)
             return true;
@@ -153,7 +148,16 @@ public class MakePaymentGUI extends JPanel {
             return payWithCreditCard(remainder);
     }
 
-    public void setMakePayment(MakePayment makePayment) {
+    public void showMakePaymentGUI() {
+		layeredPane.moveToFront(this);
+		this.setVisible(true);
+	}
+
+	public void setLayeredPane(JLayeredPane layeredPane) {
+		this.layeredPane = layeredPane;
+	}
+
+	public void setMakePayment(MakePayment makePayment) {
         this.makePayment = makePayment;
     }
 }
