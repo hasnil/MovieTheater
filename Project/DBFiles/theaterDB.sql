@@ -50,6 +50,3 @@ amount		FLOAT,
 expiryDate	DATETIME,
 PRIMARY KEY (vouchNum)
 );
-
-
-

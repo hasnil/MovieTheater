@@ -53,7 +53,6 @@ public class GUIController {
         frame.setBounds(100, 140, 1000, 650);
 
         layeredPane = new JLayeredPane();
-        makePaymentGUI.setLayeredPane(layeredPane);
         layeredPane.add(mainGUI, 0);
         mainGUI.setBounds(0, 0, 1000, 650);
         layeredPane.add(cancellation, 1);
