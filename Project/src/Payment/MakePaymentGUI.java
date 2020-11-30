@@ -5,6 +5,8 @@ import java.awt.Color;
 import javax.swing.*;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -18,6 +20,7 @@ public class MakePaymentGUI extends JPanel {
 	private JLabel loginLabel;
 	private MakePayment makePayment;
 	private JLayeredPane layeredPane;
+	private double amount;
 
 	public MakePaymentGUI(MakePayment makePayment){
 		setMakePayment(makePayment);
@@ -48,6 +51,12 @@ public class MakePaymentGUI extends JPanel {
 		frame.add(lblNewLabel_3);
 		
 		submitPaymentButton = new JButton("Submit Payment");
+		submitPaymentButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				payWithCreditCard();
+			}
+		});
 		submitPaymentButton.setBounds(409, 410, 166, 46);
 		frame.add(submitPaymentButton);
 		
@@ -93,8 +102,11 @@ public class MakePaymentGUI extends JPanel {
 	public JLabel getLoginLabel() {
 		return loginLabel;
 	}
-	
-	
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
 	public boolean makePayment(double amount) {
 //        int option = 0;
 //        System.out.println("Select 1 to pay with credit card or 2 te pay with a voucher");
@@ -114,22 +126,26 @@ public class MakePaymentGUI extends JPanel {
     return false;
     }
 
-    private boolean payWithCreditCard(double amount) {
-		return true;
-//        String cc = "";
-//        int cvv = 0;
-//        try {
-//            System.out.println("Enter your credit card number");
-//            cc = reader.readLine();
-//            System.out.println("Enter the CVV number of your card");
-//            cvv = reader.readLine();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return makePayment.payWithCreditCard(cc, cvv, amount);
+    public boolean payWithCreditCard() {
+        String cc = cardNumberField.getText();
+        String cvv = securityCodeField.getText();
+        boolean payment = makePayment.payWithCreditCard(cc, cvv, amount);
+        if (payment) {
+			displayMessage("Payment successful, receipt sent to your email");
+			return true;
+        }
+        else {
+        	displayMessage("Payment unsuccessful");
+        	return false;
+		}
     }
 
 
+
+	public void displayMessage(String string) {
+		JOptionPane pane = new JOptionPane();
+		JOptionPane.showMessageDialog(pane, string);
+	}
 
     private boolean payWithVoucher(double amount) {
         int vouchNum = 0;
@@ -139,13 +155,14 @@ public class MakePaymentGUI extends JPanel {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        double remainder = makePayment.payWithVoucher(vouchNum, amount);
-        if (remainder == 0)
-            return true;
-        else if (remainder == -1)
-            return false;
-        else
-            return payWithCreditCard(remainder);
+//        double remainder = makePayment.payWithVoucher(vouchNum, amount);
+//        if (remainder == 0)
+//            return true;
+//        else if (remainder == -1)
+//            return false;
+//        else
+//            return payWithCreditCard(remainder);
+		return false;
     }
 
     public void showMakePaymentGUI() {
@@ -160,4 +177,5 @@ public class MakePaymentGUI extends JPanel {
 	public void setMakePayment(MakePayment makePayment) {
         this.makePayment = makePayment;
     }
+
 }

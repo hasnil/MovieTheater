@@ -12,8 +12,12 @@ public class ManageRegistration {
         setUserSystem(userSystem);
     }
 
-    public String registerUser(String email, String username, String password) {
-        return userSystem.registerUser(email, username, password);
+    public String checkCredentialsAvailability(String email, String username) {
+        return userSystem.registerUser(email, username);
+    }
+
+    public boolean makePayment(String email, String username, String password) {
+        return userSystem.makePayment(email, username, password);
     }
 
     public void displayUsers() {
