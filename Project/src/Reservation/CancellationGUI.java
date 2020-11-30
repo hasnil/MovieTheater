@@ -1,6 +1,5 @@
 package Reservation;
 
-
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
@@ -13,19 +12,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class CancellationGUI extends JPanel{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	private JPanel frame;
-	private boolean userType;
-	private JTextField reservationId;
-	private JButton returnHomeButton;
+	private JTextField reservationIdTextField;
+	private JButton returnHomeButton, confirmCancellationButton;
 	private JLabel loginLabel;
-	private JButton confirmCancellation;
-	
-	
+	private boolean userType;
+
 	public CancellationGUI(boolean userType){
 		this.userType = userType;
 
@@ -33,41 +26,53 @@ public class CancellationGUI extends JPanel{
 		frame.setBounds(0, 0, 1000, 650);
 		frame.setBackground(new Color(176, 196, 222));
 		frame.setLayout(null);
+		buildGUI();
+	}
 
-		JLabel lblNewLabel = new JLabel("Please Note: Unregistered Users will Pay a 15% Administrative Penalty!");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(238, 76, 517, 60);
-		frame.add(lblNewLabel);
-		
-		reservationId = new JTextField();
-		reservationId.setBounds(325, 268, 344, 34);
-		frame.add(reservationId);
-		reservationId.setColumns(10);
-		
-		confirmCancellation = new JButton("Confirm Cancellation");
-		confirmCancellation.setBounds(415, 335, 163, 34);
-		frame.add(confirmCancellation);
-		
-		JLabel lblNewLabel_1 = new JLabel("Enter your reservation ID here:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(381, 224, 231, 33);
-		frame.add(lblNewLabel_1);
-		
+	private void buildGUI() {
+		JLabel infoLabel = new JLabel("Please Note: Unregistered Users will Pay a 15% Administrative Penalty!");
+		infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		infoLabel.setBounds(238, 76, 517, 60);
+		frame.add(infoLabel);
+
+		reservationIdTextField = new JTextField();
+		reservationIdTextField.setBounds(325, 268, 344, 34);
+		frame.add(reservationIdTextField);
+		reservationIdTextField.setColumns(10);
+
+		confirmCancellationButton = new JButton("Confirm Cancellation");
+		confirmCancellationButton.setBounds(415, 335, 163, 34);
+		frame.add(confirmCancellationButton);
+
+		JLabel reservationIdLabel = new JLabel("Enter your reservation ID here:");
+		reservationIdLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		reservationIdLabel.setBounds(381, 224, 231, 33);
+		frame.add(reservationIdLabel);
+
 		returnHomeButton = new JButton("Return to Home");
 		returnHomeButton.setBounds(10, 11, 122, 34);
 		frame.add(returnHomeButton);
-		
+
 		loginLabel = new JLabel("Login Status: Not Logged In");
 		loginLabel.setBounds(810, 14, 174, 29);
 		frame.add(loginLabel);
-		if(userType == true) {
+		if(userType) {
 			loginLabel.setText("Login Status: Logged In");
 		}
 		add(frame);
 	}
 
-	public JTextField getReservationId() {
-		return reservationId;
+	public void addButtonActionListener(JButton button, ActionListener actionListener) {
+		button.addActionListener(actionListener);
+	}
+
+	public void displayMessage(String string) {
+		JOptionPane pane = new JOptionPane();
+		JOptionPane.showMessageDialog(pane, string);
+	}
+
+	public JTextField getReservationIdTextField() {
+		return reservationIdTextField;
 	}
 
 	public JButton getReturnHomeButton() {
@@ -77,13 +82,8 @@ public class CancellationGUI extends JPanel{
 	public JLabel getLoginLabel() {
 		return loginLabel;
 	}
-	
-	public void displayMessage(String string) {
-		JOptionPane pane = new JOptionPane();
-		JOptionPane.showMessageDialog(pane, string);	
-	}
 
-	public void addCancellationButtonListener(ActionListener actionListener) {
-		confirmCancellation.addActionListener(actionListener);
+	public JButton getConfirmCancellationButton() {
+		return confirmCancellationButton;
 	}
 }
