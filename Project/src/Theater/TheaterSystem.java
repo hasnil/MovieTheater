@@ -18,6 +18,7 @@ public class TheaterSystem {
 	public TheaterSystem(ArrayList<Movie> moviesList, ArrayList<Theater> theatersList, ArrayList<String> posterURLs) {
 		this.moviesList = moviesList;
 		this.theatersList = theatersList;
+		this.posterURLs = posterURLs;
 	}
 	
 	public ArrayList<Movie> getMoviesList() {
@@ -99,6 +100,9 @@ public class TheaterSystem {
 		ArrayList<ShowTime> showtimesList = new ArrayList<ShowTime>();
 		
 		for(Movie m: moviesList) {
+			if(m.getShowTimes() == null) {
+				break;
+			}
 			for(ShowTime s : m.getShowTimes()) {
 				showtimesList.add(s);
 			}
@@ -134,6 +138,54 @@ public class TheaterSystem {
 
 	public void setSelectedShowTime(ShowTime selectedShowTime) {
 		this.selectedShowTime = selectedShowTime;
+	}
+	
+	public String[][] getMoviesWithAccess(String movieName){
+		ArrayList<Movie> moviesArr = getMoviesList();
+		ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
+		
+		
+		for(Movie m : moviesArr) {
+			if(m.getMovieName().contains(movieName)) {
+				filteredMovies.add(m);
+			}
+		}
+		
+		String [][] moviesWithAccess = new String[filteredMovies.size()][2];
+		
+		
+		for(int i = 0; i < filteredMovies.size(); i++) {
+			moviesWithAccess[i][0] = filteredMovies.get(i).getMovieName();
+			
+			if(filteredMovies.get(i).isEarlyAccess() == true) {
+				moviesWithAccess[i][1] = "Y";
+			}
+			else {
+				moviesWithAccess[i][1] = "N";
+			}			
+		}
+		
+		return moviesWithAccess;
+	}
+	
+	public String[][] getAllMoviesWithAccess(){
+		ArrayList<Movie> moviesArr = getMoviesList();
+		
+		String [][] moviesWithAccess = new String[moviesArr.size()][2];
+		
+		
+		for(int i = 0; i < moviesArr.size(); i++) {
+			moviesWithAccess[i][0] = moviesArr.get(i).getMovieName();
+			
+			if(moviesArr.get(i).isEarlyAccess() == true) {
+				moviesWithAccess[i][1] = "Y";
+			}
+			else {
+				moviesWithAccess[i][1] = "N";
+			}			
+		}
+		
+		return moviesWithAccess;
 	}
 
 	

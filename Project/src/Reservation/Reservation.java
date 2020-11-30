@@ -39,10 +39,6 @@ public class Reservation {
         return tickets;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
     @Override
     public String toString() {
         return "Reservation{" +

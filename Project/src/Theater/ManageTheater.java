@@ -74,7 +74,6 @@ public class ManageTheater {
 	}
 	
 	
-	
 	class ListAllShowtimesListener implements ActionListener{
 
 		@Override
@@ -124,7 +123,7 @@ public class ManageTheater {
 			String movieName = movieView.getMovieNameSelection();
 			if(movieName != null) {
 				
-				if(theaterSystem.searchMovieByName(movieName).isEarlyAccess() == true && userStatus == false) {
+				if(movieView.isCurrentSelectionEligible() == false) {
 					movieView.displayMessage("Sorry, only registered users may select that movie right now! Please consider registering.");
 					return;
 				}
@@ -138,6 +137,7 @@ public class ManageTheater {
 					}
 				}
 				theaterSystem.setSelectedMovie(selectedMovie);
+				
 				movieView.displayMessage("Your movie selection was successful.");
 		}
 		}
@@ -149,32 +149,11 @@ public class ManageTheater {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			ArrayList<Movie> moviesArr = theaterSystem.getMoviesList();
-			ArrayList<Movie> filteredMovies = new ArrayList<Movie>();
 			String movieName = movieView.getSearchString();
-			
-			for(Movie m : moviesArr) {
-				if(m.getMovieName().contains(movieName)) {
-					filteredMovies.add(m);
-				}
-			}
-			
-			String [][] moviesWithAccess = new String[filteredMovies.size()][2];
-			
-			
-			for(int i = 0; i < filteredMovies.size(); i++) {
-				moviesWithAccess[i][0] = filteredMovies.get(i).getMovieName();
-				
-				if(filteredMovies.get(i).isEarlyAccess() == true) {
-					moviesWithAccess[i][1] = "✓";
-				}
-				else {
-					moviesWithAccess[i][1] = "x";
-				}			
-			}
+			String[][] moviesWithAccess = theaterSystem.getMoviesWithAccess(movieName);
 			
 			try {
-				movieView.setTableModel(moviesWithAccess);
+				movieView.setUpTable(moviesWithAccess);
 			}catch (Exception ex) {
 				movieView.displayMessage("Something went wrong! Please retry.");
 			}
@@ -204,7 +183,8 @@ public class ManageTheater {
 			}
 			
 			try {
-				movieView.setTableModel(moviesWithAccess);
+				movieView.setUpTable(moviesWithAccess);
+				movieView.addMovieRowListener(new MovieRowClickListener());
 			}catch (Exception ex) {
 				movieView.displayMessage("Something went wrong! Please retry.");
 			}
@@ -217,9 +197,7 @@ public class ManageTheater {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			String movieName = movieView.getMovieNameSelection();
-			//String path = theaterSystem.getMatchingPosterURL(movieName);
-			//String path = "https://upload.wikimedia.org/wikipedia/en/8/89/Pirates_of_the_Caribbean_-_The_Curse_of_the_Black_Pearl.png";
-			String path = "https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg";
+			String path = theaterSystem.getMatchingPosterURL(movieName);
 			URL urlAddress = null;
 			try {
 				urlAddress = new URL(path);
@@ -231,6 +209,13 @@ public class ManageTheater {
 				moviePoster = ImageIO.read(urlAddress);
 			} catch (IOException ex) {
 				ex.printStackTrace();
+			}
+			
+			if(theaterSystem.searchMovieByName(movieName).isEarlyAccess() == true && userStatus == false) {
+				movieView.setCurrentSelectionEligible(false);
+			}
+			else {
+				movieView.setCurrentSelectionEligible(true);
 			}
 
 			movieView.setPosterLabel(new ImageIcon(moviePoster));
@@ -271,33 +256,12 @@ public class ManageTheater {
 			}
 			
 			try {
-				movieView.setTableModel(moviesWithAccess);
+				movieView.setUpTable(moviesWithAccess);
 			}catch (Exception ex) {
 				movieView.displayMessage("Something went wrong! Please retry.");
 			}
 		}
 	}
-	
-	
-	class MoviesReturnHomeListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			movieView.dispose();
-		}}
-	
-	class TheatersReturnHomeListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			theaterView.dispose();
-		}}
-	
-	class ShowtimesReturnHomeListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			showtimesView.dispose();
-		}}
-	
-	
 	
 	public TheaterSystem getTheaterSystem() {
 		return theaterSystem;
@@ -311,8 +275,7 @@ public class ManageTheater {
 	public void setTheaterView(BrowseTheaterGUI theaterView) {
 		this.theaterView = theaterView;
 		theaterView.addConfirmTheaterButtonListener(new ConfirmTheaterListener());
-		theaterView.addReturnListener(new TheatersReturnHomeListener());
-		
+		//theaterView.addReturnListener(new TheatersReturnHomeListener());	
 	}
 	public BrowseMoviesGUI getMovieView() {
 		return movieView;
@@ -326,8 +289,10 @@ public class ManageTheater {
 		movieView.addListAllButtonListener(new ListAllMoviesButtonListener());
 		movieView.addMovieRowListener(new MovieRowClickListener());
 		movieView.addComboBoxListener(new BrowseMoviesComboBoxListener());
-		movieView.addReturnListener(new MoviesReturnHomeListener());
+		//movieView.addReturnListener(new MoviesReturnHomeListener());
 		if(theaterSelected == false) {
+			movieView.getWelcomeLabel().setText("You must select a theater to see movies.");
+			movieView.getTable().setVisible(false);
 			movieView.getConfirmSelectionButton().setEnabled(false);
 			movieView.getSearchButton().setEnabled(false);
 			movieView.getListAllMoviesButton().setEnabled(false);
@@ -345,8 +310,9 @@ public class ManageTheater {
 		showtimesView.addAllShowtimesButtonListener(new ListAllShowtimesListener());
 		showtimesView.addConfirmShowtimeButtonListener(new ConfirmShowtimeListener());
 		showtimesView.addSelectedShowtimesButtonListener(new ViewSelectedShowtimesListener());
-		showtimesView.addReturnListener(new ShowtimesReturnHomeListener());
+		//showtimesView.addReturnListener(new ShowtimesReturnHomeListener());
 		if(theaterSelected == false) {
+			showtimesView.getInfoLabel().setText("You must select a movie to see specific showtimes.");
 			showtimesView.getConfirmShowtimeButton().setEnabled(false);
 			showtimesView.getViewSelectedShowtimesButton().setEnabled(false);
 		}		
@@ -372,52 +338,6 @@ public class ManageTheater {
 	}
 	
 	
-	/////////////////////////////////////////////////////////////
-	public static void main(String[] args) {
-		ManageTheater manageTheater = new ManageTheater(true);
-		
-		ArrayList<Movie> movies = new ArrayList<Movie>();
-		ArrayList<Theater> theaters = new ArrayList<Theater>();
-		ArrayList<String> moviePosters = new ArrayList<String>();
-		TheaterSystem theaterSystem = new TheaterSystem(movies, theaters, moviePosters);
-		manageTheater.setTheaterSystem(theaterSystem);
-		
-		ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
-		BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
-		
-		String[][] moviesWithAccess = new String[][] {
-    		{"Pirates of the Carribbean", "✓"},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    		{null, null},
-    	};
-    	
-    	
-		BrowseMoviesGUI browseMovies = new BrowseMoviesGUI(moviesWithAccess, 
-				manageTheater.getUserStatus(),
-				manageTheater.getTheaterSystem().getShowTimesArray());
-		
-		
-		manageTheater.setShowtimesView(viewShowtimes);
-		manageTheater.setTheaterView(browseTheater);
-		manageTheater.setMovieView(browseMovies);
-	}
 	public boolean getUserStatus() {
 		return userStatus;
 	}

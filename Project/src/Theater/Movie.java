@@ -1,5 +1,6 @@
 package Theater;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -14,12 +15,21 @@ public class Movie {
 	private ArrayList<Theater> currentTheaters;
 	
 	
-	public Movie(ArrayList<ShowTime> showTimes) {
+	public Movie(String name, ArrayList<ShowTime> showTimes, LocalDateTime normalReservationDate) {
+		movieName = name;
 		this.showTimes = showTimes;
+		this.normalReservationDate = normalReservationDate;
+		if(Duration.between(LocalDateTime.now(), normalReservationDate).toDays() > 5) {
+			earlyAccess = true;
+			earlyReservationDate = normalReservationDate.minusDays(5);
+		}
+		else {
+			earlyAccess = false;
+			earlyReservationDate = null;
+		}
+				
 	}
 	
-	
-	//CHANGED RETURN TYPE
 	public void selectShowTime(LocalDateTime time) {
 		selectedShowtime = new ShowTime(time);
 	}
@@ -82,12 +92,7 @@ public class Movie {
 	public ShowTime getSelectedShowtime() {
 		return selectedShowtime;
 	}
-
-
-	public void setSelectedShowtime(ShowTime selectedShowtime) {
-		this.selectedShowtime = selectedShowtime;
-	}
-
+	
 
 	public ArrayList<Theater> getCurrentTheaters() {
 		return currentTheaters;
@@ -97,11 +102,6 @@ public class Movie {
 	public void setCurrentTheaters(ArrayList<Theater> currentTheaters) {
 		this.currentTheaters = currentTheaters;
 	}
-	
-	
-	
-	
-	
 	
 
 }

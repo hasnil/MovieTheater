@@ -11,12 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
-public class ViewShowtimesGUI extends JFrame{
+public class ViewShowtimesGUI extends JPanel{
 	
+	private JPanel frame;
 	private ManageTheater manageTheater;
 	private JList<ShowTime> showtimesList;
 	private JList<String> showtimesAndMovieList;
@@ -25,74 +27,71 @@ public class ViewShowtimesGUI extends JFrame{
 	private JButton viewSelectedShowtimesButton;
 	private JLabel infoLabel;
 	private JButton returnHomeButton;
-	private JLabel lblNewLabel_1;
+	private JLabel loginLabel;
 	
-	
+
 	public ViewShowtimesGUI(boolean userStatus) {
 		
-		getContentPane().setBackground(new Color(176, 196, 222));
-		getContentPane().setLayout(null);
+		frame = new JPanel();
+		frame.setBounds(0, 0, 1000, 650);
+		frame.setBackground(new Color(176, 196, 222));
+		frame.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Here are our current showtimes!");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
 		lblNewLabel.setBounds(297, 11, 399, 80);
-		getContentPane().add(lblNewLabel);
+		frame.add(lblNewLabel);
 		
 		showtimesList = new JList<ShowTime>();
 		showtimesList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showtimesList.setBounds(214, 121, 566, 298);
-		getContentPane().add(showtimesList);
+		frame.add(showtimesList);
 		showtimesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		showtimesAndMovieList = new JList<String>();
 		showtimesAndMovieList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		showtimesAndMovieList.setBounds(214, 121, 566, 298);
-		getContentPane().add(showtimesAndMovieList);
+		frame.add(showtimesAndMovieList);
 
 		
 		confirmShowtimeButton = new JButton("Confirm Movie Showtime Selection");
 		confirmShowtimeButton.setBounds(528, 441, 252, 50);
-		getContentPane().add(confirmShowtimeButton);
+		frame.add(confirmShowtimeButton);
 		
 		viewAllShowtimesButton = new JButton("View All Showtimes");
 		viewAllShowtimesButton.setBounds(418, 525, 160, 44);
-		getContentPane().add(viewAllShowtimesButton);
+		frame.add(viewAllShowtimesButton);
 		
 		infoLabel = new JLabel("", SwingConstants.CENTER);
 		infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		infoLabel.setBounds(357, 88, 289, 22);
-		getContentPane().add(infoLabel);
+		infoLabel.setBounds(214, 88, 566, 22);
+		frame.add(infoLabel);
 		
 		viewSelectedShowtimesButton = new JButton("View Your Selected Movie's Showtimes");
 		viewSelectedShowtimesButton.setBounds(214, 441, 304, 50);
-		getContentPane().add(viewSelectedShowtimesButton);
+		frame.add(viewSelectedShowtimesButton);
 		
 		returnHomeButton = new JButton("Return to Home");
 		returnHomeButton.setBounds(10, 11, 135, 35);
-		getContentPane().add(returnHomeButton);
+		frame.add(returnHomeButton);
 		
-		lblNewLabel_1 = new JLabel("Login Status: Not Logged In");
-		lblNewLabel_1.setBackground(new Color(255, 222, 173));
-		lblNewLabel_1.setBounds(810, 11, 160, 35);
-		getContentPane().add(lblNewLabel_1);
+		loginLabel = new JLabel("Login Status: Not Logged In");
+		loginLabel.setBackground(new Color(255, 222, 173));
+		loginLabel.setBounds(810, 11, 160, 35);
+		frame.add(loginLabel);
 		
 		if(userStatus == true) {
-			lblNewLabel_1.setText("Login Status: Logged In");
+			loginLabel.setText("Login Status: Logged In");
         }
 		
-		initializeFrame();
+		add(frame);
 	}
 	
 	
-	private void initializeFrame() {
-		this.setTitle("View Showtimes");
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setBounds(100, 140, 1000, 650);
-		this.setResizable(false);
-		this.setVisible(true);
+	public JLabel getInfoLabel() {
+		return infoLabel;
 	}
-	
-	
+
 	public void setShowtimesList(DefaultListModel<ShowTime> listModel) {
 		showtimesList.removeAll();
 		showtimesAndMovieList.setVisible(false);
@@ -159,6 +158,15 @@ public class ViewShowtimesGUI extends JFrame{
 
 	public void setInfoLabelText(String message) {
 		infoLabel.setText(message);
+	}
+	
+	public JButton getReturnHomeButton() {
+		return returnHomeButton;
+	}
+	
+	
+	public JLabel getLoginLabel() {
+		return loginLabel;
 	}
 
 
