@@ -20,13 +20,18 @@ public class ReservationSystem {
         reservations = new ArrayList<>();
     }
 
-    public void cancelReservation(int reservationId) {
-        for (Reservation reservation : reservations)
-            if (reservation.getReservationId() == reservationId)
-                if (checkForExpiry(reservation))
-                    System.out.println(createVoucher(reservation));
-                else
-                    System.out.println("Movie starts in less than 3 days, can't cancel anymore");
+    public String cancelReservation(int reservationId) {
+        for (Reservation reservation : reservations) {
+            if (reservation.getReservationId() == reservationId) {
+                if (checkForExpiry(reservation)) {
+                    Voucher voucher = createVoucher(reservation);
+                    reservations.remove(reservation);
+                    return "Cancellation successful\nThe following voucher has been emailed to you\n" + voucher.toString();
+                } else
+                    return "Movie starts in less than 3 days, can't cancel anymore";
+            }
+        }
+        return "Reservation doesn't exist";
     }
 
     public void loadMovies(ResultSet rs) {
