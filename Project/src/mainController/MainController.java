@@ -55,7 +55,7 @@ public class MainController {
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
-        ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI);
+        ReservationSystem reservationSystem = new ReservationSystem();
         ManageReservations manageReservations = new ManageReservations(reservationSystem, cancel, reservation, purchaseTicketsGUI);
         ///////////////////////////////////////////////////////
 

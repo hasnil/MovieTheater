@@ -1,20 +1,16 @@
 package Reservation;
 
-import Payment.MakePaymentGUI;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ReservationSystem {
 
-    private MakePaymentGUI makePaymentGUI;
     private ArrayList<Voucher> vouchers;
     private ArrayList<Movie> movies;
     private ArrayList<Reservation> reservations;
 
-    public ReservationSystem(MakePaymentGUI makePaymentGUI) {
-        setMakePaymentGUI(makePaymentGUI);
+    public ReservationSystem() {
         vouchers = new ArrayList<>();
         movies = new ArrayList<>();
         reservations = new ArrayList<>();
@@ -41,6 +37,31 @@ public class ReservationSystem {
         }
         return "Reservation doesn't exist";
     }
+
+    private Voucher createVoucherRegularUser(Reservation reservation) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
+        Voucher voucher = new Voucher(vouchNum, (amount * .85));
+        vouchers.add(voucher);
+        return voucher;
+    }
+
+    private Voucher createVoucherRegisteredUser(Reservation reservation) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
+        Voucher voucher = new Voucher(vouchNum, amount);
+        vouchers.add(voucher);
+        return voucher;
+    }
+
+    private boolean checkForExpiry(Reservation reservation) {
+        return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
+    }
+
 
     public void loadMovies(ResultSet rs) {
         try {
@@ -110,44 +131,6 @@ public class ReservationSystem {
             throwables.printStackTrace();
         }
     }
-    public void displayMovies() {
-        for (Movie movie : movies)
-            System.out.println(movie);
-    }
-
-    public void displayVouchers() {
-        for (Voucher voucher : vouchers)
-            System.out.println(voucher);
-    }
-
-    public void displayReservations() {
-        for (Reservation reservation : reservations)
-            System.out.println(reservation);
-    }
-
-    private Voucher createVoucherRegularUser(Reservation reservation) {
-        double amount = 0;
-        for (Ticket ticket : reservation.getTickets())
-            amount += ticket.getPrice();
-        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
-        Voucher voucher = new Voucher(vouchNum, (amount * .85));
-        vouchers.add(voucher);
-        return voucher;
-    }
-
-    private Voucher createVoucherRegisteredUser(Reservation reservation) {
-        double amount = 0;
-        for (Ticket ticket : reservation.getTickets())
-            amount += ticket.getPrice();
-        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
-        Voucher voucher = new Voucher(vouchNum, amount);
-        vouchers.add(voucher);
-        return voucher;
-    }
-
-    private boolean checkForExpiry(Reservation reservation) {
-        return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
-    }
 
     private void addMovie(Movie movie) {
         movies.add(movie);
@@ -159,9 +142,5 @@ public class ReservationSystem {
 
     private void addReservation(Reservation reservation) {
         reservations.add(reservation);
-    }
-
-    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
-        this.makePaymentGUI = makePaymentGUI;
     }
 }

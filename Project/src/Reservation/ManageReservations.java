@@ -7,8 +7,8 @@ public class ManageReservations {
 
     private ReservationSystem reservationSystem;
     private CancellationGUI cancellationGUI;
-    private ReservationGUI reservationGUI;
-    private PurchaseTicketsGUI purchaseTicketsGUI;
+    private ReservationGUI reservationGUI; // ??
+    private PurchaseTicketsGUI purchaseTicketsGUI; // ??
 
     public ManageReservations(ReservationSystem reservationSystem, CancellationGUI cancellationGUI, 
     		ReservationGUI reservationGUI, PurchaseTicketsGUI purchaseTicketsGUI) {
@@ -41,18 +41,6 @@ public class ManageReservations {
 
     private String cancelReservation(int reservationId) {
         return reservationSystem.cancelReservation(reservationId);
-    }
-
-    public void displayMovies() {
-        reservationSystem.displayMovies();
-    }
-
-    public void displayVouchers() {
-        reservationSystem.displayVouchers();
-    }
-
-    public void displayReservations() {
-        reservationSystem.displayReservations();
     }
 
     public void setReservationSystem(ReservationSystem reservationSystem) {
