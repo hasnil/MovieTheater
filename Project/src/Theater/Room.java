@@ -18,7 +18,7 @@ public class Room {
 		
 		//Creating seats
 		for (int r = 0; r < rows; r++) {
-			for (int c = 0; c < columns; c++) {
+			for (int c = 1; c <= columns; c++) {
 				addSeat(c, rowValue);
 			}
 			rowValue++;
@@ -26,7 +26,8 @@ public class Room {
 	}
 	
 	public void addSeat(int seatNum, char seatRow) {
-		//TODO
+		Seat seat = new Seat(seatNum, seatRow);
+		getSeats().add(seat);
 	}
 	
 	public int getRoomNumber() {
@@ -35,6 +36,17 @@ public class Room {
 	
 	public ArrayList<Seat> getSeats() {
 		return seats;
+	}
+	
+	@Override
+	public String toString() {
+		String out = "Room number: " + getRoomNumber() + " " + "Amount of seats: " + getSeats().size() + "\n";
+		
+		for (Seat seat : getSeats()) { 		      
+			out += seat.toString() + "\n";
+		}
+	    
+		return out;
 	}
 
 }
