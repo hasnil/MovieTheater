@@ -13,6 +13,7 @@ public class TheaterSystem {
 	private Movie selectedMovie;
 	private ShowTime selectedShowTime;
 	private Theater selectedTheater;
+	private boolean userStatus;
 	
 	
 	public TheaterSystem(ArrayList<Movie> moviesList, ArrayList<Theater> theatersList, ArrayList<String> posterURLs) {
@@ -188,6 +189,9 @@ public class TheaterSystem {
 		return moviesWithAccess;
 	}
 
+	public void setUserStatus(boolean userStatus) {
+		this.userStatus = userStatus;
+	}
 	
 	
 }

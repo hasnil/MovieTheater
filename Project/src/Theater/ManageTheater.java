@@ -343,6 +343,7 @@ public class ManageTheater {
 	}
 	public void setUserStatus(boolean userStatus) {
 		this.userStatus = userStatus;
+		theaterSystem.setUserStatus(true);
 	}
 	
 }

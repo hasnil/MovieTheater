@@ -238,6 +238,8 @@ public class GUIController {
 
             if(loginGUI.isLoginSuccessful() == true) {
                 loginGUI.setVisible(false);
+                setUserStatus(true);
+                browseMovies.getManageTheater().setUserStatus(true);
 
                 browseMovies.getLoginLabel().setText("Login Status: Logged In");
                 browseTheater.getLoginLabel().setText("Login Status: Logged In");
@@ -287,7 +289,7 @@ public class GUIController {
             String movieName = browseMovies.getMovieNameSelection();
             if(movieName != null) {
 
-                if(browseMovies.isCurrentSelectionEligible() == false) {
+                if(userStatus == false && browseMovies.getMovieAccessSelection() == true) {
                     return;
                 }
 

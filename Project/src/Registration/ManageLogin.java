@@ -12,6 +12,11 @@ public class ManageLogin {
     public ManageLogin(UserSystem userSystem) {
         setUserSystem(userSystem);
     }
+	
+//    public void setLoginGUI(LoginGUI login) {
+//        loginGUI = login;
+//        loginGUI.addButtonActionListener(loginGUI.getLoginButton(), new LoginButtonListener());
+//    }
 
     public RegisteredUser logInUser(String username, String password) {
         return userSystem.logInUser(username, password);
@@ -31,6 +36,7 @@ public class ManageLogin {
                         loginGUI.displayMessage("Successfully logged in");
                         loginGUI.setLoginSuccessful(true);
                         loginGUI.getLoginLabel().setText("Login Status: Logged In");
+                     
                     }
                     else {
                         loginGUI.displayMessage("Wrong username and/or password");

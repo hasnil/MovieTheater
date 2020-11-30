@@ -79,6 +79,7 @@ public class MainController {
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
         ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI);
         ManageReservations manageReservations = new ManageReservations(reservationSystem, cancel, reservation, purchaseTicketsGUI);
+        reservation.setManageReservations(manageReservations);
         ///////////////////////////////////////////////////////
 
         // Set up Make Payment and Payment GUI
@@ -127,6 +128,7 @@ public class MainController {
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
         BrowseMoviesGUI browseMovies = new BrowseMoviesGUI(theaterSystem.getAllMoviesWithAccess(),
                 manageTheater.getUserStatus(), manageTheater.getTheaterSystem().getShowTimesArray());
+        browseMovies.setManageTheater(manageTheater);
         manageTheater.setShowtimesView(viewShowtimes);
         manageTheater.setTheaterView(browseTheater);
         manageTheater.setMovieView(browseMovies);

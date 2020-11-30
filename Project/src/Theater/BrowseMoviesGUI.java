@@ -177,6 +177,17 @@ public class BrowseMoviesGUI extends JPanel{
 		return movieName;
 	}
 	
+	public boolean getMovieAccessSelection() {
+		int selectedRow = table.getSelectedRow();
+		String movieAccess = (String) table.getValueAt(selectedRow, 1);
+		if(movieAccess.equals("Y")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	
 	public JLabel getWelcomeLabel() {
 		return welcomeLabel;
