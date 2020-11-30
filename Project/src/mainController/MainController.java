@@ -70,7 +70,7 @@ public class MainController {
         manageAnnualFee.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setMakePayment(makePayment);
 //        makePayment.setManageAnnualFee(manageAnnualFee);
-        UserSystem userSystem = new UserSystem(makePaymentGUI);
+        UserSystem userSystem = new UserSystem();
         manageAnnualFee.setUserSystem(userSystem);
         /////////////////////////////////////////////////////////
 

@@ -244,6 +244,7 @@ public class GUIController {
                 reservation.getLoginLabel().setText("Login Status: Logged In");
                 viewShowtimes.getLoginLabel().setText("Login Status: Logged In");
                 mainGUI.getRegisterButton().setEnabled(false);
+                mainGUI.getLoginButton().setEnabled(false);
                 layeredPane.moveToFront(mainGUI);
                 mainGUI.setVisible(true);
             }

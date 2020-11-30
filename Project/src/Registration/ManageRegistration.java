@@ -15,7 +15,7 @@ public class ManageRegistration {
     }
 
     public String checkCredentialsAvailability(String email, String username) {
-        return userSystem.registerUser(email, username);
+        return userSystem.checkCredentials(email, username);
     }
 
     class RegistrationButtonListener implements ActionListener {

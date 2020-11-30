@@ -1,22 +1,18 @@
 package Registration;
 
-import Payment.MakePaymentGUI;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserSystem {
 
-    private ManageAnnualFee manageAnnualFee;
     private ArrayList<RegisteredUser> registeredUsers;
 
-    public UserSystem(MakePaymentGUI makePaymentGUI) {
-        manageAnnualFee = new ManageAnnualFee(makePaymentGUI);
+    public UserSystem() {
         registeredUsers = new ArrayList<>();
     }
 
-    public String registerUser(String email, String username) {
+    public String checkCredentials(String email, String username) {
         if (findUserByEmail(email))
             return "That email is already registered, try to log in";
         else if (findUserByUsername(username))
@@ -25,20 +21,15 @@ public class UserSystem {
             return "Okay";
     }
 
-//    public boolean makePayment(String email, String username, String password) {
-//        if (manageAnnualFee.payAnnualFee()) {
-//            registeredUsers.add(new RegisteredUser(username, email, password));
-//            return true;
-//        }
-//        else
-//            return false;
-//    }
-
     public RegisteredUser logInUser(String username, String password) {
         for (RegisteredUser user : registeredUsers)
             if (user.getUserName().equals(username) && user.getPassword().equals(password))
                 return user;
         return null;
+    }
+
+    public void addUser(RegisteredUser user) {
+        registeredUsers.add(user);
     }
 
     public void loadUsers(ResultSet rs) {
@@ -55,15 +46,6 @@ public class UserSystem {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public void displayUsers() {
-        for (RegisteredUser user : registeredUsers)
-            System.out.println(user);
-    }
-
-    public void addUser(RegisteredUser user) {
-        registeredUsers.add(user);
     }
 
     private boolean findUserByEmail(String email) {
