@@ -24,6 +24,12 @@ movieName	VARCHAR(25)
 
 DROP TABLE IF EXISTS tickets;
 CREATE TABLE tickets(
+movieName	VARCHAR(25),
+seat		INT,
+showTime	VARCHAR(25),
+room		INT,
+price		FLOAT,
+reservationId	INT
 );
 
 DROP TABLE IF EXISTS users;
@@ -31,6 +37,9 @@ CREATE TABLE users(
 userName	VARCHAR(20) NOT NULL,
 email		VARCHAR(30),
 passw		VARCHAR(20),
+fullName	VARCHAR(50),
+address		VARCHAR(50),
+creditCard	VARCHAR(16),		
 PRIMARY KEY (userName)
 );
 
