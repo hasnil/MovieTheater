@@ -8,12 +8,14 @@ import Emailer.EmailForm;
 
 public class MakePayment {
 
+	private String description;
     private PaymentSystem paymentSystem;
-    private TransactionForm transactionForm;
 
     public MakePayment(PaymentSystem paymentSystem) {
+    	setDescription("");
         setPaymentSystem(paymentSystem);
     }
+    
 
     public boolean payWithCreditCard(String cc, String cvv, double amount) {
         TransactionForm tf = new TransactionForm(cc, cvv, amount);
@@ -23,13 +25,18 @@ public class MakePayment {
     	
     	//send receipt as email when payment is processed
     	if (result) {
+    		
+    		paymentSystem.generateReceipt(getDescription(), amount);
     		EmailForm email = new EmailForm();
-    		email.setSubject("Your Receipt for Payment - SLAB CINEMAS");
-    		email.setBody(tf.toString());
+    		email.setSubject("Your Receipt - SLAB CINEMAS");
+    		email.setBody(paymentSystem.getLastReceipt().toString());
     		//email.setTo(to); //will send to self
     		
     		email.submit();
     	}
+    	
+    	// Record payment regardless of fail/success (since it has a field to store that info)
+    	paymentSystem.recordPayment(amount, result);
     	
     	return result;
     }
@@ -49,5 +56,13 @@ public class MakePayment {
 
     public void setPaymentSystem(PaymentSystem paymentSystem) {
         this.paymentSystem = paymentSystem;
+    }
+    
+    public void setDescription(String description) {
+    	this.description = description;
+    }
+    
+    public String getDescription() {
+    	return this.description;
     }
 }
