@@ -253,9 +253,7 @@ public class GUIController {
                 layeredPane.moveToFront(mainGUI);
                 mainGUI.setVisible(true);
             }
-
         }
-
     }
 
     class TheaterConfirmedListener implements ActionListener{

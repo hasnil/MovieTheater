@@ -2,7 +2,6 @@ package Registration;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,8 +14,8 @@ import javax.swing.JButton;
 public class LoginGUI extends JPanel {
 
 	private JPanel frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField passwordTextField;
+	private JTextField usernameTextField;
 	private JButton returnHomeButton;
 	private boolean loginSuccessful = false;
 	private JButton loginButton;
@@ -53,15 +52,15 @@ public class LoginGUI extends JPanel {
 		loginButton.setBounds(382, 425, 220, 59);
 		frame.add(loginButton);
 		
-		textField = new JTextField();
-		textField.setBounds(347, 245, 289, 25);
-		frame.add(textField);
-		textField.setColumns(10);
+		passwordTextField = new JTextField();
+		passwordTextField.setBounds(347, 245, 289, 25);
+		frame.add(passwordTextField);
+		passwordTextField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(347, 159, 289, 25);
-		frame.add(textField_1);
+		usernameTextField = new JTextField();
+		usernameTextField.setColumns(10);
+		usernameTextField.setBounds(347, 159, 289, 25);
+		frame.add(usernameTextField);
 		
 		returnHomeButton = new JButton("Return to Home");
 		returnHomeButton.setBounds(10, 11, 150, 40);
@@ -73,7 +72,14 @@ public class LoginGUI extends JPanel {
 		
 		add(frame);
 	}
-	
+
+	public JTextField getPasswordTextField() {
+		return passwordTextField;
+	}
+
+	public JTextField getUsernameTextField() {
+		return usernameTextField;
+	}
 
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;

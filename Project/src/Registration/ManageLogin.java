@@ -7,6 +7,7 @@ public class ManageLogin {
 
     private UserSystem userSystem;
     private LoginGUI loginGUI;
+    private RegisteredUser user;
 
     public ManageLogin(UserSystem userSystem) {
         setUserSystem(userSystem);
@@ -22,10 +23,19 @@ public class ManageLogin {
         loginGUI.getLoginButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-
-                //MUST CHECK IF LOGIN WORKED
-                loginGUI.setLoginSuccessful(true);
-                loginGUI.getLoginLabel().setText("Login Status: Logged In");
+                if (user == null) {
+                    String username = loginGUI.getUsernameTextField().getText();
+                    String password = loginGUI.getPasswordTextField().getText();
+                    user = logInUser(username, password);
+                    if (user != null) {
+                        loginGUI.displayMessage("Successfully logged in");
+                        loginGUI.setLoginSuccessful(true);
+                        loginGUI.getLoginLabel().setText("Login Status: Logged In");
+                    }
+                    else {
+                        loginGUI.displayMessage("Wrong username and/or password");
+                    }
+                }
             }
         });
     }
