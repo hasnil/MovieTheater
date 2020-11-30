@@ -28,13 +28,23 @@ public class ManageRegistration {
     private void register() {
         String email = registrationGUI.getEmailTextField().getText();
         String username = registrationGUI.getUsernameTextField().getText();
+        String password = registrationGUI.getPasswordTextField().getText();
+        String fullName = registrationGUI.getNameTextField().getText();
+        String address = registrationGUI.getAddressTextField().getText();
+        String creditCard = registrationGUI.getCreditCardTextField().getText();
         String response = checkCredentialsAvailability(email, username);
         if (!response.equals("Okay"))
             registrationGUI.displayMessage(response);
         else {
             registrationGUI.displayMessage("That username and email are available, please proceed to make a payment");
             registrationGUI.getMakePaymentButton().setEnabled(true);
+            addUser(username, email, password, fullName, address, creditCard);
         }
+    }
+
+    private void addUser(String userName, String email, String password, String fullName, String address, String creditCard) {
+        RegisteredUser user = new RegisteredUser(userName, email, password, fullName, address, creditCard);
+        userSystem.addUser(user);
     }
 
     public void setUserSystem(UserSystem userSystem) {

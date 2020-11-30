@@ -86,6 +86,10 @@ public class MakePaymentGUI extends JPanel {
 		securityCodeField.setText("");
 	}
 
+	public void payWithCreditCard() {
+
+	}
+
 	public double getAmount() {
 		return amount;
 	}
@@ -114,8 +118,4 @@ public class MakePaymentGUI extends JPanel {
 		this.amount = amount;
 		amountLabel.setText("$" + amount);
 	}
-
-//	public void addSubmitButtonListener(ActionListener actionListener) {
-//		submitPaymentButton.addActionListener(actionListener);
-//	}
 }

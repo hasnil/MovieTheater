@@ -62,17 +62,15 @@ public class MakePayment {
     }
 
     private void makePayment() {
-        int i = 0;
         String cc = makePaymentGUI.getCardNumberField().getText();
         String cvv = makePaymentGUI.getSecurityCodeField().getText();
         boolean payment = payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
-        System.out.println(i);
         if (payment) {
             makePaymentGUI.clearTextFields();
-            makePaymentGUI.displayMessage("Payment successful");
+            makePaymentGUI.displayMessage("Payment successful\nYou can go back home and log in");
         }
         else {
-            makePaymentGUI.displayMessage("Payment unsuccessful");
+            makePaymentGUI.displayMessage("Payment unsuccessful\nCheck your credit card number and cvv");
         }
     }
 

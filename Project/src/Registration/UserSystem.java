@@ -62,7 +62,7 @@ public class UserSystem {
             System.out.println(user);
     }
 
-    private void addUser(RegisteredUser user) {
+    public void addUser(RegisteredUser user) {
         registeredUsers.add(user);
     }
 
