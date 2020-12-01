@@ -19,7 +19,7 @@ public class Reservation {
         tickets.add(ticket);
     }
     
-    public void generateTicket(String movieName, int seat, LocalDateTime showTime, int room, double price) {
+    public void generateTicket(String movieName, int seat, LocalDateTime showTime, double price, int room) {
         Ticket ticket = new Ticket(movieName, seat, showTime, room, price, getReservationId());
         tickets.add(ticket);
     }
@@ -34,12 +34,25 @@ public class Reservation {
     public int getReservationId() {
         return reservationId;
     }
-    public String getUserName() { return userName; }
+    
+    public String getUserName() {
+    	return userName;
+    }
 
     public LocalDateTime getShowTime() {
         return tickets.get(0).getShowTime();
     }
+    
     public ArrayList<Ticket> getTickets() {
         return tickets;
+    }
+    
+    @Override
+    public String toString() {
+    	String out = "";
+    	for (int i = 0; i < getTickets().size(); i++) {
+    		out += getTickets().get(i) + "\n";
+    	}
+    	return out;
     }
 }

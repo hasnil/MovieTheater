@@ -23,23 +23,30 @@ public class Ticket {
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
+    
     public void setSeat(int seat) {
         this.seat = seat;
     }
+    
     public void setRoom(int room) {
         this.room = room;
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
+
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
     }
-    public void setShowTime(LocalDateTime showTime) { this.showTime = showTime; }
-
-    public double getPrice() {
-        return price;
+    
+    public void setShowTime(LocalDateTime showTime) {
+    	this.showTime = showTime;
     }
+    
+    public void setPrice(double price) {
+		this.price = price;
+	}
+    
+    public double getPrice() {
+		return price;
+	}
 
     public String getMovieName() {
 		return movieName;
@@ -56,7 +63,18 @@ public class Ticket {
     public LocalDateTime getShowTime() {
         return showTime;
     }
+    
     public int getReservationId() {
         return reservationId;
+    }
+    
+    @Override
+    public String toString() {
+    	return "Movie " + movieName + "\n"+
+    			"Seat " + seat + "\n"+
+    			"showTime " + showTime + "\n"+
+    			"Room " + room + "\n"+
+    			"Price " + price + "\n"+
+    			"Id " + reservationId;
     }
 }

@@ -17,6 +17,7 @@ public class ReservationSystem {
     private ArrayList<Voucher> vouchers;
     private ArrayList<Reservation> reservations;
     private ArrayList<Session> sessions;
+    private int lastReservationId;
     
     
     public ReservationSystem(MakeTicketPaymentGUI makeTicketPaymentGUI, ArrayList<Session> sessions) {
@@ -115,6 +116,8 @@ public class ReservationSystem {
                 addReservation(new Reservation(
                         rs.getInt("reservationId"),
                         rs.getString("userName")));
+                
+                lastReservationId = rs.getInt("reservationId") + 1;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,6 +158,25 @@ public class ReservationSystem {
 
     private void addReservation(Reservation reservation) {
         reservations.add(reservation);
+        lastReservationId = reservation.getReservationId() + 1;
+        
+    }
+    
+    public void generateReservation(String userName, Session activeSession) {
+    	lastReservationId++;
+    	Reservation res = new Reservation(lastReservationId, userName);
+        reservations.add(res);
+        
+        //Generate tickets for each seat belonging to the reservation
+        String movieName = activeSession.getMovie().getMovieName();
+        LocalDateTime showTime = activeSession.getMovie().getSelectedShowtime().getTime();
+        int room = activeSession.getRoom().getRoomNumber();
+        double price = activeSession.getSelectedSeats().size() * 12.0;
+        
+        for (int i = 0; i < activeSession.getSelectedSeats().size(); i++) {
+        	int seat = activeSession.getSelectedSeats().get(i);
+        	res.generateTicket(movieName, seat, showTime, price, room);
+        }
     }
 
     public void setSessions(ArrayList<Session> sessions) {

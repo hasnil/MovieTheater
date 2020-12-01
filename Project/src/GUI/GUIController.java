@@ -248,6 +248,20 @@ public class GUIController {
 					seats.add(s);
 					
 				}
+    		
+    			// Reservation creation
+    			String userName = "Regular User";
+    			
+    			if (mainController.getManageLogin().getUser() != null) {
+    				userName = mainController.getManageLogin().getUser().getUserName();
+    			}
+    			
+    			reservation.getManageReservations().getReservationSystem().generateReservation(userName, currentSession);
+    			
+    			//Clear seats selected
+    			reservation.getSeatsBeingSelected().clear();
+    			
+    			makeTicketPaymentGUI.displayMessage(reservation.toString());
             }
             else {
             	makeTicketPaymentGUI.displayMessage("Payment unsuccessful");
@@ -375,12 +389,6 @@ public class GUIController {
 			}
 			
 			else if(selectedSeats.size() > 0) {
-				
-				for(int s: selectedSeats) {
-					
-					seats.add(s);
-					
-				}
 				
 				
 				reservation.setVisible(false);
