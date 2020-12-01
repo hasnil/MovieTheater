@@ -54,6 +54,7 @@ public class MainGUI extends JPanel {
 
         manageAnnualFeeButton = new JButton("Manage Annual Fee");
         manageAnnualFeeButton.setBounds(94, 492, 200, 40);
+        manageAnnualFeeButton.setEnabled(false); //only shown to registered users
         panel.add(manageAnnualFeeButton);
 
         registerButton = new JButton("Register");
