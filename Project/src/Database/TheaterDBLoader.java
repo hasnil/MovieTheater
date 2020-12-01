@@ -6,6 +6,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -131,7 +132,7 @@ public class TheaterDBLoader implements DBCredentials{
     
     
     public ArrayList<Session> loadSessions(){
-    	ResultSet rs2 = dbLoader.loadShowTimes();
+    	ResultSet rs2 = loadShowTimes();
     	ArrayList<Session> sessions = new ArrayList<Session>();
     	ArrayList<Movie> movies = loadMoviesFromDatabase();
     	
