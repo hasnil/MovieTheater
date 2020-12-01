@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegistrationGUI extends JPanel{
@@ -137,6 +138,18 @@ public class RegistrationGUI extends JPanel{
 	public JTextField getUsernameTextField() {
 		return usernameTextField;
 	}
+	public JTextField getPasswordTextField() {
+		return passwordTextField;
+	}
+	public JTextField getNameTextField() {
+		return nameTextField;
+	}
+	public JTextField getAddressTextField() {
+		return addressTextField;
+	}
+	public JTextField getCreditCardTextField() {
+		return creditCardTextField;
+	}
 	public JButton getRegisterButton() {
 		return registerButton;
 	}
@@ -148,6 +161,3 @@ public class RegistrationGUI extends JPanel{
 		makePaymentButton.addActionListener(actionListener);
 	}
 }
-
-	
-	

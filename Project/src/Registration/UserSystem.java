@@ -32,6 +32,20 @@ public class UserSystem {
         registeredUsers.add(user);
     }
 
+    private boolean findUserByEmail(String email) {
+        for (RegisteredUser user : registeredUsers)
+            if (user.getEmail().equals(email))
+                return true;
+        return false;
+    }
+
+    private boolean findUserByUsername(String username) {
+        for (RegisteredUser user : registeredUsers)
+            if (user.getUserName().equals(username))
+                return true;
+        return false;
+    }
+
     public void loadUsers(ResultSet rs) {
         try {
             while (rs.next()) {
@@ -46,19 +60,5 @@ public class UserSystem {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    private boolean findUserByEmail(String email) {
-        for (RegisteredUser user : registeredUsers)
-            if (user.getEmail().equals(email))
-                return true;
-        return false;
-    }
-
-    private boolean findUserByUsername(String username) {
-        for (RegisteredUser user : registeredUsers)
-            if (user.getUserName().equals(username))
-                return true;
-        return false;
     }
 }

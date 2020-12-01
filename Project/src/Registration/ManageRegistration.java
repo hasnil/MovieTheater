@@ -35,6 +35,10 @@ public class ManageRegistration {
         String response = checkCredentialsAvailability(email, username);
         if (!response.equals("Okay"))
             registrationGUI.displayMessage(response);
+        else if (email.equals("") || username.equals("") || password.equals("") || fullName.equals("") ||
+                address.equals("") || creditCard.equals("")){
+            registrationGUI.displayMessage("Please fill all the necessary information");
+        }
         else {
             registrationGUI.displayMessage("That username and email are available, please proceed to make a payment");
             registrationGUI.getMakePaymentButton().setEnabled(true);
@@ -50,7 +54,6 @@ public class ManageRegistration {
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
-
     public void setRegistrationGUI(RegistrationGUI registrationGUI) {
         this.registrationGUI = registrationGUI;
     }
