@@ -74,7 +74,7 @@ public class MainController {
         manageAnnualFeeGUI.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setMakePayment(makePayment);
-        UserSystem userSystem = new UserSystem(makePaymentGUI);
+        UserSystem userSystem = new UserSystem();
         manageAnnualFee.setUserSystem(userSystem);
         /////////////////////////////////////////////////////////
 
