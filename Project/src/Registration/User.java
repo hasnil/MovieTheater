@@ -1,9 +1,5 @@
 package Registration;
 
-import Reservation.Voucher;
-
-import java.util.ArrayList;
-
 public class User {
 
     private String email;
