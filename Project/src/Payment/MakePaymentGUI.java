@@ -102,7 +102,4 @@ public class MakePaymentGUI extends JPanel {
 	public JButton getSubmitPaymentButton() {
 		return submitPaymentButton;
 	}
-//	public void addSubmitButtonListener(ActionListener actionListener) {
-//		submitPaymentButton.addActionListener(actionListener);
-//	}
 }
