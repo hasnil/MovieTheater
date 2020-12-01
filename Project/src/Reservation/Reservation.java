@@ -18,6 +18,11 @@ public class Reservation {
     public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
+    
+    public void generateTicket(String movieName, int seat, LocalDateTime showTime, int room, double price) {
+        Ticket ticket = new Ticket(movieName, seat, showTime, room, price, getReservationId());
+        tickets.add(ticket);
+    }
 
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
@@ -30,6 +35,7 @@ public class Reservation {
         return reservationId;
     }
     public String getUserName() { return userName; }
+
     public LocalDateTime getShowTime() {
         return tickets.get(0).getShowTime();
     }
