@@ -97,7 +97,7 @@ public class ReservationSystem {
             while (rs.next()) {
                 Ticket ticket = new Ticket(rs.getString("movieName"),
                         rs.getInt("seat"),
-                        modifyDate(rs.getDate("showTime")),
+                        modifyDate(rs.getDate("showTimes")),
                         rs.getInt("room"),
                         rs.getDouble("price"),
                         rs.getInt("reservationId"));
