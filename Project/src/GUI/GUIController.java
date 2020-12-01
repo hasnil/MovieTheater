@@ -207,9 +207,9 @@ public class GUIController {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 purchaseTicketsGUI.setVisible(false);
-                layeredPane.moveToFront(makePaymentGUI);
-                makePaymentGUI.setAmount(purchaseTicketsGUI.getAmount());
-                makePaymentGUI.setVisible(true);
+                layeredPane.moveToFront(makeTicketPaymentGUI);
+                makeTicketPaymentGUI.setAmount(purchaseTicketsGUI.getAmount());
+                makeTicketPaymentGUI.setVisible(true);
             }
         });
 //////////////////////////////////////////////////////////////////////////
@@ -491,4 +491,7 @@ public class GUIController {
 		this.userStatus = b;
 	}
 
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 }

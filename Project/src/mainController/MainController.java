@@ -134,7 +134,7 @@ public class MainController {
         registrationGUI.setLayout(null);
         reservation.setLayout(null);
         viewShowtimes.setLayout(null);
-
+        makeTicketPaymentGUI.setLayout(null);
 
         mainGUI.setVisible(false);
         cancel.setVisible(false);
@@ -147,6 +147,7 @@ public class MainController {
         registrationGUI.setVisible(false);
         reservation.setVisible(false);
         viewShowtimes.setVisible(false);
+        makeTicketPaymentGUI.setVisible(false);
         
         // Set up GUIControllerr
         GUIController guiController = new GUIController(mainGUI, viewShowtimes, browseMovies, browseTheater, cancel, reservation,

@@ -118,6 +118,7 @@ public class MakeTicketPaymentGUI extends JPanel {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+		amountLabel.setText("$" + amount + "0");
 	}
 
 	public void addSubmitButtonListener(ActionListener actionListener) {

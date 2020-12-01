@@ -34,13 +34,13 @@ public class ManageAnnualFeeGUI extends JPanel{
 		
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel.setBounds(366, 64, 252, 48);
+		lblNewLabel.setBounds(366, 64, 800, 48);
 		frame.add(lblNewLabel);
 		
 		dateLabel = new JLabel("");
 		dateLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dateLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		dateLabel.setBounds(197, 117, 589, 35);
+		dateLabel.setBounds(197, 117, 800, 35);
 		frame.add(dateLabel);
 		
 		btnNewButton = new JButton("Proceed to Make Payment");
