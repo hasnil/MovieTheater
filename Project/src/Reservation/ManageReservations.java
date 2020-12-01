@@ -21,13 +21,8 @@ public class ManageReservations {
         this.cancellationGUI = cancellationGUI;
         this.reservationGUI = reservationGUI;
         this.purchaseTicketsGUI = purchaseTicketsGUI;
-        cancellationGUI.addCancellationButtonListener(new CancelReservationButton());
     }
 
-    
-    
-    
-    
     
     public String cancelReservation(int reservationId) {
         return reservationSystem.cancelReservation(reservationId);
@@ -48,10 +43,7 @@ public class ManageReservations {
     public void setReservationSystem(ReservationSystem reservationSystem) {
         this.reservationSystem = reservationSystem;
     }
-
-    
-    
-    
+   
     
     public CancellationGUI getCancellationGUI() {
 		return cancellationGUI;
@@ -87,31 +79,9 @@ public class ManageReservations {
 		return currentSession;
 	}
 
-
-
-
-
-
 	public void setCurrentSession(Session currentSession) {
 		this.currentSession = currentSession;
 	}
 
 
-
-	class CancelReservationButton implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            int reservationId = 0;
-            try {
-                reservationId = Integer.parseInt(cancellationGUI.getReservationId().getText());
-            } catch (NumberFormatException e) {
-                cancellationGUI.displayMessage("Enter a valid reservation ID");
-            }
-            if (reservationId != 0) {
-                String message = cancelReservation(reservationId);
-                cancellationGUI.displayMessage(message);
-            }
-        }
-    }
 }

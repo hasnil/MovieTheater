@@ -42,4 +42,11 @@ public class ManageAnnualFee {
     	this.manageRegistration = manageRegistration;
     }
     
+    public UserSystem getUserSystem() {
+    	return userSystem;
+    }
+
+	public MakePaymentGUI getMakePaymentGUI() {
+		return makePaymentGUI;
+	}
 }

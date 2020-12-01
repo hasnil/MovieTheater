@@ -10,8 +10,10 @@ public class UserSystem {
 
     private ManageAnnualFee manageAnnualFee;
     private ArrayList<RegisteredUser> registeredUsers;
+    private ManageLogin manageLogin;
 
-    public UserSystem(MakePaymentGUI makePaymentGUI) {
+
+	public UserSystem(MakePaymentGUI makePaymentGUI) {
         manageAnnualFee = new ManageAnnualFee(makePaymentGUI);
         registeredUsers = new ArrayList<>();
     }
@@ -79,4 +81,12 @@ public class UserSystem {
                 return true;
         return false;
     }
+    
+    public ManageLogin getManageLogin() {
+		return manageLogin;
+	}
+
+	public void setManageLogin(ManageLogin manageLogin) {
+		this.manageLogin = manageLogin;
+	}
 }

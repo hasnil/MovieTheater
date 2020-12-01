@@ -1,6 +1,6 @@
 package Reservation;
 
-import Payment.MakePaymentGUI; 
+import Payment.MakeTicketPaymentGUI;
 
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -9,19 +9,18 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import Theater.*;
 
-//import Theater.ShowTime;
+
 public class ReservationSystem {
 
-    private MakePaymentGUI makePaymentGUI;
+    private MakeTicketPaymentGUI makeTicketPaymentGUI;
     private ArrayList<Voucher> vouchers;
     private ArrayList<Movie> movies;
     private ArrayList<Reservation> reservations;
-    
     private ArrayList<Session> sessions;
     
     
-    public ReservationSystem(MakePaymentGUI makePaymentGUI, ArrayList<Session> sessions) {
-        setMakePaymentGUI(makePaymentGUI);
+    public ReservationSystem(MakeTicketPaymentGUI makeTicketPaymentGUI, ArrayList<Session> sessions) {
+        setMakePaymentGUI(makeTicketPaymentGUI);
         vouchers = new ArrayList<>();
         movies = new ArrayList<>();
         reservations = new ArrayList<>();
@@ -41,6 +40,17 @@ public class ReservationSystem {
         }
         return "Reservation doesn't exist";
     }
+    
+    
+    public Reservation searchForReservation(int reservationId) {
+    	for (Reservation reservation : reservations) {
+            if (reservation.getReservationId() == reservationId) {
+            	return reservation;
+            }
+    	}
+    	return null;
+    }
+    
 
     public void loadMovies(ResultSet rs) {
         try {
@@ -141,27 +151,18 @@ public class ReservationSystem {
     				(s.getShowTime().getTime().compareTo(showtime.getTime()) == 0)  && roomNumber == s.getRoom().getRoomNumber()) {
         		
     			return s;
-    			
-    			
         	}
     	}
-    	
+
     	return null;
     }
-    
-    
-    
-    
+        
     private boolean checkForExpiry(Reservation reservation) {
         return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
     }
 
     private void addMovie(Movie movie) {
         movies.add(movie);
-    }
-
-    private LocalDateTime modifyDate(Date originalDate) {
-        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 
     private void addVoucher(Voucher voucher) {
@@ -172,8 +173,8 @@ public class ReservationSystem {
         reservations.add(reservation);
     }
 
-    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
-        this.makePaymentGUI = makePaymentGUI;
+    public void setMakePaymentGUI(MakeTicketPaymentGUI makeTicketPaymentGUI) {
+        this.makeTicketPaymentGUI = makeTicketPaymentGUI;
     }
     
     public LocalDateTime modifyDate(Date originalDate) {

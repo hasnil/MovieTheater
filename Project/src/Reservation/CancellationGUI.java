@@ -24,6 +24,7 @@ public class CancellationGUI extends JPanel{
 	private JButton returnHomeButton;
 	private JLabel loginLabel;
 	private JButton confirmCancellation;
+	private ManageReservations manageReservations;
 	
 	
 	public CancellationGUI(boolean userType){
@@ -85,5 +86,14 @@ public class CancellationGUI extends JPanel{
 
 	public void addCancellationButtonListener(ActionListener actionListener) {
 		confirmCancellation.addActionListener(actionListener);
+	}
+
+	public ManageReservations getManageReservations() {
+		return manageReservations;
+	}
+
+
+	public void setManageReservations(ManageReservations manageReservations) {
+		this.manageReservations = manageReservations;
 	}
 }
