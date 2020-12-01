@@ -134,6 +134,7 @@ public class MainController {
         registrationGUI.setLayout(null);
         reservation.setLayout(null);
         viewShowtimes.setLayout(null);
+        makeTicketPaymentGUI.setLayout(null);
 
 
         mainGUI.setVisible(false);
