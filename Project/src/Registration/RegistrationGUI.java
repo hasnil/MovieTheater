@@ -140,18 +140,6 @@ public class RegistrationGUI extends JPanel{
 	public JTextField getUsernameTextField() {
 		return usernameTextField;
 	}
-	public JTextField getPasswordTextField() {
-		return passwordTextField;
-	}
-	public JTextField getNameTextField() {
-		return nameTextField;
-	}
-	public JTextField getAddressTextField() {
-		return addressTextField;
-	}
-	public JTextField getCreditCardTextField() {
-		return creditCardTextField;
-	}
 
 	public JButton getRegisterButton() {
 		return registerButton;

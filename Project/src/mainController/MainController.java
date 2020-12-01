@@ -55,8 +55,8 @@ public class MainController {
         // Set up Manage Reservations and Reservation GUIs
         PaymentSystem paymentSystem = new PaymentSystem();
         MakePayment makePayment = new MakePayment(paymentSystem);
-        MakePaymentGUI makePaymentGUI = new MakePaymentGUI();
-//        makePayment.setMakePaymentGUI(makePaymentGUI);
+        MakePaymentGUI makePaymentGUI = new MakePaymentGUI(makePayment);
+        makePayment.setMakePaymentGUI(makePaymentGUI);
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
@@ -75,8 +75,8 @@ public class MainController {
         manageAnnualFeeGUI.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setMakePayment(makePayment);
-//        makePayment.setManageAnnualFee(manageAnnualFee);
-        UserSystem userSystem = new UserSystem();
+        makePayment.setManageAnnualFee(manageAnnualFee);
+        UserSystem userSystem = new UserSystem(makePaymentGUI);
         manageAnnualFee.setUserSystem(userSystem);
         /////////////////////////////////////////////////////////
 
@@ -107,6 +107,7 @@ public class MainController {
         		, theaterLoader.loadPostersFromDatabase());
         manageTheater.setTheaterSystem(theaterSystem);
         ViewShowtimesGUI viewShowtimes = new ViewShowtimesGUI(manageTheater.getUserStatus());
+        viewShowtimes.setManageTheater(manageTheater);
         BrowseTheaterGUI browseTheater = new BrowseTheaterGUI(manageTheater.getUserStatus());
         BrowseMoviesGUI browseMovies = new BrowseMoviesGUI(theaterSystem.getAllMoviesWithAccess(),
                 manageTheater.getUserStatus(), manageTheater.getTheaterSystem().getShowTimesArray());

@@ -15,26 +15,23 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class ReservationGUI extends JPanel {
-
-//public class ReservationGUI extends JFrame {
 	
 	private JPanel frame;
 	private JTextField txtEnterVoucherId;
-	
 	private ArrayList<JButton> seatBtns;
 	private ArrayList<Integer> seatsBeingSelected;
-	
 	private JButton purchaseTicketsButton;
 	private JButton returnHomeButton;
 	private JButton deSelectAll;
 	private JLabel loginLabel;
-	
 	private ManageReservations manageReservations;
 	
 
 	public ReservationGUI() {
 		
-		ArrayList<JButton> seatBtns = new ArrayList<JButton>();
+		seatsBeingSelected = new ArrayList<Integer>();
+		
+		seatBtns = new ArrayList<JButton>();
 		frame = new JPanel();
 		frame.setBounds(0, 0, 1000, 650);
 		frame.setBackground(new Color(176, 196, 222));
@@ -46,7 +43,7 @@ public class ReservationGUI extends JPanel {
 		
 		
 		deSelectAll = new JButton("Deselect All");
-		deSelectAll.setBounds(10, 200, 122, 36);
+		deSelectAll.setBounds(337, 491, 122, 36);
 		frame.add(deSelectAll);
 		
 		
@@ -67,7 +64,7 @@ public class ReservationGUI extends JPanel {
 		lblNewLabel_2.setOpaque(true);
 		frame.add(lblNewLabel_2);
 		
-		int xstart = 190;
+		int xstart = 250;
 		int ystart = 160;
 		
 		for (int i = 1; i <= 20; i++ ) {
@@ -111,7 +108,7 @@ public class ReservationGUI extends JPanel {
 		}
 		
 		purchaseTicketsButton = new JButton("Purchase Tickets");
-		purchaseTicketsButton.setBounds(407, 489, 170, 40);
+		purchaseTicketsButton.setBounds(481, 489, 170, 40);
 		frame.add(purchaseTicketsButton);
 		
 		add(frame);
@@ -163,9 +160,5 @@ public class ReservationGUI extends JPanel {
 		this.seatsBeingSelected = seatsBeingSelected;
 	}
 	
-//	public static void main(String[] args) {
-//		ReservationGUI res = new ReservationGUI();
-//		res.setVisible(true);
-//	}
 	
 }

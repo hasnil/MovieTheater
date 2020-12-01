@@ -52,10 +52,11 @@ public class GUIController {
         this.loginGUI = loginGUI;
 
 
-        JFrame frame = new JFrame("Movie Theater Application");
+        JFrame frame = new JFrame("Slab Cinemas Theater Application");
         frame.setBounds(100, 140, 1000, 650);
 
         layeredPane = new JLayeredPane();
+        makePaymentGUI.setLayeredPane(layeredPane);
         layeredPane.add(mainGUI, 0);
         mainGUI.setBounds(0, 0, 1000, 650);
         layeredPane.add(cancellation, 1);
@@ -169,35 +170,32 @@ public class GUIController {
                 loginGUI.setVisible(true);
             }
         });
-
-        reservation.getPurchaseTicketsButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-
-                //Check if there is seat selection!!!
-
-                reservation.setVisible(false);
-                layeredPane.moveToFront(purchaseTicketsGUI);
-                purchaseTicketsGUI.setVisible(true);
-            }
-        });
-
+//////////////////////////////////////////////////////////////////
+ 
+       // purchaseTicketsGUI.getApplyVoucherButton().addActionListener(l);
+        
 
         purchaseTicketsGUI.getMakePaymentButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+            	
+            	
 
                 //Must check payment info
+            	
+            	
+            	
                 purchaseTicketsGUI.setVisible(false);
                 layeredPane.moveToFront(makePaymentGUI);
                 makePaymentGUI.setVisible(true);
             }
         });
-
+//////////////////////////////////////////////////////////////////////////
 
 
 
     }
+
 
     class ReturnHomeListener implements ActionListener{
 
@@ -224,7 +222,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent e) {
 			if(viewShowtimes.getShowtimesListSelection() != null) {
 				Movie movie = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedMovie();
-				ShowTime showTime = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedShowTime();
+				
+				ShowTime showTime = viewShowtimes.getShowtimesListSelection();
 				int roomNumber = showTime.getRoomNumber();
 				
 				Session currentSession = reservation.getManageReservations().getReservationSystem().searchForSession(movie, showTime, roomNumber);
@@ -236,8 +235,6 @@ public class GUIController {
 				for(int s: seats) {
 					reservation.getSeatBtn(s).setEnabled(false);
 					reservation.getSeatBtn(s).setBackground(Color.BLUE);
-					
-					
 				}
 				
 				
@@ -260,11 +257,18 @@ public class GUIController {
 			int roomNumber = showTime.getRoomNumber();
 			
 			Session currentSession = reservation.getManageReservations().getReservationSystem().searchForSession(movie, showTime, roomNumber);
+			reservation.getManageReservations().setCurrentSession(currentSession);
 			
 			ArrayList<Integer> seats = currentSession.getSelectedSeats();
 			
 			ArrayList<Integer> selectedSeats = reservation.getSeatsBeingSelected();
-			if(selectedSeats.size() > 0) {
+			
+			if(selectedSeats.size() > 2 && movie.isEarlyAccess() == true) {
+				viewShowtimes.displayMessage("Sorry, only 10% of seats may be reserved prior to public announcement.");
+				return;
+			}
+			
+			else if(selectedSeats.size() > 0) {
 				
 				for(int s: selectedSeats) {
 					
@@ -272,14 +276,18 @@ public class GUIController {
 					
 				}
 				
+				
 				reservation.setVisible(false);
 				layeredPane.moveToFront(purchaseTicketsGUI);
-				purchaseTicketsGUI.setVisible(true);
+				purchaseTicketsGUI.setSummary2("Number of Tickets: " + selectedSeats.size());
+				purchaseTicketsGUI.setSummary("Total Price: $" + 12 * selectedSeats.size() + ".00");
+				purchaseTicketsGUI.setVisible(true);	
+				
+				
+				
 				
 				
 			}
-			
-			
 		}
     	
     }
@@ -317,7 +325,6 @@ public class GUIController {
                 reservation.getLoginLabel().setText("Login Status: Logged In");
                 viewShowtimes.getLoginLabel().setText("Login Status: Logged In");
                 mainGUI.getRegisterButton().setEnabled(false);
-                mainGUI.getLoginButton().setEnabled(false);
                 layeredPane.moveToFront(mainGUI);
                 mainGUI.setVisible(true);
             }

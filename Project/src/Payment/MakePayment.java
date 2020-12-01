@@ -4,12 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import Reservation.Voucher;
+import Registration.ManageAnnualFee;
 import Emailer.EmailForm;
 
 public class MakePayment {
 
     private PaymentSystem paymentSystem;
+    private TransactionForm transactionForm;
     private MakePaymentGUI makePaymentGUI;
+    private ManageAnnualFee manageAnnualFee;
 	private String description;
 
     public MakePayment(PaymentSystem paymentSystem) {
@@ -54,40 +57,40 @@ public class MakePayment {
         return -1;
     }
 
-    class MakePaymentButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            makePayment();
-        }
-    }
-
-    private void makePayment() {
-        String cc = makePaymentGUI.getCardNumberField().getText();
-        String cvv = makePaymentGUI.getSecurityCodeField().getText();
-        boolean payment = payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
-        if (payment) {
-            makePaymentGUI.clearTextFields();
-            makePaymentGUI.displayMessage("Payment successful\nYou can go back home and log in");
-        }
-        else {
-            makePaymentGUI.displayMessage("Payment unsuccessful\nCheck your credit card number and cvv");
-        }
-    }
-
     public void setPaymentSystem(PaymentSystem paymentSystem) {
         this.paymentSystem = paymentSystem;
     }
     
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
     	this.makePaymentGUI = makePaymentGUI;
-    	makePaymentGUI.addButtonActionListener(makePaymentGUI.getSubmitPaymentButton(), new MakePaymentButtonListener());
+        makePaymentGUI.addSubmitButtonListener(new SubmitPaymentButton());
+    }
+    
+    public void setManageAnnualFee(ManageAnnualFee manageAnnualFee) {
+        this.manageAnnualFee = manageAnnualFee;
     }
     
     public void setDescription(String description) {
     	this.description = description;
     }
-
+    
     public String getDescription() {
     	return this.description;
+    }
+
+    class SubmitPaymentButton implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            String cc = makePaymentGUI.getCardNumberField().getText();
+            String cvv = makePaymentGUI.getSecurityCodeField().getText();
+            boolean payment = payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
+            if (payment) {
+                makePaymentGUI.displayMessage("Payment successful");
+            }
+            else {
+                makePaymentGUI.displayMessage("Payment unsuccessful");
+            }
+        }
     }
 }

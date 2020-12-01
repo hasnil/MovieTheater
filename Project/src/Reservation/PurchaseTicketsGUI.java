@@ -17,6 +17,10 @@ public class PurchaseTicketsGUI extends JPanel{
 	private JButton returnHomeButton;
 	private JButton makePaymentButton;
 	private JLabel loginLabel;
+	private JLabel summary;
+	private JLabel summary2; 
+	private JButton applyVoucherButton;
+	private ManageReservations manageReservations;
 
 	public PurchaseTicketsGUI() {
 		frame = new JPanel();
@@ -24,19 +28,19 @@ public class PurchaseTicketsGUI extends JPanel{
 		frame.setBackground(new Color(176, 196, 222));
 		frame.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Total Price:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(281, 98, 466, 45);
-		frame.add(lblNewLabel);
+		summary = new JLabel("Total Price:");
+		summary.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		summary.setBounds(281, 98, 466, 45);
+		frame.add(summary);
 		
-		JLabel lblNewLabel_1 = new JLabel("Number of Tickets: ");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(281, 162, 399, 45);
-		frame.add(lblNewLabel_1);
+		summary2 = new JLabel("Number of Tickets: ");
+		summary2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		summary2.setBounds(281, 162, 399, 45);
+		frame.add(summary2);
 		
-		JButton btnNewButton = new JButton("Apply Voucher");
-		btnNewButton.setBounds(418, 338, 158, 45);
-		frame.add(btnNewButton);
+		applyVoucherButton = new JButton("Apply Voucher");
+		applyVoucherButton.setBounds(418, 338, 158, 45);
+		frame.add(applyVoucherButton);
 		
 		txtEnterVoucherId = new JTextField();
 		txtEnterVoucherId.setText("Enter Voucher ID here");
@@ -71,6 +75,26 @@ public class PurchaseTicketsGUI extends JPanel{
 	}
 	
 	
+	public JLabel getSummary() {
+		return summary;
+	}
+
+
+	public void setSummary(String s) {
+		summary.setText(s);
+	}
+
+
+	public JLabel getSummary2() {
+		return summary2;
+	}
+
+
+	public void setSummary2(String s) {
+		summary2.setText(s);
+	}
+
+
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;
 	}
@@ -84,7 +108,13 @@ public class PurchaseTicketsGUI extends JPanel{
 		return loginLabel;
 	}
 
-	public static void main(String[] args) {
-		PurchaseTicketsGUI gui = new PurchaseTicketsGUI();
+
+	public JButton getApplyVoucherButton() {
+		return applyVoucherButton;
+	}
+
+
+	public void setApplyVoucherButton(JButton applyVoucherButton) {
+		this.applyVoucherButton = applyVoucherButton;
 	}
 }

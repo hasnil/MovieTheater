@@ -46,10 +46,10 @@ public class Session {
 	public Room getRoom() {
 		return room;
 	}
-	
 	public void setRoom(Room room) {
-		room.getRoomNumber();
+		this.room = room;
 	}
+
 
 	public ArrayList<Integer> getSelectedSeats() {
 		return selectedSeats;
