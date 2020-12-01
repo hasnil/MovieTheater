@@ -59,7 +59,7 @@ public class MainController {
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
-        ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI, theaterLoader.loadSessions());
+        ReservationSystem reservationSystem = new ReservationSystem(theaterLoader.loadSessions());
         ManageReservations manageReservations = new ManageReservations(reservationSystem, cancel, reservation, purchaseTicketsGUI);
         reservation.setManageReservations(manageReservations);
         ///////////////////////////////////////////////////////
