@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class UserSystem {
 
     private ArrayList<RegisteredUser> registeredUsers;
+    private ManageLogin manageLogin;
 
     public UserSystem() {
         registeredUsers = new ArrayList<>();
@@ -61,4 +62,12 @@ public class UserSystem {
             e.printStackTrace();
         }
     }
+    
+    public ManageLogin getManageLogin() {
+		return manageLogin;
+	}
+
+	public void setManageLogin(ManageLogin manageLogin) {
+		this.manageLogin = manageLogin;
+	}
 }

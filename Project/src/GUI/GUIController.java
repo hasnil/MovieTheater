@@ -1,19 +1,24 @@
 package GUI;
 
 import Payment.MakePaymentGUI;
+import Payment.MakeTicketPaymentGUI;
 import Registration.*;
 import Registration.RegistrationGUI;
 import Reservation.CancellationGUI;
 import Reservation.PurchaseTicketsGUI;
+import Reservation.Reservation;
 import Reservation.ReservationGUI;
 import Reservation.Session;
+import Reservation.Ticket;
 import Theater.*;
+import mainController.MainController;
 
 import javax.swing.*;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -29,15 +34,17 @@ public class GUIController {
     private MakePaymentGUI makePaymentGUI;
     private ManageAnnualFeeGUI manageAnnualFee;
     private RegistrationGUI registrationGUI;
+    private MakeTicketPaymentGUI makeTicketPaymentGUI;
     private LoginGUI loginGUI;
     private JLayeredPane layeredPane;
     private boolean userStatus;
+    private MainController mainController;
 
-
-    public GUIController(MainGUI mainGUI, ViewShowtimesGUI viewShowtimes, BrowseMoviesGUI browseMovies,
+	public GUIController(MainGUI mainGUI, ViewShowtimesGUI viewShowtimes, BrowseMoviesGUI browseMovies,
                          BrowseTheaterGUI browseTheater, CancellationGUI cancellation, ReservationGUI reservation,
                          PurchaseTicketsGUI purchaseTicketsGUI, MakePaymentGUI makePaymentGUI,
-                         ManageAnnualFeeGUI manageAnnualFee, RegistrationGUI registrationGUI, LoginGUI loginGUI) {
+                         ManageAnnualFeeGUI manageAnnualFee, RegistrationGUI registrationGUI, LoginGUI loginGUI,
+                         MakeTicketPaymentGUI makeTicketPaymentGUI) {
 
         this.mainGUI = mainGUI;
         this.viewShowtimes = viewShowtimes;
@@ -50,6 +57,8 @@ public class GUIController {
         this.manageAnnualFee = manageAnnualFee;
         this.registrationGUI = registrationGUI;
         this.loginGUI = loginGUI;
+        this.makeTicketPaymentGUI = makeTicketPaymentGUI;
+        this.mainGUI.getManageAnnualFeeButton().setEnabled(false);
 
 
         JFrame frame = new JFrame("Slab Cinemas Theater Application");
@@ -78,6 +87,8 @@ public class GUIController {
         reservation.setBounds(0, 0, 1000, 650);
         layeredPane.add(viewShowtimes, 10);
         viewShowtimes.setBounds(0, 0, 1000, 650);
+        layeredPane.add(makeTicketPaymentGUI, 11);
+        makeTicketPaymentGUI.setBounds(0, 0, 1000, 650);
         layeredPane.setVisible(true);
 
 
@@ -95,6 +106,7 @@ public class GUIController {
         cancellation.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         loginGUI.getReturnHomeButton().addActionListener(new ReturnHomeListenerForLogin());
         makePaymentGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
+        makeTicketPaymentGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         manageAnnualFee.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         purchaseTicketsGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
         registrationGUI.getReturnHomeButton().addActionListener(new ReturnHomeListener());
@@ -105,7 +117,10 @@ public class GUIController {
         browseMovies.addConfirmMovieButtonListener(new MovieConfirmedListener());
         viewShowtimes.getConfirmShowtimeButton().addActionListener(new ConfirmShowtimeButtonListener());
         reservation.addConfirmedButtonListener(new ConfirmSeatListener());
-        
+        cancellation.addCancellationButtonListener(new CancelReservationButton());
+        makeTicketPaymentGUI.addSubmitButtonListener(new TicketPaymentSubmitButtonListener());
+        manageAnnualFee.addMakePaymentListener(new AnnualFeeMakePaymentButtonListener());
+
 
         mainGUI.getBrowseTheaterButton().addActionListener(new ActionListener() {
             @Override
@@ -137,6 +152,14 @@ public class GUIController {
         mainGUI.getManageAnnualFeeButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
+
+            	if(mainController.getManageLogin().getUser().isExpired()) {
+            		manageAnnualFee.setLblNewLabel("Your Annual $20 Fee is Overdue:");
+            	}
+            	else {
+            		manageAnnualFee.setLblNewLabel("Your Annual $20 Fee is Due By:");
+            		manageAnnualFee.setDateLabel(mainController.getManageLogin().getUser().getExpDate().toString());
+            	}
                 mainGUI.setVisible(false);
                 layeredPane.moveToFront(manageAnnualFee);
                 manageAnnualFee.setVisible(true);
@@ -179,6 +202,7 @@ public class GUIController {
         });
         
 
+
         purchaseTicketsGUI.getMakePaymentButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -195,19 +219,103 @@ public class GUIController {
     }
 
 
+
+    class TicketPaymentSubmitButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+            String cc = makeTicketPaymentGUI.getCardNumberField().getText();
+            String cvv = makeTicketPaymentGUI.getSecurityCodeField().getText();
+            boolean payment = makeTicketPaymentGUI.getMakePayment().payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
+            if (payment) {
+            	makeTicketPaymentGUI.displayMessage("Payment successful");
+
+            	// blocks off appropriate seats
+            	Movie movie = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedMovie();
+    			ShowTime showTime = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedShowTime();
+    			int roomNumber = showTime.getRoomNumber();
+
+    			Session currentSession = reservation.getManageReservations().getReservationSystem().searchForSession(movie, showTime, roomNumber);
+    			reservation.getManageReservations().setCurrentSession(currentSession);
+
+    			ArrayList<Integer> seats = currentSession.getSelectedSeats();
+
+    			ArrayList<Integer> selectedSeats = reservation.getSeatsBeingSelected();
+
+
+    			for(int s: selectedSeats) {
+
+					seats.add(s);
+
+				}
+            }
+            else {
+            	makeTicketPaymentGUI.displayMessage("Payment unsuccessful");
+            }
+        }
+    }
+
+
+
+    class CancelReservationButton implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            int reservationId = 0;
+            ArrayList<Integer> seatNumbersToRemove = null;
+            Session sessionToRemoveSeatsFrom = null;
+            ArrayList<Ticket> tickets = null;
+
+            try {
+            	// releases seats after cancellation
+                reservationId = cancellation.getReservationId();
+
+                TheaterSystem theaterSystem = browseMovies.getManageTheater().getTheaterSystem();
+
+                tickets = cancellation.getManageReservations().getReservationSystem().searchForReservation(reservationId).getTickets();
+                sessionToRemoveSeatsFrom = reservation.getManageReservations().getReservationSystem().searchForSession(theaterSystem.searchMovieByName(tickets.get(0).getMovieName())
+                		, new ShowTime(tickets.get(0).getShowTime()), tickets.get(0).getRoom());
+
+                seatNumbersToRemove = new ArrayList<Integer>();
+                for(Ticket t: tickets) {
+                	seatNumbersToRemove.add(t.getSeat());
+                }
+
+            } catch (NumberFormatException e) {
+                cancellation.displayMessage("Enter a valid reservation ID");
+            }
+            if (reservationId != 0) {
+                String message = cancellation.getManageReservations().getReservationSystem().cancelReservation(reservationId);
+                cancellation.displayMessage(message);
+
+                if(message.equals("Reservation doesn't exist") || message.equals( "Movie starts in less than 3 days, can't cancel anymore")) {
+
+                }
+                else {
+                	for(Ticket t: tickets) {
+                		int index = sessionToRemoveSeatsFrom.getSelectedSeats().indexOf(t.getRoom());
+                		sessionToRemoveSeatsFrom.getSelectedSeats().remove(index);
+                	}
+                }
+            }
+        }
+    }
+
+
     class ReturnHomeListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
             viewShowtimes.setVisible(false);
-            browseMovies.setVisible(false);;
-            browseTheater.setVisible(false);;
-            cancellation.setVisible(false);;
-            reservation.setVisible(false);;
-            purchaseTicketsGUI.setVisible(false);;
-            makePaymentGUI.setVisible(false);;
-            manageAnnualFee.setVisible(false);;
-            registrationGUI.setVisible(false);;
+            browseMovies.setVisible(false);
+            browseTheater.setVisible(false);
+            cancellation.setVisible(false);
+            reservation.setVisible(false);
+            purchaseTicketsGUI.setVisible(false);
+            makePaymentGUI.setVisible(false);
+            makeTicketPaymentGUI.setVisible(false);
+            manageAnnualFee.setVisible(false);
+            registrationGUI.setVisible(false);
             loginGUI.setVisible(false);
             layeredPane.moveToFront(mainGUI);
             mainGUI.setVisible(true);
@@ -281,11 +389,7 @@ public class GUIController {
 				purchaseTicketsGUI.setTotalPriceLabel("Total Price: $" + 12 * selectedSeats.size() + ".00");
 				purchaseTicketsGUI.setAmount(12 * selectedSeats.size());
 				purchaseTicketsGUI.setVisible(true);	
-				
-				
-				
-				
-				
+
 			}
 		}
     	
@@ -318,6 +422,8 @@ public class GUIController {
                 browseTheater.getLoginLabel().setText("Login Status: Logged In");
                 cancellation.getLoginLabel().setText("Login Status: Logged In");
                 makePaymentGUI.getLoginLabel().setText("Login Status: Logged In");
+                makeTicketPaymentGUI.getLoginLabel().setText("Login Status: Logged In");
+                mainGUI.getManageAnnualFeeButton().setEnabled(true);
                 manageAnnualFee.getLoginLabel().setText("Login Status: Logged In");
                 purchaseTicketsGUI.getLoginLabel().setText("Login Status: Logged In");
                 registrationGUI.getLoginLabel().setText("Login Status: Logged In");

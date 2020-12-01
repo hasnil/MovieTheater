@@ -9,7 +9,7 @@ public class Ticket {
     private LocalDateTime showTime;
     private int room;
     private double price;
-    private int reservationId;
+	private int reservationId;
 
     public Ticket(String movieName, int seat, LocalDateTime showTime, int room, double price, int reservationId) {
         setMovieName(movieName);
@@ -40,6 +40,19 @@ public class Ticket {
     public double getPrice() {
         return price;
     }
+
+    public String getMovieName() {
+		return movieName;
+	}
+
+	public int getSeat() {
+		return seat;
+	}
+
+	public int getRoom() {
+		return room;
+	}
+
     public LocalDateTime getShowTime() {
         return showTime;
     }

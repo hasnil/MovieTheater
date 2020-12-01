@@ -2,6 +2,7 @@ package Payment;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
 import java.util.Date;
 import Reservation.Voucher;
 import Registration.ManageAnnualFee;
@@ -11,6 +12,8 @@ public class MakePayment {
 
     private PaymentSystem paymentSystem;
     private MakePaymentGUI makePaymentGUI;
+    private MakeTicketPaymentGUI makeTicketPaymentGUI;
+    private ManageAnnualFee manageAnnualFee;
 	private String description;
 
     public MakePayment(MakePaymentGUI makePaymentGUI, PaymentSystem paymentSystem) {
@@ -51,11 +54,17 @@ public class MakePayment {
         boolean payment = payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
         if (payment) {
             makePaymentGUI.displayMessage("Payment successful");
+            // manageAnnualFee.getUserSystem().getManageLogin().getUser().setDateOfLastPayment(LocalDateTime.now());  
+            // manageAnnualFee.getMakePaymentGUI().setEnabled(false);
         }
         else {
             makePaymentGUI.displayMessage("Payment unsuccessful");
         }
     }
+    
+	public void setMakeTicketPaymentGUI(MakeTicketPaymentGUI makeTicketPaymentGUI) {
+		this.makeTicketPaymentGUI = makeTicketPaymentGUI;
+	}
 
     public void setPaymentSystem(PaymentSystem paymentSystem) {
         this.paymentSystem = paymentSystem;

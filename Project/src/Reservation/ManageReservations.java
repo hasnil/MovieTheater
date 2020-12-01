@@ -70,15 +70,48 @@ public class ManageReservations {
     private String cancelReservation(int reservationId) {
         return reservationSystem.cancelReservation(reservationId);
     }
+   
+    public void setReservationSystem(ReservationSystem reservationSystem) {
+        this.reservationSystem = reservationSystem;
+    }
+    
+    public CancellationGUI getCancellationGUI() {
+		return cancellationGUI;
+	}
 
-    public void setReservationSystem(ReservationSystem reservationSystem) { this.reservationSystem = reservationSystem; }
-    public ReservationSystem getReservationSystem() {
-        return reservationSystem;
-    }
-    public Session getCurrentSession() {
-        return currentSession;
-    }
-    public void setCurrentSession(Session currentSession) {
-        this.currentSession = currentSession;
-    }
+	public void setCancellationGUI(CancellationGUI cancellationGUI) {
+		this.cancellationGUI = cancellationGUI;
+	}
+
+	public ReservationGUI getReservationGUI() {
+		return reservationGUI;
+	}
+
+	public void setReservationGUI(ReservationGUI reservationGUI) {
+		this.reservationGUI = reservationGUI;
+	}
+
+	public PurchaseTicketsGUI getPurchaseTicketsGUI() {
+		return purchaseTicketsGUI;
+	}
+
+	public void setPurchaseTicketsGUI(PurchaseTicketsGUI purchaseTicketsGUI) {
+		this.purchaseTicketsGUI = purchaseTicketsGUI;
+	}
+
+	public ReservationSystem getReservationSystem() {
+		return reservationSystem;
+	}
+
+
+
+	public Session getCurrentSession() {
+		return currentSession;
+	}
+
+	public void setCurrentSession(Session currentSession) {
+		this.currentSession = currentSession;
+	}
+
+
 }
