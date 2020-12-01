@@ -40,7 +40,6 @@ public class ManageRegistration {
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
-
     public void setRegistrationGUI(RegistrationGUI registrationGUI) {
         this.registrationGUI = registrationGUI;
     }
