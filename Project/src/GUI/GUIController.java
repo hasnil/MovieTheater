@@ -279,6 +279,7 @@ public class GUIController {
 				layeredPane.moveToFront(purchaseTicketsGUI);
 				purchaseTicketsGUI.setNumOfTicketsLabel("Number of Tickets: " + selectedSeats.size());
 				purchaseTicketsGUI.setTotalPriceLabel("Total Price: $" + 12 * selectedSeats.size() + ".00");
+				purchaseTicketsGUI.setAmount(12 * selectedSeats.size());
 				purchaseTicketsGUI.setVisible(true);	
 				
 				

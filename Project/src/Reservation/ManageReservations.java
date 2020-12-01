@@ -61,7 +61,7 @@ public class ManageReservations {
                 purchaseTicketsGUI.setAmount(0);
             }
             else {
-                purchaseTicketsGUI.getTotalPriceLabel().setText("Total Price: $" + remainder);
+                purchaseTicketsGUI.getTotalPriceLabel().setText("Total Price: $" + remainder + "0");
                 purchaseTicketsGUI.setAmount(remainder);
             }
         }

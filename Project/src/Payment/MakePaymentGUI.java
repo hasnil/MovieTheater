@@ -93,7 +93,7 @@ public class MakePaymentGUI extends JPanel {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
-		amountLabel.setText("$" + amount);
+		amountLabel.setText("$" + amount + "0");
 	}
 	public JButton getSubmitPaymentButton() {
 		return submitPaymentButton;
