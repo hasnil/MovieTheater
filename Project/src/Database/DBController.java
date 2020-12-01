@@ -4,7 +4,6 @@ import Registration.UserSystem;
 import Theater.Movie;
 import Theater.ShowTime;
 import Reservation.ReservationSystem;
-import Theater.TheaterSystem;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -15,13 +14,13 @@ import java.util.HashMap;
 public class DBController implements DBCredentials {
 
     private Connection conn;
-    private DBLoader dbLoader;
+    private UserDBLoader userDbLoader;
     private UserSystem userSystem;
     private ReservationSystem reservationSystem;
 
     public DBController(UserSystem userSystem, ReservationSystem reservationSystem) {
         initializeConnection();
-        dbLoader = new DBLoader(conn);
+        userDbLoader = new UserDBLoader(conn);
         setUserSystem(userSystem);
         setReservationSystem(reservationSystem);
     }
@@ -37,13 +36,13 @@ public class DBController implements DBCredentials {
     }
 
     public void loadFromDB() {
-        ResultSet rs = dbLoader.loadUsers();
+        ResultSet rs = userDbLoader.loadUsers();
         userSystem.loadUsers(rs);
-        rs = dbLoader.loadVouchers();
+        rs = userDbLoader.loadVouchers();
         reservationSystem.loadVouchers(rs);
-        rs = dbLoader.loadReservations();
+        rs = userDbLoader.loadReservations();
         reservationSystem.loadReservations(rs);
-        rs = dbLoader.loadTickets();
+        rs = userDbLoader.loadTickets();
         reservationSystem.loadTickets(rs);
     }
 

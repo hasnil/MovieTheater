@@ -14,7 +14,7 @@ import Theater.ShowTime;
 public class TheaterDBLoader implements DBCredentials{
 	
 	private Connection conn;
-    private DBLoader dbLoader;
+    private UserDBLoader dbLoader;
     
     public TheaterDBLoader() {
         initializeConnection();
