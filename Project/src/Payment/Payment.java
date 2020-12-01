@@ -43,6 +43,4 @@ public class Payment {
 				"Amount: $" + getAmount() + "\n" +
 				"Result: " + result;
 	}
-	
-	
 }

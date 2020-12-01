@@ -20,26 +20,18 @@ public class Ticket {
         setReservationId(reservationId);
     }
 
-    public int getReservationId() {
-        return reservationId;
-    }
-
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
-
     public void setSeat(int seat) {
         this.seat = seat;
     }
-
     public void setRoom(int room) {
         this.room = room;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
-
     public void setReservationId(int reservationId) {
         this.reservationId = reservationId;
     }
@@ -51,20 +43,10 @@ public class Ticket {
     public double getPrice() {
         return price;
     }
-
     public LocalDateTime getShowTime() {
         return showTime;
     }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "movieName='" + movieName + '\'' +
-                ", seat=" + seat +
-                ", showTime=" + showTime +
-                ", room=" + room +
-                ", price=" + price +
-                ", reservationId=" + reservationId +
-                '}';
+    public int getReservationId() {
+        return reservationId;
     }
 }

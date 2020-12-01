@@ -25,9 +25,17 @@ public class RegisteredUser extends User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
     }
 
     public String getUserName() {
@@ -36,17 +44,5 @@ public class RegisteredUser extends User {
 
     public String getPassword() {
         return password;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setCreditCard(String creditCard) {
-        this.creditCard = creditCard;
     }
 }

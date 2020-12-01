@@ -13,9 +13,7 @@ import Theater.Movie;
 //import Theater.ShowTime;
 public class ReservationSystem {
 
-    private MakePaymentGUI makePaymentGUI;
     private ArrayList<Voucher> vouchers;
-    private ArrayList<Movie> movies;
     private ArrayList<Reservation> reservations;
     
     private ArrayList<Session> sessions;
@@ -24,7 +22,6 @@ public class ReservationSystem {
     public ReservationSystem(MakePaymentGUI makePaymentGUI, ArrayList<Session> sessions) {
         setMakePaymentGUI(makePaymentGUI);
         vouchers = new ArrayList<>();
-        movies = new ArrayList<>();
         reservations = new ArrayList<>();
         this.sessions = sessions; 
     }
@@ -33,9 +30,17 @@ public class ReservationSystem {
         for (Reservation reservation : reservations) {
             if (reservation.getReservationId() == reservationId) {
                 if (checkForExpiry(reservation)) {
-                    Voucher voucher = createVoucher(reservation);
-                    reservations.remove(reservation);
-                    return "Cancellation successful\nThe following voucher has been emailed to you\n" + voucher.toString();
+                    if (reservation.getUserName().equals("noUser")) {
+                        Voucher voucher = createVoucherRegularUser(reservation);
+                        reservations.remove(reservation);
+                        return "Cancellation successful\nThe following voucher has been emailed to you\n" +
+                                voucher.toString() + "\nYour voucher is for 85% of the original amount";
+                    } else {
+                        Voucher voucher = createVoucherRegisteredUser(reservation);
+                        reservations.remove(reservation);
+                        return "Cancellation successful\nThe following voucher has been emailed to you\n" +
+                                voucher.toString() + "\nYour voucher is for the full original amount";
+                    }
                 } else
                     return "Movie starts in less than 3 days, can't cancel anymore";
             }
@@ -43,16 +48,28 @@ public class ReservationSystem {
         return "Reservation doesn't exist";
     }
 
-    public void loadMovies(ResultSet rs) {
-        try {
-            while (rs.next()) {
-                addMovie(new Movie(
-                        rs.getString("movieName"),
-                        rs.getDate("releaseDate")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    private Voucher createVoucherRegularUser(Reservation reservation) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
+        Voucher voucher = new Voucher(vouchNum, (amount * .85));
+        vouchers.add(voucher);
+        return voucher;
+    }
+
+    private Voucher createVoucherRegisteredUser(Reservation reservation) {
+        double amount = 0;
+        for (Ticket ticket : reservation.getTickets())
+            amount += ticket.getPrice();
+        int vouchNum = vouchers.get(vouchers.size() - 1).getVouchNum() + 1;
+        Voucher voucher = new Voucher(vouchNum, amount);
+        vouchers.add(voucher);
+        return voucher;
+    }
+
+    private boolean checkForExpiry(Reservation reservation) {
+        return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
     }
 
     public void loadVouchers(ResultSet rs) {
@@ -62,20 +79,6 @@ public class ReservationSystem {
                         rs.getInt("vouchNum"),
                         rs.getFloat("amount"),
                         rs.getDate("expiryDate")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loadShowTimes(ResultSet rs) {
-        try {
-            while (rs.next()) {
-                ShowTime showTime = new ShowTime(rs.getString("showTimes"),
-                                                 rs.getString("movieName"));
-                for (Movie movie : movies)
-                    if (movie.getMovieName().equals(showTime.getMovieName()))
-                        movie.addShowTime(showTime);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -167,13 +170,5 @@ public class ReservationSystem {
 
     private void addReservation(Reservation reservation) {
         reservations.add(reservation);
-    }
-
-    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
-        this.makePaymentGUI = makePaymentGUI;
-    }
-    
-    public LocalDateTime modifyDate(Date originalDate) {
-        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 }

@@ -21,7 +21,7 @@ public class Voucher {
         setAYearFromTodayDate();
     }
 
-    public void setAYearFromTodayDate() {
+    private void setAYearFromTodayDate() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.YEAR, 1);
         expiryDate = cal.getTime();
@@ -30,11 +30,9 @@ public class Voucher {
     public void setVouchNum(int vouchNum) {
         this.vouchNum = vouchNum;
     }
-
     public void setAmount(double amount) {
         this.amount = amount;
     }
-
     public void setExpiryDate(Date expiryDate) {
         this.expiryDate = expiryDate;
     }
@@ -42,17 +40,15 @@ public class Voucher {
     public int getVouchNum() {
         return vouchNum;
     }
-
     public double getAmount() {
         return amount;
     }
-
     public Date getExpiryDate() {
         return expiryDate;
     }
 
     @Override
     public String toString() {
-        return "Voucher #: " + vouchNum + ", amount $" + amount + ", expiry date: " + expiryDate;
+        return "Voucher #: " + vouchNum + ", amount $" + String.format("%.2f", amount) + ", expiry date: " + expiryDate;
     }
 }
