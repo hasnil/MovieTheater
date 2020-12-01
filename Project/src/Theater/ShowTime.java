@@ -44,12 +44,12 @@ public class ShowTime {
 
 	@Override
     public String toString() {
-        return "showTime: " + showTime + "\n";
+		return time.toString();
     }
 	
 	
 	public String printToString() {
-		return time.toString();
+        return "showTime: " + showTime + "\n";
 	}
 	
 	

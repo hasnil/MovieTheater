@@ -6,6 +6,7 @@ import GUI.GUIController;
 import GUI.MainGUI;
 import Payment.MakePayment;
 import Payment.MakePaymentGUI;
+import Payment.MakeTicketPaymentGUI;
 import Payment.PaymentSystem;
 import Registration.*;
 import Reservation.*;
@@ -42,30 +43,34 @@ public class MainController {
 		this.setManageTheater(manageTheater);
 		this.manageReservations = manageReservations;
 		this.databaseController = databaseController;
+        guiController.setMainController(this);
         databaseController.loadFromDB();
-        
-//        manageLogin.setMainController(this);
-
 	}
 	
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
     	
     	TheaterDBLoader theaterLoader = new TheaterDBLoader();
     	
         // Set up Manage Reservations and Reservation GUIs
         PaymentSystem paymentSystem = new PaymentSystem();
+
         MakePaymentGUI makePaymentGUI = new MakePaymentGUI();
         MakePayment makePayment = new MakePayment(makePaymentGUI, paymentSystem);
+
+        MakeTicketPaymentGUI makeTicketPaymentGUI = new MakeTicketPaymentGUI(makePayment);
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
-        ReservationSystem reservationSystem = new ReservationSystem(theaterLoader.loadSessions());
+        ReservationSystem reservationSystem = new ReservationSystem(makeTicketPaymentGUI, theaterLoader.loadSessions());
         ManageReservations manageReservations = new ManageReservations(reservationSystem, cancel, reservation, purchaseTicketsGUI);
+        cancel.setManageReservations(manageReservations);
         reservation.setManageReservations(manageReservations);
         ///////////////////////////////////////////////////////
 
         // Set up Make Payment and Payment GUI
         makePayment.setMakePaymentGUI(makePaymentGUI);
+        makePayment.setMakeTicketPaymentGUI(makeTicketPaymentGUI);
         //////////////////////////////////////////////////////
 
         // Set up Manage Annual Fee and Manage Annual Fee GUI
@@ -88,6 +93,7 @@ public class MainController {
         ManageLogin manageLogin = new ManageLogin(userSystem);
         LoginGUI loginGUI = new LoginGUI();
         manageLogin.setLoginGUI(loginGUI);
+        userSystem.setManageLogin(manageLogin);
         ///////////////////////////////////////////////////////
         
      // Set up MainGUI
@@ -144,7 +150,7 @@ public class MainController {
         
         // Set up GUIControllerr
         GUIController guiController = new GUIController(mainGUI, viewShowtimes, browseMovies, browseTheater, cancel, reservation,
-                purchaseTicketsGUI, makePaymentGUI, manageAnnualFeeGUI, registrationGUI, loginGUI);
+                purchaseTicketsGUI, makePaymentGUI, manageAnnualFeeGUI, registrationGUI, loginGUI, makeTicketPaymentGUI);
         //////////////////////////////
         
         MainController mainController = new MainController(makePayment, manageLogin, manageRegistration, 
@@ -165,5 +171,9 @@ public class MainController {
 
 	public GUIController getGUIController() {
 		return guiController;
+	}
+	
+	public ManageLogin getManageLogin() {
+		return manageLogin;
 	}
 }

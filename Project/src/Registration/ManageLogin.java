@@ -44,7 +44,15 @@ public class ManageLogin {
         }
     }
 
-    public void setLoginGUI(LoginGUI login) {
+    public UserSystem getUserSystem() {
+		return userSystem;
+	}
+
+	public RegisteredUser getUser() {
+		return user;
+	}
+
+	public void setLoginGUI(LoginGUI login) {
         loginGUI = login;
         loginGUI.addButtonActionListener(loginGUI.getLoginButton(), new LoginButtonListener());
     }

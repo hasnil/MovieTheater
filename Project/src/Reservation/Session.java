@@ -23,10 +23,6 @@ public class Session {
 		
 	}
 
-
-
-
-
 	public Movie getMovie() {
 		return movie;
 	}

@@ -19,6 +19,7 @@ public class LoginGUI extends JPanel {
 	private JButton returnHomeButton, loginButton;
 	private boolean loginSuccessful = false;
 	private JLabel loginLabel;
+	
 
 	public LoginGUI() {
 		frame = new JPanel();

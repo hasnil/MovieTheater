@@ -2,6 +2,7 @@ package Reservation;
 
 import Theater.Movie;
 import Theater.ShowTime;
+import Payment.MakeTicketPaymentGUI;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +10,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+
 public class ReservationSystem {
 
+    private MakeTicketPaymentGUI makeTicketPaymentGUI; //TODO: remove
     private ArrayList<Voucher> vouchers;
     private ArrayList<Reservation> reservations;
     private ArrayList<Session> sessions;
-
-    public ReservationSystem(ArrayList<Session> sessions) {
+    
+    
+    public ReservationSystem(MakeTicketPaymentGUI makeTicketPaymentGUI, ArrayList<Session> sessions) {
+        setMakePaymentGUI(makeTicketPaymentGUI);
         vouchers = new ArrayList<>();
         reservations = new ArrayList<>();
         setSessions(sessions);
@@ -42,6 +47,17 @@ public class ReservationSystem {
         }
         return "Reservation doesn't exist";
     }
+    
+    
+    public Reservation searchForReservation(int reservationId) {
+    	for (Reservation reservation : reservations) {
+            if (reservation.getReservationId() == reservationId) {
+            	return reservation;
+            }
+    	}
+    	return null;
+    }
+    
 
     public double applyVoucher(int vouchNum, double amount) {
         for (Voucher voucher : vouchers)
@@ -133,10 +149,6 @@ public class ReservationSystem {
         return null;
     }
 
-    private LocalDateTime modifyDate(Date originalDate) {
-        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
-    }
-
     private void addVoucher(Voucher voucher) {
         vouchers.add(voucher);
     }
@@ -147,5 +159,13 @@ public class ReservationSystem {
 
     public void setSessions(ArrayList<Session> sessions) {
         this.sessions = sessions;
+    }
+    
+    public void setMakePaymentGUI(MakeTicketPaymentGUI makeTicketPaymentGUI) {
+        this.makeTicketPaymentGUI = makeTicketPaymentGUI;
+    }
+    
+    public LocalDateTime modifyDate(Date originalDate) {
+        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 }
