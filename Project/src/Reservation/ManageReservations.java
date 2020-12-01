@@ -49,4 +49,8 @@ public class ManageReservations {
     public void setReservationSystem(ReservationSystem reservationSystem) {
         this.reservationSystem = reservationSystem;
     }
+    
+    public ReservationSystem getReservationSystem() {
+		return reservationSystem;
+	}
 }

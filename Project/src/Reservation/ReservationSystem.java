@@ -15,11 +15,12 @@ public class ReservationSystem {
 
     private ArrayList<Voucher> vouchers;
     private ArrayList<Reservation> reservations;
-    
     private ArrayList<Session> sessions;
+    private MakePaymentGUI makePaymentGUI;
     
     
     public ReservationSystem(MakePaymentGUI makePaymentGUI, ArrayList<Session> sessions) {
+    	
         setMakePaymentGUI(makePaymentGUI);
         vouchers = new ArrayList<>();
         reservations = new ArrayList<>();
@@ -114,10 +115,6 @@ public class ReservationSystem {
             throwables.printStackTrace();
         }
     }
-    public void displayMovies() {
-        for (Movie movie : movies)
-            System.out.println(movie);
-    }
 
     public void displayVouchers() {
         for (Voucher voucher : vouchers)
@@ -153,16 +150,6 @@ public class ReservationSystem {
     	return null;
     }
     
-    
-    
-    
-    private boolean checkForExpiry(Reservation reservation) {
-        return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
-    }
-
-    private void addMovie(Movie movie) {
-        movies.add(movie);
-    }
 
     private void addVoucher(Voucher voucher) {
         vouchers.add(voucher);
@@ -170,5 +157,14 @@ public class ReservationSystem {
 
     private void addReservation(Reservation reservation) {
         reservations.add(reservation);
+    }
+    
+
+    public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
+        this.makePaymentGUI = makePaymentGUI;
+    }
+    
+    public LocalDateTime modifyDate(Date originalDate) {
+        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
 }
