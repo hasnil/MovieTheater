@@ -14,9 +14,11 @@ import java.util.Date;
 public class ReservationSystem {
 
     private MakeTicketPaymentGUI makeTicketPaymentGUI; //TODO: remove
+    private ManageReservations manageReservations;
     private ArrayList<Voucher> vouchers;
     private ArrayList<Reservation> reservations;
     private ArrayList<Session> sessions;
+    private Reservation lastReservation;
     private int lastReservationId;
     
     
@@ -169,14 +171,32 @@ public class ReservationSystem {
         
         //Generate tickets for each seat belonging to the reservation
         String movieName = activeSession.getMovie().getMovieName();
-        LocalDateTime showTime = activeSession.getMovie().getSelectedShowtime().getTime();
-        int room = activeSession.getRoom().getRoomNumber();
-        double price = activeSession.getSelectedSeats().size() * 12.0;
+        LocalDateTime showTime;
         
-        for (int i = 0; i < activeSession.getSelectedSeats().size(); i++) {
-        	int seat = activeSession.getSelectedSeats().get(i);
+        if (activeSession.getShowTime() != null) {
+        	showTime = activeSession.getShowTime().getTime();
+        } else {
+        	showTime = LocalDateTime.now();
+        }
+        
+        double price = 0;
+        int room = 0;
+        
+        if (getManageReservations() != null) {
+            room = activeSession.getRoom().getRoomNumber();
+            price = getManageReservations().getReservationGUI().getSeatsBeingSelected().size() * 12;
+        } else {
+            room = activeSession.getRoom().getRoomNumber();
+            price = activeSession.getSelectedSeats().size() * 12;
+        }
+
+        
+        for (int i = 0; i < getManageReservations().getReservationGUI().getSeatsBeingSelected().size(); i++) {
+        	int seat = getManageReservations().getReservationGUI().getSeatsBeingSelected().get(i);
         	res.generateTicket(movieName, seat, showTime, price, room);
         }
+        
+    	this.lastReservation = res;
     }
 
     public void setSessions(ArrayList<Session> sessions) {
@@ -190,4 +210,16 @@ public class ReservationSystem {
     public LocalDateTime modifyDate(Date originalDate) {
         return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
+    
+    public Reservation getLastReservation() {
+		return lastReservation;
+	}
+    
+    public void setManageReservations(ManageReservations manageReservations) {
+		this.manageReservations = manageReservations;
+	}
+    
+    public ManageReservations getManageReservations() {
+		return manageReservations;
+	}
 }

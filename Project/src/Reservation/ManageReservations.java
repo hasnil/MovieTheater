@@ -73,6 +73,7 @@ public class ManageReservations {
    
     public void setReservationSystem(ReservationSystem reservationSystem) {
         this.reservationSystem = reservationSystem;
+        this.reservationSystem.setManageReservations(this);
     }
     
     public CancellationGUI getCancellationGUI() {

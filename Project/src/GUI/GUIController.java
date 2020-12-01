@@ -226,9 +226,8 @@ public class GUIController {
 		public void actionPerformed(ActionEvent actionEvent) {
             String cc = makeTicketPaymentGUI.getCardNumberField().getText();
             String cvv = makeTicketPaymentGUI.getSecurityCodeField().getText();
-            boolean payment = makeTicketPaymentGUI.getMakePayment().payWithCreditCard(cc, cvv, makePaymentGUI.getAmount());
+            boolean payment = makeTicketPaymentGUI.getMakePayment().payWithCreditCard(cc, cvv, makeTicketPaymentGUI.getAmount());
             if (payment) {
-            	makeTicketPaymentGUI.displayMessage("Payment successful");
 
             	// blocks off appropriate seats
             	Movie movie = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedMovie();
@@ -258,10 +257,11 @@ public class GUIController {
     			
     			reservation.getManageReservations().getReservationSystem().generateReservation(userName, currentSession);
     			
+    			makeTicketPaymentGUI.displayMessage("Payment successful\n\nYour tickets:\n\n" +
+    												reservation.getManageReservations().getReservationSystem().getLastReservation().toString());
+    			
     			//Clear seats selected
     			reservation.getSeatsBeingSelected().clear();
-    			
-    			makeTicketPaymentGUI.displayMessage(reservation.toString());
             }
             else {
             	makeTicketPaymentGUI.displayMessage("Payment unsuccessful");
@@ -300,7 +300,6 @@ public class GUIController {
             }
             if (reservationId != 0) {
                 String message = cancellation.getManageReservations().getReservationSystem().cancelReservation(reservationId);
-                cancellation.displayMessage(message);
 
                 if(message.equals("Reservation doesn't exist") || message.equals( "Movie starts in less than 3 days, can't cancel anymore")) {
 

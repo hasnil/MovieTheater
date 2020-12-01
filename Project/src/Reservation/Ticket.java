@@ -70,11 +70,11 @@ public class Ticket {
     
     @Override
     public String toString() {
-    	return "Movie " + movieName + "\n"+
-    			"Seat " + seat + "\n"+
-    			"showTime " + showTime + "\n"+
-    			"Room " + room + "\n"+
-    			"Price " + price + "\n"+
+    	return "Movie " + movieName + " - "+
+    			"Seat " + seat + " - "+
+    			"showTime " + showTime + " - "+
+    			"Room " + room + " - "+
+    			"Price " + price + " - "+
     			"Id " + reservationId;
     }
 }
