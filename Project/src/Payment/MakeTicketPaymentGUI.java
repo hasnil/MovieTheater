@@ -5,10 +5,7 @@ import java.awt.Color;
 import javax.swing.*;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 public class MakeTicketPaymentGUI extends JPanel {
 	
@@ -17,7 +14,7 @@ public class MakeTicketPaymentGUI extends JPanel {
 	private JTextField cardNumberField;
 	private JButton returnHomeButton;
 	private JButton submitPaymentButton;
-	private JLabel loginLabel;
+	private JLabel loginLabel, amountLabel;
 	private MakePayment makePayment;
 	private JLayeredPane layeredPane;
 	private double amount;
@@ -35,10 +32,10 @@ public class MakeTicketPaymentGUI extends JPanel {
 		informationLabel.setBounds(319, 11, 346, 72);
 		frame.add(informationLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("$20.00");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(453, 82, 75, 44);
-		frame.add(lblNewLabel_1);
+		amountLabel = new JLabel();
+		amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		amountLabel.setBounds(453, 82, 75, 44);
+		frame.add(amountLabel);
 		
 		JLabel lblNewLabel_2 = new JLabel("Please enter your credit card number:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
