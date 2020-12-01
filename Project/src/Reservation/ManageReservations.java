@@ -56,10 +56,14 @@ public class ManageReservations {
         if (voucherId != -1) {
             double amount = Double.parseDouble(purchaseTicketsGUI.getTotalPriceLabel().getText().substring(14));
             double remainder = reservationSystem.applyVoucher(voucherId, amount);
-            if (remainder < 0.0)
+            if (remainder < 0.0) {
                 purchaseTicketsGUI.getTotalPriceLabel().setText("Total Price: $0.00");
-            else
+                purchaseTicketsGUI.setAmount(0);
+            }
+            else {
                 purchaseTicketsGUI.getTotalPriceLabel().setText("Total Price: $" + remainder);
+                purchaseTicketsGUI.setAmount(remainder);
+            }
         }
     }
 

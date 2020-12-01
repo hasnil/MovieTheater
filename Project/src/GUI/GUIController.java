@@ -182,15 +182,9 @@ public class GUIController {
         purchaseTicketsGUI.getMakePaymentButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-            	
-            	
-
-                //Must check payment info
-            	// TODO makr payment for purchase ticket
-            	
-            	
                 purchaseTicketsGUI.setVisible(false);
                 layeredPane.moveToFront(makePaymentGUI);
+                makePaymentGUI.setAmount(purchaseTicketsGUI.getAmount());
                 makePaymentGUI.setVisible(true);
             }
         });

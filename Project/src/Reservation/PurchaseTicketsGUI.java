@@ -16,6 +16,7 @@ public class PurchaseTicketsGUI extends JPanel{
 	private JTextField enterVoucherTextField;
 	private JButton returnHomeButton, makePaymentButton, applyVoucherButton;
 	private JLabel loginLabel, totalPriceLabel, numOfTicketsLabel;
+	private double amount;
 
 	public PurchaseTicketsGUI() {
 		frame = new JPanel();
@@ -94,4 +95,6 @@ public class PurchaseTicketsGUI extends JPanel{
 		return applyVoucherButton;
 	}
 	public JTextField getEnterVoucherTextField() { return enterVoucherTextField; }
+	public double getAmount() { return amount; }
+	public void setAmount(double amount) {this.amount = amount;}
 }

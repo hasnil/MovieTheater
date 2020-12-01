@@ -10,7 +10,7 @@ public class MakePaymentGUI extends JPanel {
 	private JPanel frame;
 	private JTextField securityCodeField, cardNumberField;
 	private JButton returnHomeButton, submitPaymentButton;
-	private JLabel loginLabel;
+	private JLabel loginLabel, amountLabel;
 	private double amount;
 
 	public MakePaymentGUI(){
@@ -31,7 +31,7 @@ public class MakePaymentGUI extends JPanel {
 		informationLabel.setBounds(319, 11, 346, 72);
 		frame.add(informationLabel);
 
-		JLabel amountLabel = new JLabel("$20.00");
+		amountLabel = new JLabel();
 		amountLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		amountLabel.setBounds(453, 82, 75, 44);
 		frame.add(amountLabel);
@@ -93,6 +93,7 @@ public class MakePaymentGUI extends JPanel {
 	}
 	public void setAmount(double amount) {
 		this.amount = amount;
+		amountLabel.setText("$" + amount);
 	}
 	public JButton getSubmitPaymentButton() {
 		return submitPaymentButton;
