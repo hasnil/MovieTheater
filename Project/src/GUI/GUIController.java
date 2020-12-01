@@ -15,8 +15,6 @@ import mainController.MainController;
 
 import javax.swing.*;
 
-import GUI.GUIController.CancelReservationButton;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

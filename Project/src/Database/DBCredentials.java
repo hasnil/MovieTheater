@@ -7,6 +7,10 @@ public interface DBCredentials {
     //static final String USERNAME = "santiago";
     //static final String PASSWORD = "santiago123!";
     
+//    String USERNAME = "root";
+//    String PASSWORD = "zgmfx09a";
+    
     String USERNAME = "root";
-    String PASSWORD = "zgmfx09a";
+    String PASSWORD = "fE3tJQz#^XBQ9E";
+    
 }
