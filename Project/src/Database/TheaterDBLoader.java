@@ -1,6 +1,6 @@
 package Database;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.Date;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -8,7 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import Reservation.Session;
 import Theater.Movie;
+import Theater.Room;
 import Theater.ShowTime;
 
 public class TheaterDBLoader implements DBCredentials{
@@ -36,10 +39,13 @@ public class TheaterDBLoader implements DBCredentials{
     public ArrayList<ShowTime> loadShowTimesFromDatabase(){
     	ResultSet rs = dbLoader.loadShowTimes();
     	ArrayList<ShowTime> showtimes = new ArrayList<ShowTime>();
+    	
     	try {
 			while(rs.next()) {
 				ShowTime showtime = new ShowTime(modifyDate(rs.getDate("showTimes")));
+				showtime.setRoomNumber(rs.getInt("roomNumber"));
 				showtimes.add(showtime);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +75,11 @@ public class TheaterDBLoader implements DBCredentials{
 			while(rs2.next()) {
 				for(Movie m: returnArrayList) {
 					if(m.getMovieName().equals(rs2.getString("movieName"))) {
-						m.getShowTimes().add(new ShowTime(modifyDate(rs2.getDate("showTimes"))));
+						
+						ShowTime showtime = new ShowTime(modifyDate(rs2.getDate("showTimes")));
+						showtime.setRoomNumber(rs2.getInt("roomNumber"));
+						
+						m.getShowTimes().add(showtime);
 					}
 				}
 			}
@@ -98,5 +108,32 @@ public class TheaterDBLoader implements DBCredentials{
     public LocalDateTime modifyDate(Date originalDate) {
         return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
     }
+    
+    
+    public ArrayList<Session> loadSessions(){
+    	ResultSet rs2 = dbLoader.loadShowTimes();
+    	ArrayList<Session> sessions = new ArrayList<Session>();
+    	ArrayList<Movie> movies = loadMoviesFromDatabase();
+    	
+    	
+    	for(Movie m: movies) {
+    		
+    		for(ShowTime st: m.getShowTimes()) {
+    			
+    			Session session = new Session(m, st, (new Room( st.getRoomNumber(), 20)));
+    			sessions.add(session);
+    		}
+    	}
+    	
+    	
+    	return sessions;
+    }
+    
+    
+    
+    
+    
+    
+    
 }
 

@@ -10,7 +10,7 @@ public class Room {
 	
 	public Room(int roomNum, int seatsPerRoom) {
 		this.roomNumber = roomNum;
-		this.seatsPerRoom = seatsPerRoom;
+		this.setSeatsPerRoom(seatsPerRoom);
 		this.seats = new ArrayList<Seat>();
 		
 		//Creating seats
@@ -18,7 +18,15 @@ public class Room {
 			addSeat(r);
 		}
 	}
-	
+	public Seat getSeatAt(int number) {
+		
+		for(Seat seat: seats) {
+			if(seat.getSeatNumber() == number)
+				return seat;
+		}
+		
+		return null;
+	}
 	public void addSeat(int seatNum) {
 		Seat seat = new Seat(seatNum);
 		seats.add(seat);
@@ -32,6 +40,13 @@ public class Room {
 		return seats;
 	}
 	
+	public int getSeatsPerRoom() {
+		return seatsPerRoom;
+	}
+	public void setSeatsPerRoom(int seatsPerRoom) {
+		this.seatsPerRoom = seatsPerRoom;
+	}
+	
 	@Override
 	public String toString() {
 		String out = "Room number: " + getRoomNumber() + " " + "Amount of seats: " + getSeats().size() + "\n";
@@ -42,5 +57,6 @@ public class Room {
 	    
 		return out;
 	}
+	
 
 }

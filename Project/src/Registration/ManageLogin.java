@@ -52,14 +52,11 @@ public class ManageLogin {
                         loginGUI.displayMessage("Successfully logged in");
                         loginGUI.setLoginSuccessful(true);
                         loginGUI.getLoginLabel().setText("Login Status: Logged In");
-                        
+                     
                     }
                     else {
                         loginGUI.displayMessage("Wrong username and/or password");
                     }
-                } else {
-                    loginGUI.displayMessage("Logged out!");
-                    logout();
                 }
             }
         });
@@ -68,13 +65,7 @@ public class ManageLogin {
     class LoginButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-        	if (user == null) {
-        		System.out.println("log in button pressed1");
-        		login();
-        	} else {
-        		System.out.println("log in button pressed2");
-        		logout();
-        	}
+            login();
         }
     }
     
@@ -85,22 +76,17 @@ public class ManageLogin {
             user = logInUser(username, password);
             loginGUI.clearTextFields();
             if (user != null) {
-            	mainController.getGUIController().setUserStatus(true);
                 loginGUI.displayMessage("Successfully logged in");
                 loginGUI.setLoginSuccessful(true);
                 loginGUI.getLoginLabel().setText("Login Status: Logged In");
-            } else {
+            }
+            else {
                 loginGUI.displayMessage("Wrong username and/or password");
             }
-        } else {
+        }
+        else {
             loginGUI.displayMessage("You are already logged in");
         }
-    }
-    
-    private void logout() {
-    	user = null;
-		mainController.getGUIController().setUserStatus(false);
-		loginGUI.setLoginSuccessful(false);
     }
 
 }

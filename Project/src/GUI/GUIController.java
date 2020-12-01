@@ -6,11 +6,15 @@ import Registration.RegistrationGUI;
 import Reservation.CancellationGUI;
 import Reservation.PurchaseTicketsGUI;
 import Reservation.ReservationGUI;
+import Reservation.Session;
 import Theater.*;
 
 import javax.swing.*;
+
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class GUIController {
@@ -101,7 +105,8 @@ public class GUIController {
         browseTheater.addConfirmTheaterButtonListener(new TheaterConfirmedListener());
         browseMovies.addConfirmMovieButtonListener(new MovieConfirmedListener());
         viewShowtimes.getConfirmShowtimeButton().addActionListener(new ConfirmShowtimeButtonListener());
-
+        reservation.addConfirmedButtonListener(new ConfirmSeatListener());
+        
 
         mainGUI.getBrowseTheaterButton().addActionListener(new ActionListener() {
             @Override
@@ -220,6 +225,24 @@ public class GUIController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(viewShowtimes.getShowtimesListSelection() != null) {
+				Movie movie = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedMovie();
+				ShowTime showTime = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedShowTime();
+				int roomNumber = showTime.getRoomNumber();
+				
+				Session currentSession = reservation.getManageReservations().getReservationSystem().searchForSession(movie, showTime, roomNumber);
+				
+				ArrayList<Integer> seats = currentSession.getSelectedSeats();
+				
+				
+				//s is seats numbers
+				for(int s: seats) {
+					reservation.getSeatBtn(s).setEnabled(false);
+					reservation.getSeatBtn(s).setBackground(Color.BLUE);
+					
+					
+				}
+				
+				
 				viewShowtimes.setVisible(false);
 				layeredPane.moveToFront(reservation);
 				reservation.setVisible(true);
@@ -228,6 +251,41 @@ public class GUIController {
     	
     }
 
+    
+    
+    class ConfirmSeatListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Movie movie = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedMovie();
+			ShowTime showTime = viewShowtimes.getManageTheater().getTheaterSystem().getSelectedShowTime();
+			int roomNumber = showTime.getRoomNumber();
+			
+			Session currentSession = reservation.getManageReservations().getReservationSystem().searchForSession(movie, showTime, roomNumber);
+			
+			ArrayList<Integer> seats = currentSession.getSelectedSeats();
+			
+			ArrayList<Integer> selectedSeats = reservation.getSeatsBeingSelected();
+			if(selectedSeats.size() > 0) {
+				
+				for(int s: selectedSeats) {
+					
+					seats.add(s);
+					
+				}
+				
+				reservation.setVisible(false);
+				layeredPane.moveToFront(purchaseTicketsGUI);
+				purchaseTicketsGUI.setVisible(true);
+				
+				
+			}
+			
+			
+		}
+    	
+    }
+    
 
     class AnnualFeeMakePaymentButtonListener implements ActionListener {
 

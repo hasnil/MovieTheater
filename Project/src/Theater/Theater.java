@@ -32,6 +32,16 @@ public class Theater {
 		return name;
 	}
 	
+	public Room getRoomByNumber(int number) {
+		for (Room room: rooms) {
+			if(room.getRoomNumber() == number) {
+				return room;
+			}
+		}
+		
+		return null;
+	}
+	
 	public ArrayList<Room> getRooms() {
 		return rooms;
 	}

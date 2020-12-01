@@ -49,7 +49,9 @@ public class MainController {
 	}
 	
     public static void main(String[] args) {
-
+    	
+    	TheaterDBLoader theaterLoader = new TheaterDBLoader();
+    	
         // Set up Manage Reservations and Reservation GUIs
         PaymentSystem paymentSystem = new PaymentSystem();
         MakePayment makePayment = new MakePayment(paymentSystem);
@@ -58,7 +60,7 @@ public class MainController {
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
-        ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI);
+        ReservationSystem reservationSystem = new ReservationSystem(makePaymentGUI, theaterLoader.loadSessions());
         ManageReservations manageReservations = new ManageReservations(reservationSystem, cancel, reservation, purchaseTicketsGUI);
         reservation.setManageReservations(manageReservations);
         ///////////////////////////////////////////////////////
@@ -97,8 +99,8 @@ public class MainController {
         
         
         DBController dbController = new DBController(userSystem, reservationSystem);
-        TheaterDBLoader theaterLoader = new TheaterDBLoader();
-
+        
+        
         // Set up Manage Theater and Theater GUIs
         ManageTheater manageTheater = new ManageTheater(false);
         TheaterSystem theaterSystem = new TheaterSystem(theaterLoader.loadMoviesFromDatabase(), new ArrayList<Theater>()

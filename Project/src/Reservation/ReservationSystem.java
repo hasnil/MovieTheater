@@ -1,25 +1,32 @@
 package Reservation;
 
-import Payment.MakePaymentGUI;
+import Payment.MakePaymentGUI; 
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import Theater.*;
+import Theater.Movie;
 
+//import Theater.ShowTime;
 public class ReservationSystem {
 
     private MakePaymentGUI makePaymentGUI;
     private ArrayList<Voucher> vouchers;
     private ArrayList<Movie> movies;
     private ArrayList<Reservation> reservations;
-
-    public ReservationSystem(MakePaymentGUI makePaymentGUI) {
+    
+    private ArrayList<Session> sessions;
+    
+    
+    public ReservationSystem(MakePaymentGUI makePaymentGUI, ArrayList<Session> sessions) {
         setMakePaymentGUI(makePaymentGUI);
         vouchers = new ArrayList<>();
         movies = new ArrayList<>();
         reservations = new ArrayList<>();
+        this.sessions = sessions; 
     }
 
     public String cancelReservation(int reservationId) {
@@ -129,6 +136,23 @@ public class ReservationSystem {
         return voucher;
     }
 
+    public Session searchForSession(Movie movie, ShowTime showtime, int roomNumber) {
+    	for(Session s: sessions) {
+    		if(s.getMovie().getMovieName().equals(movie.getMovieName()) &&
+    				(s.getShowTime().getTime().compareTo(showtime.getTime()) == 0)  && roomNumber == s.getRoom().getRoomNumber()) {
+        		
+    			return s;
+    			
+    			
+        	}
+    	}
+    	
+    	return null;
+    }
+    
+    
+    
+    
     private boolean checkForExpiry(Reservation reservation) {
         return reservation.getShowTime().minusDays(3).compareTo(java.time.LocalDateTime.now()) > 0;
     }

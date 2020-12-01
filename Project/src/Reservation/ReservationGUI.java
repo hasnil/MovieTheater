@@ -1,6 +1,6 @@
 package Reservation;
 
-import java.awt.Color;
+import java.awt.Color; 
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -22,8 +22,11 @@ public class ReservationGUI extends JPanel {
 	private JTextField txtEnterVoucherId;
 	
 	private ArrayList<JButton> seatBtns;
+	private ArrayList<Integer> seatsBeingSelected;
+	
 	private JButton purchaseTicketsButton;
 	private JButton returnHomeButton;
+	private JButton deSelectAll;
 	private JLabel loginLabel;
 	
 	private ManageReservations manageReservations;
@@ -40,6 +43,12 @@ public class ReservationGUI extends JPanel {
 		returnHomeButton = new JButton("Return to Home");
 		returnHomeButton.setBounds(10, 11, 122, 36);
 		frame.add(returnHomeButton);
+		
+		
+		deSelectAll = new JButton("Deselect All");
+		deSelectAll.setBounds(10, 200, 122, 36);
+		frame.add(deSelectAll);
+		
 		
 		loginLabel = new JLabel("Login Status: Not Logged In");
 		loginLabel.setBounds(786, 17, 188, 25);
@@ -68,9 +77,37 @@ public class ReservationGUI extends JPanel {
 			int xloc = xstart + ((i-1) % 5) * 100;
 			int yloc = ystart + ((i-1) / 5) * 80;
 			
+			
+			
+			seatButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent evt) {
+	               int seatNumber = Integer.parseInt(seatButton.getText().split(" ")[1]);
+	               seatButton.setBackground(Color.YELLOW);
+	               seatsBeingSelected.add(seatNumber);
+	               
+	            }
+	        });
+
+			deSelectAll.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent evt) {
+	            	
+	            	for(int s: seatsBeingSelected) {
+	            		getSeatBtn(s).setBackground(Color.LIGHT_GRAY);
+	            	}
+	            	
+	            	seatsBeingSelected.clear();
+	            	
+	               
+	               
+	            }
+	        });
+			
 			seatButton.setBounds(xloc, yloc, 89, 68);
 			frame.add(seatButton);
 			seatBtns.add(seatButton);
+			
 		}
 		
 		purchaseTicketsButton = new JButton("Purchase Tickets");
@@ -79,6 +116,14 @@ public class ReservationGUI extends JPanel {
 		
 		add(frame);
 	}
+	
+	
+	public void addConfirmedButtonListener(ActionListener e) {
+			purchaseTicketsButton.addActionListener(e);
+		
+		
+	}
+	
 	
 	
 	public JButton getSeatBtn(int seatNum) {
@@ -99,8 +144,23 @@ public class ReservationGUI extends JPanel {
 	}
 	
 	
+	public ManageReservations getManageReservations() {
+		return manageReservations;
+	}
+
+
 	public void setManageReservations(ManageReservations manageReservations) {
 		this.manageReservations = manageReservations;
+	}
+
+
+	public ArrayList<Integer> getSeatsBeingSelected() {
+		return seatsBeingSelected;
+	}
+
+
+	public void setSeatsBeingSelected(ArrayList<Integer> seatsBeingSelected) {
+		this.seatsBeingSelected = seatsBeingSelected;
 	}
 	
 //	public static void main(String[] args) {

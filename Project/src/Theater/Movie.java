@@ -1,8 +1,11 @@
 package Theater;
 
-import java.time.Duration;
+import java.time.Duration; 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+
+
 
 public class Movie {
 	
@@ -11,6 +14,7 @@ public class Movie {
 	private boolean earlyAccess;
 	private LocalDateTime earlyReservationDate;
 	private LocalDateTime normalReservationDate;
+	private Date releaseDate;
 	private ShowTime selectedShowtime;
 	private ArrayList<Theater> currentTheaters;
 	
@@ -29,6 +33,16 @@ public class Movie {
 		}
 				
 	}
+	public Movie(String movieName, Date releaseDate) {
+        setMovieName(movieName);
+        setReleaseDate(releaseDate);
+        showTimes = new ArrayList<>();
+    }
+	
+	public void addShowTime(ShowTime showTime) {
+	        showTimes.add(showTime);
+	}
+	
 	
 	public void selectShowTime(LocalDateTime time) {
 		selectedShowtime = new ShowTime(time);
@@ -102,6 +116,15 @@ public class Movie {
 	public void setCurrentTheaters(ArrayList<Theater> currentTheaters) {
 		this.currentTheaters = currentTheaters;
 	}
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
 	
-
+	@Override
+    public String toString() {
+        return "Movie: " + movieName + "\nShowTimes: " + showTimes + "\nRelease Date: " + releaseDate + "\n";
+    }
 }

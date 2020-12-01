@@ -2,6 +2,9 @@ package Reservation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
 
 public class ManageReservations {
 
@@ -20,6 +23,11 @@ public class ManageReservations {
         cancellationGUI.addCancellationButtonListener(new CancelReservationButton());
     }
 
+    
+    
+    
+    
+    
     public String cancelReservation(int reservationId) {
         return reservationSystem.cancelReservation(reservationId);
     }
@@ -40,7 +48,41 @@ public class ManageReservations {
         this.reservationSystem = reservationSystem;
     }
 
-    class CancelReservationButton implements ActionListener {
+    
+    
+    
+    
+    public CancellationGUI getCancellationGUI() {
+		return cancellationGUI;
+	}
+
+	public void setCancellationGUI(CancellationGUI cancellationGUI) {
+		this.cancellationGUI = cancellationGUI;
+	}
+
+	public ReservationGUI getReservationGUI() {
+		return reservationGUI;
+	}
+
+	public void setReservationGUI(ReservationGUI reservationGUI) {
+		this.reservationGUI = reservationGUI;
+	}
+
+	public PurchaseTicketsGUI getPurchaseTicketsGUI() {
+		return purchaseTicketsGUI;
+	}
+
+	public void setPurchaseTicketsGUI(PurchaseTicketsGUI purchaseTicketsGUI) {
+		this.purchaseTicketsGUI = purchaseTicketsGUI;
+	}
+
+	public ReservationSystem getReservationSystem() {
+		return reservationSystem;
+	}
+
+
+
+	class CancelReservationButton implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
