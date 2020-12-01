@@ -44,7 +44,7 @@ public class MainController {
 		this.databaseController = databaseController;
         databaseController.loadFromDB();
         
-        manageLogin.setMainController(this);
+//        manageLogin.setMainController(this);
 
 	}
 	
