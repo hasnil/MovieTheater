@@ -160,6 +160,10 @@ public class ReservationSystem {
         movies.add(movie);
     }
 
+    private LocalDateTime modifyDate(Date originalDate) {
+        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
+    }
+
     private void addVoucher(Voucher voucher) {
         vouchers.add(voucher);
     }

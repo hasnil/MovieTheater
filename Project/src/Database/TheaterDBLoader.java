@@ -17,11 +17,10 @@ import Theater.ShowTime;
 public class TheaterDBLoader implements DBCredentials{
 	
 	private Connection conn;
-    private DBLoader dbLoader;
+    private Statement stmt;
     
     public TheaterDBLoader() {
         initializeConnection();
-        dbLoader = new DBLoader(conn);
     }
 
     
@@ -34,10 +33,31 @@ public class TheaterDBLoader implements DBCredentials{
             e.printStackTrace();
         }
     }
-    
+
+	public ResultSet loadMovies() {
+		try {
+			String query = "SELECT * FROM movies";
+			stmt = conn.createStatement();
+			return stmt.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ResultSet loadShowTimes() {
+		try {
+			String query = "SELECT * FROM showtimes";
+			stmt = conn.createStatement();
+			return stmt.executeQuery(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
     
     public ArrayList<ShowTime> loadShowTimesFromDatabase(){
-    	ResultSet rs = dbLoader.loadShowTimes();
+    	ResultSet rs = loadShowTimes();
     	ArrayList<ShowTime> showtimes = new ArrayList<ShowTime>();
     	
     	try {
@@ -59,7 +79,7 @@ public class TheaterDBLoader implements DBCredentials{
     	
     	ArrayList<Movie> returnArrayList = new ArrayList<Movie>();
     			
-    	ResultSet rs = dbLoader.loadMovies();
+    	ResultSet rs = loadMovies();
     	try {
 			while(rs.next()) {
 				Movie singleMovie = new Movie(rs.getString("movieName"), new ArrayList<ShowTime> (), modifyDate(rs.getDate("releaseDate")));
@@ -70,7 +90,7 @@ public class TheaterDBLoader implements DBCredentials{
 		}
     	
     	
-    	ResultSet rs2 = dbLoader.loadShowTimes();
+    	ResultSet rs2 = loadShowTimes();
     	try {
 			while(rs2.next()) {
 				for(Movie m: returnArrayList) {
@@ -93,7 +113,7 @@ public class TheaterDBLoader implements DBCredentials{
     
     
     public ArrayList<String> loadPostersFromDatabase(){
-    	ResultSet rs = dbLoader.loadMovies();
+    	ResultSet rs = loadMovies();
     	ArrayList<String> posters = new ArrayList<String>();
     	try {
 			while(rs.next()) {

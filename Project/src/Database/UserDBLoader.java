@@ -2,12 +2,12 @@ package Database;
 
 import java.sql.*;
 
-public class DBLoader {
+public class UserDBLoader {
 
     private Connection conn;
     private Statement stmt;
 
-    public DBLoader(Connection conn) {
+    public UserDBLoader(Connection conn) {
         setConn(conn);
     }
 
