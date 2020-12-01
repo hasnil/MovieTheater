@@ -18,6 +18,7 @@ public class ManageReservations {
         this.reservationGUI = reservationGUI;
         this.purchaseTicketsGUI = purchaseTicketsGUI;
         cancellationGUI.addButtonActionListener(cancellationGUI.getConfirmCancellationButton(), new CancelReservationButtonListener());
+        purchaseTicketsGUI.addButtonActionListener(purchaseTicketsGUI.getApplyVoucherButton(), new ApplyVoucherButtonListener());
     }
 
     class CancelReservationButtonListener implements ActionListener {
@@ -25,6 +26,11 @@ public class ManageReservations {
         public void actionPerformed(ActionEvent actionEvent) {
             cancel();
         }
+    }
+
+    class ApplyVoucherButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) { applyVoucher(); }
     }
 
     private void cancel() {
@@ -40,22 +46,34 @@ public class ManageReservations {
         }
     }
 
+    private void applyVoucher() {
+        int voucherId = -1;
+        try {
+            voucherId = Integer.parseInt(purchaseTicketsGUI.getEnterVoucherTextField().getText());
+        } catch (NumberFormatException e) {
+            cancellationGUI.displayMessage("Enter a valid voucher ID");
+        }
+        if (voucherId != -1) {
+            double amount = Double.parseDouble(purchaseTicketsGUI.getTotalPriceLabel().getText().substring(14));
+            double remainder = reservationSystem.applyVoucher(voucherId, amount);
+            if (remainder < 0.0)
+                purchaseTicketsGUI.getTotalPriceLabel().setText("Total Price: $0.00");
+            else
+                purchaseTicketsGUI.getTotalPriceLabel().setText("Total Price: $" + remainder);
+        }
+    }
+
     private String cancelReservation(int reservationId) {
         return reservationSystem.cancelReservation(reservationId);
     }
 
-    public void setReservationSystem(ReservationSystem reservationSystem) {
-        this.reservationSystem = reservationSystem;
-    }
-
+    public void setReservationSystem(ReservationSystem reservationSystem) { this.reservationSystem = reservationSystem; }
     public ReservationSystem getReservationSystem() {
         return reservationSystem;
     }
-
     public Session getCurrentSession() {
         return currentSession;
     }
-
     public void setCurrentSession(Session currentSession) {
         this.currentSession = currentSession;
     }

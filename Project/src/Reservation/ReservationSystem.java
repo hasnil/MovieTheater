@@ -43,6 +43,19 @@ public class ReservationSystem {
         return "Reservation doesn't exist";
     }
 
+    public double applyVoucher(int vouchNum, double amount) {
+        for (Voucher voucher : vouchers)
+            if (voucher.getVouchNum() == vouchNum)
+                if (voucher.getExpiryDate().compareTo(new Date()) > 0) {
+                    if (voucher.getAmount() >= amount)
+                        return 0;
+                    else
+                        return amount - voucher.getAmount();
+                } else
+                    return -1;
+        return -1;
+    }
+
     private Voucher createVoucherRegularUser(Reservation reservation) {
         double amount = 0;
         for (Ticket ticket : reservation.getTickets())

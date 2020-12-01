@@ -283,8 +283,8 @@ public class GUIController {
 				
 				reservation.setVisible(false);
 				layeredPane.moveToFront(purchaseTicketsGUI);
-				purchaseTicketsGUI.setSummary2("Number of Tickets: " + selectedSeats.size());
-				purchaseTicketsGUI.setSummary("Total Price: $" + 12 * selectedSeats.size() + ".00");
+				purchaseTicketsGUI.setNumOfTicketsLabel("Number of Tickets: " + selectedSeats.size());
+				purchaseTicketsGUI.setTotalPriceLabel("Total Price: $" + 12 * selectedSeats.size() + ".00");
 				purchaseTicketsGUI.setVisible(true);	
 				
 				

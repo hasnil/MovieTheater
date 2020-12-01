@@ -38,19 +38,6 @@ public class MakePayment {
     	return result;
     }
 
-    public double payWithVoucher(int vouchNum, double amount) {
-        for (Voucher voucher : paymentSystem.getVouchers())
-            if (voucher.getVouchNum() == vouchNum)
-                if (voucher.getExpiryDate().compareTo(new Date()) > 0) {
-                    if (voucher.getAmount() >= amount)
-                        return 0;
-                    else
-                        return amount - voucher.getAmount();
-                } else
-                    return -1;
-        return -1;
-    }
-
     class SubmitPaymentButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {

@@ -1,14 +1,9 @@
 package Payment;
 
 import java.awt.Color;
-
 import javax.swing.*;
-
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
 
 public class MakePaymentGUI extends JPanel {
 	
