@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import javax.swing.*;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegistrationGUI extends JPanel{
@@ -129,22 +128,18 @@ public class RegistrationGUI extends JPanel{
 	public JLabel getLoginLabel() {
 		return loginLabel;
 	}
-
 	public JButton getReturnHomeButton() {
 		return returnHomeButton;
 	}
-
 	public JTextField getEmailTextField() {
 		return emailTextField;
 	}
 	public JTextField getUsernameTextField() {
 		return usernameTextField;
 	}
-
 	public JButton getRegisterButton() {
 		return registerButton;
 	}
-
 	public JButton getMakePaymentButton() {
 		return makePaymentButton;
 	}

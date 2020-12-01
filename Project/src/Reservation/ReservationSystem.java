@@ -175,8 +175,4 @@ public class ReservationSystem {
     public void setMakePaymentGUI(MakePaymentGUI makePaymentGUI) {
         this.makePaymentGUI = makePaymentGUI;
     }
-    
-    public LocalDateTime modifyDate(Date originalDate) {
-        return new java.sql.Timestamp(originalDate.getTime()).toLocalDateTime();
-    }
 }

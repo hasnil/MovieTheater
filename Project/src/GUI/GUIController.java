@@ -56,7 +56,6 @@ public class GUIController {
         frame.setBounds(100, 140, 1000, 650);
 
         layeredPane = new JLayeredPane();
-        makePaymentGUI.setLayeredPane(layeredPane);
         layeredPane.add(mainGUI, 0);
         mainGUI.setBounds(0, 0, 1000, 650);
         layeredPane.add(cancellation, 1);
@@ -172,7 +171,12 @@ public class GUIController {
         });
 //////////////////////////////////////////////////////////////////
  
-       // purchaseTicketsGUI.getApplyVoucherButton().addActionListener(l);
+        purchaseTicketsGUI.getApplyVoucherButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                // TODO apply voucher for purchase ticket
+            }
+        });
         
 
         purchaseTicketsGUI.getMakePaymentButton().addActionListener(new ActionListener() {
@@ -182,7 +186,7 @@ public class GUIController {
             	
 
                 //Must check payment info
-            	
+            	// TODO makr payment for purchase ticket
             	
             	
                 purchaseTicketsGUI.setVisible(false);

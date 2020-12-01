@@ -54,9 +54,8 @@ public class MainController {
     	
         // Set up Manage Reservations and Reservation GUIs
         PaymentSystem paymentSystem = new PaymentSystem();
-        MakePayment makePayment = new MakePayment(paymentSystem);
-        MakePaymentGUI makePaymentGUI = new MakePaymentGUI(makePayment);
-        makePayment.setMakePaymentGUI(makePaymentGUI);
+        MakePaymentGUI makePaymentGUI = new MakePaymentGUI();
+        MakePayment makePayment = new MakePayment(makePaymentGUI, paymentSystem);
         CancellationGUI cancel = new CancellationGUI(false);
         ReservationGUI reservation = new ReservationGUI();
         PurchaseTicketsGUI purchaseTicketsGUI = new PurchaseTicketsGUI();
@@ -75,7 +74,6 @@ public class MainController {
         manageAnnualFeeGUI.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setManageAnnualFeeGUI(manageAnnualFeeGUI);
         manageAnnualFee.setMakePayment(makePayment);
-        makePayment.setManageAnnualFee(manageAnnualFee);
         UserSystem userSystem = new UserSystem(makePaymentGUI);
         manageAnnualFee.setUserSystem(userSystem);
         /////////////////////////////////////////////////////////
