@@ -270,7 +270,7 @@ public class GUIController {
             
             try {
             	// releases seats after cancellation
-                reservationId = Integer.parseInt(cancellation.getReservationId().getText());
+                reservationId = cancellation.getReservationId();
                 
                 TheaterSystem theaterSystem = browseMovies.getManageTheater().getTheaterSystem();
                 

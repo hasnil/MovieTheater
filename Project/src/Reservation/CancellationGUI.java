@@ -19,7 +19,7 @@ public class CancellationGUI extends JPanel{
 	private JLabel loginLabel;
 	private boolean userType;
 	private JButton confirmCancellation;
-	//private ManageReservations manageReservations;
+	private ManageReservations manageReservations;
 	
 	
 	public CancellationGUI(boolean userType){
@@ -86,12 +86,15 @@ public class CancellationGUI extends JPanel{
 		return confirmCancellationButton;
 	}
 
-	// public ManageReservations getManageReservations() {
-	// 	return manageReservations;
-	// }
+	 public ManageReservations getManageReservations() {
+	 	return manageReservations;
+	 }
 
-
-	// public void setManageReservations(ManageReservations manageReservations) {
-	// 	this.manageReservations = manageReservations;
-	// }
+	 public void setManageReservations(ManageReservations manageReservations) {
+	 	this.manageReservations = manageReservations;
+	 }
+	 
+	 public int getReservationId() {
+		 return Integer.parseInt(getReservationIdTextField().getText());
+	 }
 }
